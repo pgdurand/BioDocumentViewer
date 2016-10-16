@@ -10,6 +10,8 @@ The software has been made to facilitate the use of public web services so that 
 
 BioDocumentViewer also provides you with viewing capabilities to display annotated sequences and 3D structures.
 
+![BioDocumentViewer](doc/bio-document-viewer-query-ncbi-all-s.png)
+
 ##Requirements
 
 Use a [Java Virtual Machine](http://www.oracle.com/technetwork/java/javase/downloads/index.html) 1.7 (or above) from Oracle. 
@@ -53,6 +55,8 @@ Whatever the data provider you use, NCBI or EBI, the software is quite easy to u
 * setup the criteria in the query dialogue box
 * click on the [Ok] button... and wait a little bit to get an answer from the provider
 
+![BioDocumentViewer](doc/bio-doc-viewer-query-ncbi-proteins.png)
+
 The DocumentNavigator is displayed as soon as you get a valid answer from the bank provider, i.e. your query matches some entries.
 
 Use the DocumentNavigator:
@@ -60,6 +64,8 @@ Use the DocumentNavigator:
 * to navigate through entries; use [<] [>] buttons located at the top right corner
 * to display an entry in the Sequence or 3D Structure viewer
 * to fetch entries as Fasta or plain format (e.g. Genbank, EMBL, Uniprot, etc.)
+
+![BioDocumentViewer](doc/bio-doc-viewer-ncbi-protein-results.png)
 
 ###NCBI/EBI recommendations
 
@@ -71,6 +77,8 @@ Basically:
 * do not overload NCBI/EBI remote servers
 * retrieve sequences in batch mode using timers
 * provide your email address: NCBI or EBI can get in touch with you in case they consider your are querying too much their remote services. 
+
+![BioDocumentViewer](doc/bio-doc-viewer-batch-retrieval.png)
 
 More about these recommendations: [here for NCBI](https://www.ncbi.nlm.nih.gov/home/about/policies.shtml#scripting), [here for EBI](http://www.ebi.ac.uk/Tools/webservices/help/faq).
 
@@ -92,7 +100,10 @@ BDV uses a logging framework to monitor the software... this can be quite useful
 
 To access the log messages, simply click on the little icon located on the top right corner of BDV main frame, next to [Documents] pulldown menu.
 
-By default, BDV uses "info" log level, which does not provide much messages. However, you are advised to start BDV with "-DV_DEBUG=true" to get more log messages, which can help to diagnose problems.
+By default, BDV uses "info" log level, which does not provide much messages. However, you are advised to start BDV with "-DV_DEBUG=true" to get more log messages, which can help to diagnose problems. It is worth noting that log messages are localized in your conurty (e.g. French on my OSX system).
+
+![BioDocumentViewer](doc/bio-doc-viewer-log.png)
+
 
 ##License and dependencies
 
