@@ -1,0 +1,1063 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE eSummaryResult PUBLIC "-//NLM//DTD esummary v1 20041029//EN" "https://eutils.ncbi.nlm.nih.gov/eutils/dtd/20041029/esummary-v1.dtd">
+<eSummaryResult>
+<DocSum>
+	<Id>117754</Id>
+	<Item Name="PdbAcc" Type="String">1EJG</Item>
+	<Item Name="PdbDescr" Type="String">Crambin At Ultra-high Resolution: Valence Electron Density</Item>
+	<Item Name="EC" Type="String"></Item>
+	<Item Name="Resolution" Type="String">0.54</Item>
+	<Item Name="ExpMethod" Type="String">X-Ray Diffraction</Item>
+	<Item Name="PdbClass" Type="String">Plant Protein</Item>
+	<Item Name="PdbDepositDate" Type="String">2000/03/02 00:00</Item>
+	<Item Name="MMDBEntryDate" Type="String">2014/02/25 00:00</Item>
+	<Item Name="OrganismList" Type="List">
+		<Item Name="string" Type="String">Crambe hispanica subsp. abyssinica</Item>
+	</Item>
+	<Item Name="LigCode" Type="String"></Item>
+	<Item Name="LigCount" Type="String">0</Item>
+	<Item Name="ModProteinResCount" Type="String">0</Item>
+	<Item Name="ModDNAResCount" Type="String">0</Item>
+	<Item Name="ModRNAResCount" Type="String">0</Item>
+	<Item Name="ProteinChainCount" Type="String"></Item>
+	<Item Name="DNAChainCount" Type="String"></Item>
+	<Item Name="RNAChainCount" Type="String"></Item>
+</DocSum>
+
+<DocSum>
+	<Id>106025</Id>
+	<Item Name="PdbAcc" Type="String">1JXW</Item>
+	<Item Name="PdbDescr" Type="String">Crambin Mixed Sequence Form At 180 K. Protein/water Substates</Item>
+	<Item Name="EC" Type="String"></Item>
+	<Item Name="Resolution" Type="String">0.89</Item>
+	<Item Name="ExpMethod" Type="String">X-Ray Diffraction</Item>
+	<Item Name="PdbClass" Type="String">Plant Protein</Item>
+	<Item Name="PdbDepositDate" Type="String">2001/09/10 00:00</Item>
+	<Item Name="MMDBEntryDate" Type="String">2012/12/28 00:00</Item>
+	<Item Name="OrganismList" Type="List">
+		<Item Name="string" Type="String">Crambe hispanica subsp. abyssinica</Item>
+	</Item>
+	<Item Name="LigCode" Type="String"></Item>
+	<Item Name="LigCount" Type="String">0</Item>
+	<Item Name="ModProteinResCount" Type="String">0</Item>
+	<Item Name="ModDNAResCount" Type="String">0</Item>
+	<Item Name="ModRNAResCount" Type="String">0</Item>
+	<Item Name="ProteinChainCount" Type="String"></Item>
+	<Item Name="DNAChainCount" Type="String"></Item>
+	<Item Name="RNAChainCount" Type="String"></Item>
+</DocSum>
+
+<DocSum>
+	<Id>103925</Id>
+	<Item Name="PdbAcc" Type="String">1JXU</Item>
+	<Item Name="PdbDescr" Type="String">Crambin Mixed Sequence Form At 240 K. ProteinWATER SUBSTATES</Item>
+	<Item Name="EC" Type="String"></Item>
+	<Item Name="Resolution" Type="String">0.99</Item>
+	<Item Name="ExpMethod" Type="String">X-Ray Diffraction</Item>
+	<Item Name="PdbClass" Type="String">Plant Protein</Item>
+	<Item Name="PdbDepositDate" Type="String">2001/09/09 00:00</Item>
+	<Item Name="MMDBEntryDate" Type="String">2012/10/19 00:00</Item>
+	<Item Name="OrganismList" Type="List">
+		<Item Name="string" Type="String">Crambe hispanica subsp. abyssinica</Item>
+	</Item>
+	<Item Name="LigCode" Type="String"></Item>
+	<Item Name="LigCount" Type="String">0</Item>
+	<Item Name="ModProteinResCount" Type="String">0</Item>
+	<Item Name="ModDNAResCount" Type="String">0</Item>
+	<Item Name="ModRNAResCount" Type="String">0</Item>
+	<Item Name="ProteinChainCount" Type="String"></Item>
+	<Item Name="DNAChainCount" Type="String"></Item>
+	<Item Name="RNAChainCount" Type="String"></Item>
+</DocSum>
+
+<DocSum>
+	<Id>103055</Id>
+	<Item Name="PdbAcc" Type="String">4FC1</Item>
+	<Item Name="PdbDescr" Type="String">Ultra-High Resolution Neutron Structure Of Crambin At Room-Temperature</Item>
+	<Item Name="EC" Type="String"></Item>
+	<Item Name="Resolution" Type="String">1.1</Item>
+	<Item Name="ExpMethod" Type="String">Neutron Diffraction</Item>
+	<Item Name="PdbClass" Type="String">Unknown Function</Item>
+	<Item Name="PdbDepositDate" Type="String">2012/05/23 00:00</Item>
+	<Item Name="MMDBEntryDate" Type="String">2012/11/09 00:00</Item>
+	<Item Name="OrganismList" Type="List">
+		<Item Name="string" Type="String">Crambe hispanica subsp. abyssinica</Item>
+	</Item>
+	<Item Name="LigCode" Type="String"></Item>
+	<Item Name="LigCount" Type="String">0</Item>
+	<Item Name="ModProteinResCount" Type="String">0</Item>
+	<Item Name="ModDNAResCount" Type="String">0</Item>
+	<Item Name="ModRNAResCount" Type="String">0</Item>
+	<Item Name="ProteinChainCount" Type="String"></Item>
+	<Item Name="DNAChainCount" Type="String"></Item>
+	<Item Name="RNAChainCount" Type="String"></Item>
+</DocSum>
+
+<DocSum>
+	<Id>97360</Id>
+	<Item Name="PdbAcc" Type="String">3U7T</Item>
+	<Item Name="PdbDescr" Type="String">Room Temperature Ultra-High Resolution Time-Of-Flight Neutron And X- Ray Diffraction Studies Of HD EXCHANGED CRAMBIN</Item>
+	<Item Name="EC" Type="String"></Item>
+	<Item Name="Resolution" Type="String">0.85</Item>
+	<Item Name="ExpMethod" Type="String">X-Ray Diffraction</Item>
+	<Item Name="PdbClass" Type="String">Plant Protein</Item>
+	<Item Name="PdbDepositDate" Type="String">2011/10/14 00:00</Item>
+	<Item Name="MMDBEntryDate" Type="String">2012/02/17 00:00</Item>
+	<Item Name="OrganismList" Type="List">
+		<Item Name="string" Type="String">Crambe hispanica subsp. abyssinica</Item>
+	</Item>
+	<Item Name="LigCode" Type="String"></Item>
+	<Item Name="LigCount" Type="String">0</Item>
+	<Item Name="ModProteinResCount" Type="String">0</Item>
+	<Item Name="ModDNAResCount" Type="String">0</Item>
+	<Item Name="ModRNAResCount" Type="String">0</Item>
+	<Item Name="ProteinChainCount" Type="String"></Item>
+	<Item Name="DNAChainCount" Type="String"></Item>
+	<Item Name="RNAChainCount" Type="String"></Item>
+</DocSum>
+
+<DocSum>
+	<Id>97094</Id>
+	<Item Name="PdbAcc" Type="String">3UE7</Item>
+	<Item Name="PdbDescr" Type="String">X-Ray Crystal Structure Of A Novel Topological Analogue Of Crambin</Item>
+	<Item Name="EC" Type="String"></Item>
+	<Item Name="Resolution" Type="String">1.08</Item>
+	<Item Name="ExpMethod" Type="String">X-Ray Diffraction</Item>
+	<Item Name="PdbClass" Type="String">Unknown Function</Item>
+	<Item Name="PdbDepositDate" Type="String">2011/10/28 00:00</Item>
+	<Item Name="MMDBEntryDate" Type="String">2012/02/09 00:00</Item>
+	<Item Name="OrganismList" Type="List">
+		<Item Name="string" Type="String">Crambe hispanica subsp. abyssinica</Item>
+	</Item>
+	<Item Name="LigCode" Type="String">DAL|DAR|DAS|DCY|DGL|DIL|DLE|DPN|DPR|DSG|DSN|DTH|DTY|DVA</Item>
+	<Item Name="LigCount" Type="String">0</Item>
+	<Item Name="ModProteinResCount" Type="String">0</Item>
+	<Item Name="ModDNAResCount" Type="String">0</Item>
+	<Item Name="ModRNAResCount" Type="String">0</Item>
+	<Item Name="ProteinChainCount" Type="String"></Item>
+	<Item Name="DNAChainCount" Type="String"></Item>
+	<Item Name="RNAChainCount" Type="String"></Item>
+</DocSum>
+
+<DocSum>
+	<Id>94161</Id>
+	<Item Name="PdbAcc" Type="String">1WCO</Item>
+	<Item Name="PdbDescr" Type="String">The Solution Structure Of The Nisin-Lipid Ii Complex</Item>
+	<Item Name="EC" Type="String"></Item>
+	<Item Name="Resolution" Type="String"></Item>
+	<Item Name="ExpMethod" Type="String">Solution Nmr</Item>
+	<Item Name="PdbClass" Type="String">PeptideANTIBIOTIC</Item>
+	<Item Name="PdbDepositDate" Type="String">2004/11/19 00:00</Item>
+	<Item Name="MMDBEntryDate" Type="String">2011/10/13 00:00</Item>
+	<Item Name="OrganismList" Type="List">
+		<Item Name="string" Type="String">Lactococcus lactis</Item>
+	</Item>
+	<Item Name="LigCode" Type="String">DAL|FGA|FPP|MUB|NAG</Item>
+	<Item Name="LigCount" Type="String">1</Item>
+	<Item Name="ModProteinResCount" Type="String">0</Item>
+	<Item Name="ModDNAResCount" Type="String">0</Item>
+	<Item Name="ModRNAResCount" Type="String">0</Item>
+	<Item Name="ProteinChainCount" Type="String"></Item>
+	<Item Name="DNAChainCount" Type="String"></Item>
+	<Item Name="RNAChainCount" Type="String"></Item>
+</DocSum>
+
+<DocSum>
+	<Id>90609</Id>
+	<Item Name="PdbAcc" Type="String">3NIR</Item>
+	<Item Name="PdbDescr" Type="String">Crystal Structure Of Small Protein Crambin At 0.48 A Resolution</Item>
+	<Item Name="EC" Type="String"></Item>
+	<Item Name="Resolution" Type="String">0.48</Item>
+	<Item Name="ExpMethod" Type="String">X-Ray Diffraction</Item>
+	<Item Name="PdbClass" Type="String">Plant Protein</Item>
+	<Item Name="PdbDepositDate" Type="String">2010/06/16 00:00</Item>
+	<Item Name="MMDBEntryDate" Type="String">2011/05/27 00:00</Item>
+	<Item Name="OrganismList" Type="List">
+		<Item Name="string" Type="String">Crambe hispanica subsp. abyssinica</Item>
+	</Item>
+	<Item Name="LigCode" Type="String"></Item>
+	<Item Name="LigCount" Type="String">0</Item>
+	<Item Name="ModProteinResCount" Type="String">0</Item>
+	<Item Name="ModDNAResCount" Type="String">0</Item>
+	<Item Name="ModRNAResCount" Type="String">0</Item>
+	<Item Name="ProteinChainCount" Type="String"></Item>
+	<Item Name="DNAChainCount" Type="String"></Item>
+	<Item Name="RNAChainCount" Type="String"></Item>
+</DocSum>
+
+<DocSum>
+	<Id>71721</Id>
+	<Item Name="PdbAcc" Type="String">1CBN</Item>
+	<Item Name="PdbDescr" Type="String">Atomic Resolution (0.83 Angstroms) Crystal Structure Of The Hydrophobic Protein Crambin At 130 K</Item>
+	<Item Name="EC" Type="String"></Item>
+	<Item Name="Resolution" Type="String">0.83</Item>
+	<Item Name="ExpMethod" Type="String">X-Ray Diffraction</Item>
+	<Item Name="PdbClass" Type="String">Plant Seed Protein</Item>
+	<Item Name="PdbDepositDate" Type="String">1991/10/11 00:00</Item>
+	<Item Name="MMDBEntryDate" Type="String">2011/06/20 00:00</Item>
+	<Item Name="OrganismList" Type="List">
+		<Item Name="string" Type="String">Crambe hispanica subsp. abyssinica</Item>
+	</Item>
+	<Item Name="LigCode" Type="String"></Item>
+	<Item Name="LigCount" Type="String">0</Item>
+	<Item Name="ModProteinResCount" Type="String">0</Item>
+	<Item Name="ModDNAResCount" Type="String">0</Item>
+	<Item Name="ModRNAResCount" Type="String">0</Item>
+	<Item Name="ProteinChainCount" Type="String"></Item>
+	<Item Name="DNAChainCount" Type="String"></Item>
+	<Item Name="RNAChainCount" Type="String"></Item>
+</DocSum>
+
+<DocSum>
+	<Id>58156</Id>
+	<Item Name="PdbAcc" Type="String">2PLH</Item>
+	<Item Name="PdbDescr" Type="String">Structure Of Alpha-1-Purothionin At Room Temperature And 2.8 Angstroms Resolution</Item>
+	<Item Name="EC" Type="String"></Item>
+	<Item Name="Resolution" Type="String">2.5</Item>
+	<Item Name="ExpMethod" Type="String">X-Ray Diffraction</Item>
+	<Item Name="PdbClass" Type="String">Toxin</Item>
+	<Item Name="PdbDepositDate" Type="String">1993/07/09 00:00</Item>
+	<Item Name="MMDBEntryDate" Type="String">2007/10/11 00:00</Item>
+	<Item Name="OrganismList" Type="List">
+		<Item Name="string" Type="String">Triticum aestivum</Item>
+	</Item>
+	<Item Name="LigCode" Type="String">ACT|GOL|PO4|SBT</Item>
+	<Item Name="LigCount" Type="String">32</Item>
+	<Item Name="ModProteinResCount" Type="String">0</Item>
+	<Item Name="ModDNAResCount" Type="String">0</Item>
+	<Item Name="ModRNAResCount" Type="String">0</Item>
+	<Item Name="ProteinChainCount" Type="String"></Item>
+	<Item Name="DNAChainCount" Type="String"></Item>
+	<Item Name="RNAChainCount" Type="String"></Item>
+</DocSum>
+
+<DocSum>
+	<Id>58116</Id>
+	<Item Name="PdbAcc" Type="String">2MHR</Item>
+	<Item Name="PdbDescr" Type="String">Structure Of Myohemerythrin In The Azidomet State At 1.7(Slash)1.3 Angstroms Resolution</Item>
+	<Item Name="EC" Type="String"></Item>
+	<Item Name="Resolution" Type="String">1.3</Item>
+	<Item Name="ExpMethod" Type="String">X-Ray Diffraction</Item>
+	<Item Name="PdbClass" Type="String">Oxygen Binding</Item>
+	<Item Name="PdbDepositDate" Type="String">1987/04/20 00:00</Item>
+	<Item Name="MMDBEntryDate" Type="String">2007/10/11 00:00</Item>
+	<Item Name="OrganismList" Type="List">
+		<Item Name="string" Type="String">Themiste hennahi</Item>
+	</Item>
+	<Item Name="LigCode" Type="String">AZI|FEO|SO4</Item>
+	<Item Name="LigCount" Type="String">5</Item>
+	<Item Name="ModProteinResCount" Type="String">0</Item>
+	<Item Name="ModDNAResCount" Type="String">0</Item>
+	<Item Name="ModRNAResCount" Type="String">0</Item>
+	<Item Name="ProteinChainCount" Type="String"></Item>
+	<Item Name="DNAChainCount" Type="String"></Item>
+	<Item Name="RNAChainCount" Type="String"></Item>
+</DocSum>
+
+<DocSum>
+	<Id>56260</Id>
+	<Item Name="PdbAcc" Type="String">1GPT</Item>
+	<Item Name="PdbDescr" Type="String">Solution Structure Of Gamma 1-H And Gamma 1-P Thionins From Barley And Wheat Endosperm Determined By 1h-Nmr: A Structural Motif Common To Toxic Arthropod Proteins</Item>
+	<Item Name="EC" Type="String"></Item>
+	<Item Name="Resolution" Type="String"></Item>
+	<Item Name="ExpMethod" Type="String">Solution Nmr</Item>
+	<Item Name="PdbClass" Type="String">Plant Toxin</Item>
+	<Item Name="PdbDepositDate" Type="String">1992/07/29 00:00</Item>
+	<Item Name="MMDBEntryDate" Type="String">2007/10/11 00:00</Item>
+	<Item Name="OrganismList" Type="List">
+		<Item Name="string" Type="String">Hordeum vulgare</Item>
+	</Item>
+	<Item Name="LigCode" Type="String"></Item>
+	<Item Name="LigCount" Type="String">0</Item>
+	<Item Name="ModProteinResCount" Type="String">0</Item>
+	<Item Name="ModDNAResCount" Type="String">0</Item>
+	<Item Name="ModRNAResCount" Type="String">0</Item>
+	<Item Name="ProteinChainCount" Type="String"></Item>
+	<Item Name="DNAChainCount" Type="String"></Item>
+	<Item Name="RNAChainCount" Type="String"></Item>
+</DocSum>
+
+<DocSum>
+	<Id>56259</Id>
+	<Item Name="PdbAcc" Type="String">1GPS</Item>
+	<Item Name="PdbDescr" Type="String">Solution Structure Of Gamma 1-H And Gamma 1-P Thionins From Barley And Wheat Endosperm Determined By 1h-Nmr: A Structural Motif Common To Toxic Arthropod Proteins</Item>
+	<Item Name="EC" Type="String"></Item>
+	<Item Name="Resolution" Type="String"></Item>
+	<Item Name="ExpMethod" Type="String">Solution Nmr</Item>
+	<Item Name="PdbClass" Type="String">Plant Toxin</Item>
+	<Item Name="PdbDepositDate" Type="String">1992/07/29 00:00</Item>
+	<Item Name="MMDBEntryDate" Type="String">2007/10/11 00:00</Item>
+	<Item Name="OrganismList" Type="List">
+		<Item Name="string" Type="String">Triticum turgidum</Item>
+	</Item>
+	<Item Name="LigCode" Type="String"></Item>
+	<Item Name="LigCount" Type="String">0</Item>
+	<Item Name="ModProteinResCount" Type="String">0</Item>
+	<Item Name="ModDNAResCount" Type="String">0</Item>
+	<Item Name="ModRNAResCount" Type="String">0</Item>
+	<Item Name="ProteinChainCount" Type="String"></Item>
+	<Item Name="DNAChainCount" Type="String"></Item>
+	<Item Name="RNAChainCount" Type="String"></Item>
+</DocSum>
+
+<DocSum>
+	<Id>55825</Id>
+	<Item Name="PdbAcc" Type="String">1CRN</Item>
+	<Item Name="PdbDescr" Type="String">Water Structure Of A Hydrophobic Protein At Atomic Resolution. Pentagon Rings Of Water Molecules In Crystals Of Crambin</Item>
+	<Item Name="EC" Type="String"></Item>
+	<Item Name="Resolution" Type="String">1.5</Item>
+	<Item Name="ExpMethod" Type="String">X-Ray Diffraction</Item>
+	<Item Name="PdbClass" Type="String">Plant Protein</Item>
+	<Item Name="PdbDepositDate" Type="String">1981/04/30 00:00</Item>
+	<Item Name="MMDBEntryDate" Type="String">2007/10/11 00:00</Item>
+	<Item Name="OrganismList" Type="List">
+		<Item Name="string" Type="String">Crambe hispanica subsp. abyssinica</Item>
+	</Item>
+	<Item Name="LigCode" Type="String"></Item>
+	<Item Name="LigCount" Type="String">0</Item>
+	<Item Name="ModProteinResCount" Type="String">0</Item>
+	<Item Name="ModDNAResCount" Type="String">0</Item>
+	<Item Name="ModRNAResCount" Type="String">0</Item>
+	<Item Name="ProteinChainCount" Type="String"></Item>
+	<Item Name="DNAChainCount" Type="String"></Item>
+	<Item Name="RNAChainCount" Type="String"></Item>
+</DocSum>
+
+<DocSum>
+	<Id>55797</Id>
+	<Item Name="PdbAcc" Type="String">1CNR</Item>
+	<Item Name="PdbDescr" Type="String">Correlated Disorder Of The Pure Pro22(Slash)leu25 Form Of Crambin At 150k Refined To 1.05 Angstroms Resolution</Item>
+	<Item Name="EC" Type="String"></Item>
+	<Item Name="Resolution" Type="String">1.05</Item>
+	<Item Name="ExpMethod" Type="String">X-Ray Diffraction</Item>
+	<Item Name="PdbClass" Type="String">Plant Seed Protein</Item>
+	<Item Name="PdbDepositDate" Type="String">1993/07/15 00:00</Item>
+	<Item Name="MMDBEntryDate" Type="String">2007/10/11 00:00</Item>
+	<Item Name="OrganismList" Type="List">
+		<Item Name="string" Type="String">Crambe hispanica subsp. abyssinica</Item>
+	</Item>
+	<Item Name="LigCode" Type="String"></Item>
+	<Item Name="LigCount" Type="String">0</Item>
+	<Item Name="ModProteinResCount" Type="String">0</Item>
+	<Item Name="ModDNAResCount" Type="String">0</Item>
+	<Item Name="ModRNAResCount" Type="String">0</Item>
+	<Item Name="ProteinChainCount" Type="String"></Item>
+	<Item Name="DNAChainCount" Type="String"></Item>
+	<Item Name="RNAChainCount" Type="String"></Item>
+</DocSum>
+
+<DocSum>
+	<Id>55723</Id>
+	<Item Name="PdbAcc" Type="String">1CCN</Item>
+	<Item Name="PdbDescr" Type="String">Direct Noe Refinement Of Crambin From 2d Nmr Data Using A Slow-Cooling Annealing Protocol</Item>
+	<Item Name="EC" Type="String"></Item>
+	<Item Name="Resolution" Type="String"></Item>
+	<Item Name="ExpMethod" Type="String">Solution Nmr</Item>
+	<Item Name="PdbClass" Type="String">Plant Seed Protein</Item>
+	<Item Name="PdbDepositDate" Type="String">1993/04/14 00:00</Item>
+	<Item Name="MMDBEntryDate" Type="String">2007/10/11 00:00</Item>
+	<Item Name="OrganismList" Type="List">
+		<Item Name="string" Type="String">Crambe hispanica subsp. abyssinica</Item>
+	</Item>
+	<Item Name="LigCode" Type="String"></Item>
+	<Item Name="LigCount" Type="String">0</Item>
+	<Item Name="ModProteinResCount" Type="String">0</Item>
+	<Item Name="ModDNAResCount" Type="String">0</Item>
+	<Item Name="ModRNAResCount" Type="String">0</Item>
+	<Item Name="ProteinChainCount" Type="String"></Item>
+	<Item Name="DNAChainCount" Type="String"></Item>
+	<Item Name="RNAChainCount" Type="String"></Item>
+</DocSum>
+
+<DocSum>
+	<Id>55722</Id>
+	<Item Name="PdbAcc" Type="String">1CCM</Item>
+	<Item Name="PdbDescr" Type="String">Direct Noe Refinement Of Crambin From 2d Nmr Data Using A Slow-Cooling Annealing Protocol</Item>
+	<Item Name="EC" Type="String"></Item>
+	<Item Name="Resolution" Type="String"></Item>
+	<Item Name="ExpMethod" Type="String">Solution Nmr</Item>
+	<Item Name="PdbClass" Type="String">Plant Seed Protein</Item>
+	<Item Name="PdbDepositDate" Type="String">1993/04/14 00:00</Item>
+	<Item Name="MMDBEntryDate" Type="String">2007/10/11 00:00</Item>
+	<Item Name="OrganismList" Type="List">
+		<Item Name="string" Type="String">Crambe hispanica subsp. abyssinica</Item>
+	</Item>
+	<Item Name="LigCode" Type="String"></Item>
+	<Item Name="LigCount" Type="String">0</Item>
+	<Item Name="ModProteinResCount" Type="String">0</Item>
+	<Item Name="ModDNAResCount" Type="String">0</Item>
+	<Item Name="ModRNAResCount" Type="String">0</Item>
+	<Item Name="ProteinChainCount" Type="String"></Item>
+	<Item Name="DNAChainCount" Type="String"></Item>
+	<Item Name="RNAChainCount" Type="String"></Item>
+</DocSum>
+
+<DocSum>
+	<Id>55550</Id>
+	<Item Name="PdbAcc" Type="String">1BHP</Item>
+	<Item Name="PdbDescr" Type="String">Structure Of Beta-Purothionin At Room Temperature And 1.7 Angstroms Resolution</Item>
+	<Item Name="EC" Type="String"></Item>
+	<Item Name="Resolution" Type="String">1.7</Item>
+	<Item Name="ExpMethod" Type="String">X-Ray Diffraction</Item>
+	<Item Name="PdbClass" Type="String">Plant Toxin</Item>
+	<Item Name="PdbDepositDate" Type="String">1995/03/15 00:00</Item>
+	<Item Name="MMDBEntryDate" Type="String">2007/10/11 00:00</Item>
+	<Item Name="OrganismList" Type="List">
+		<Item Name="string" Type="String">Triticum aestivum</Item>
+	</Item>
+	<Item Name="LigCode" Type="String">ACT|GOL|PO4</Item>
+	<Item Name="LigCount" Type="String">20</Item>
+	<Item Name="ModProteinResCount" Type="String">0</Item>
+	<Item Name="ModDNAResCount" Type="String">0</Item>
+	<Item Name="ModRNAResCount" Type="String">0</Item>
+	<Item Name="ProteinChainCount" Type="String"></Item>
+	<Item Name="DNAChainCount" Type="String"></Item>
+	<Item Name="RNAChainCount" Type="String"></Item>
+</DocSum>
+
+<DocSum>
+	<Id>55119</Id>
+	<Item Name="PdbAcc" Type="String">1AB1</Item>
+	<Item Name="PdbDescr" Type="String">Si Form Crambin</Item>
+	<Item Name="EC" Type="String"></Item>
+	<Item Name="Resolution" Type="String">0.89</Item>
+	<Item Name="ExpMethod" Type="String">X-Ray Diffraction</Item>
+	<Item Name="PdbClass" Type="String">Plant Seed Protein</Item>
+	<Item Name="PdbDepositDate" Type="String">1997/01/31 00:00</Item>
+	<Item Name="MMDBEntryDate" Type="String">2007/10/11 00:00</Item>
+	<Item Name="OrganismList" Type="List">
+		<Item Name="string" Type="String">Crambe hispanica subsp. abyssinica</Item>
+	</Item>
+	<Item Name="LigCode" Type="String"></Item>
+	<Item Name="LigCount" Type="String">0</Item>
+	<Item Name="ModProteinResCount" Type="String">0</Item>
+	<Item Name="ModDNAResCount" Type="String">0</Item>
+	<Item Name="ModRNAResCount" Type="String">0</Item>
+	<Item Name="ProteinChainCount" Type="String"></Item>
+	<Item Name="DNAChainCount" Type="String"></Item>
+	<Item Name="RNAChainCount" Type="String"></Item>
+</DocSum>
+
+<DocSum>
+	<Id>49870</Id>
+	<Item Name="PdbAcc" Type="String">1JXY</Item>
+	<Item Name="PdbDescr" Type="String">Crambin Mixed Sequence Form At 220 K. ProteinWATER SUBSTATES</Item>
+	<Item Name="EC" Type="String"></Item>
+	<Item Name="Resolution" Type="String">0.89</Item>
+	<Item Name="ExpMethod" Type="String">X-Ray Diffraction</Item>
+	<Item Name="PdbClass" Type="String">Plant Protein</Item>
+	<Item Name="PdbDepositDate" Type="String">2001/09/10 00:00</Item>
+	<Item Name="MMDBEntryDate" Type="String">2007/10/11 00:00</Item>
+	<Item Name="OrganismList" Type="List">
+		<Item Name="string" Type="String">Crambe hispanica subsp. abyssinica</Item>
+	</Item>
+	<Item Name="LigCode" Type="String"></Item>
+	<Item Name="LigCount" Type="String">0</Item>
+	<Item Name="ModProteinResCount" Type="String">0</Item>
+	<Item Name="ModDNAResCount" Type="String">0</Item>
+	<Item Name="ModRNAResCount" Type="String">0</Item>
+	<Item Name="ProteinChainCount" Type="String"></Item>
+	<Item Name="DNAChainCount" Type="String"></Item>
+	<Item Name="RNAChainCount" Type="String"></Item>
+</DocSum>
+
+<DocSum>
+	<Id>49869</Id>
+	<Item Name="PdbAcc" Type="String">1JXX</Item>
+	<Item Name="PdbDescr" Type="String">Crambin Mixed Sequence Form At 200 K. Protein/water Substates</Item>
+	<Item Name="EC" Type="String"></Item>
+	<Item Name="Resolution" Type="String">0.89</Item>
+	<Item Name="ExpMethod" Type="String">X-Ray Diffraction</Item>
+	<Item Name="PdbClass" Type="String">Plant Protein</Item>
+	<Item Name="PdbDepositDate" Type="String">2001/09/10 00:00</Item>
+	<Item Name="MMDBEntryDate" Type="String">2007/10/11 00:00</Item>
+	<Item Name="OrganismList" Type="List">
+		<Item Name="string" Type="String">Crambe hispanica subsp. abyssinica</Item>
+	</Item>
+	<Item Name="LigCode" Type="String"></Item>
+	<Item Name="LigCount" Type="String">0</Item>
+	<Item Name="ModProteinResCount" Type="String">0</Item>
+	<Item Name="ModDNAResCount" Type="String">0</Item>
+	<Item Name="ModRNAResCount" Type="String">0</Item>
+	<Item Name="ProteinChainCount" Type="String"></Item>
+	<Item Name="DNAChainCount" Type="String"></Item>
+	<Item Name="RNAChainCount" Type="String"></Item>
+</DocSum>
+
+<DocSum>
+	<Id>49866</Id>
+	<Item Name="PdbAcc" Type="String">1JXT</Item>
+	<Item Name="PdbDescr" Type="String">Crambin Mixed Sequence Form At 160 K. ProteinWATER SUBSTATES</Item>
+	<Item Name="EC" Type="String"></Item>
+	<Item Name="Resolution" Type="String">0.89</Item>
+	<Item Name="ExpMethod" Type="String">X-Ray Diffraction</Item>
+	<Item Name="PdbClass" Type="String">Plant Protein</Item>
+	<Item Name="PdbDepositDate" Type="String">2001/09/08 00:00</Item>
+	<Item Name="MMDBEntryDate" Type="String">2007/10/11 00:00</Item>
+	<Item Name="OrganismList" Type="List">
+		<Item Name="string" Type="String">Crambe hispanica subsp. abyssinica</Item>
+	</Item>
+	<Item Name="LigCode" Type="String"></Item>
+	<Item Name="LigCount" Type="String">0</Item>
+	<Item Name="ModProteinResCount" Type="String">0</Item>
+	<Item Name="ModDNAResCount" Type="String">0</Item>
+	<Item Name="ModRNAResCount" Type="String">0</Item>
+	<Item Name="ProteinChainCount" Type="String"></Item>
+	<Item Name="DNAChainCount" Type="String"></Item>
+	<Item Name="RNAChainCount" Type="String"></Item>
+</DocSum>
+
+<DocSum>
+	<Id>43749</Id>
+	<Item Name="PdbAcc" Type="String">2FD9</Item>
+	<Item Name="PdbDescr" Type="String">X-Ray Crystal Structure Of Chemically Synthesized Crambin- {alpha}carboxamide</Item>
+	<Item Name="EC" Type="String"></Item>
+	<Item Name="Resolution" Type="String">1.6</Item>
+	<Item Name="ExpMethod" Type="String">X-Ray Diffraction</Item>
+	<Item Name="PdbClass" Type="String">Unknown Function</Item>
+	<Item Name="PdbDepositDate" Type="String">2005/12/13 00:00</Item>
+	<Item Name="MMDBEntryDate" Type="String">2007/02/26 00:00</Item>
+	<Item Name="OrganismList" Type="List">
+		<Item Name="string" Type="String">Crambe hispanica subsp. abyssinica</Item>
+	</Item>
+	<Item Name="LigCode" Type="String"></Item>
+	<Item Name="LigCount" Type="String">0</Item>
+	<Item Name="ModProteinResCount" Type="String">0</Item>
+	<Item Name="ModDNAResCount" Type="String">0</Item>
+	<Item Name="ModRNAResCount" Type="String">0</Item>
+	<Item Name="ProteinChainCount" Type="String"></Item>
+	<Item Name="DNAChainCount" Type="String"></Item>
+	<Item Name="RNAChainCount" Type="String"></Item>
+</DocSum>
+
+<DocSum>
+	<Id>43748</Id>
+	<Item Name="PdbAcc" Type="String">2FD7</Item>
+	<Item Name="PdbDescr" Type="String">X-Ray Crystal Structure Of Chemically Synthesized Crambin</Item>
+	<Item Name="EC" Type="String"></Item>
+	<Item Name="Resolution" Type="String">1.75</Item>
+	<Item Name="ExpMethod" Type="String">X-Ray Diffraction</Item>
+	<Item Name="PdbClass" Type="String">Unknown Function</Item>
+	<Item Name="PdbDepositDate" Type="String">2005/12/13 00:00</Item>
+	<Item Name="MMDBEntryDate" Type="String">2007/02/26 00:00</Item>
+	<Item Name="OrganismList" Type="List">
+		<Item Name="string" Type="String">Crambe hispanica subsp. abyssinica</Item>
+	</Item>
+	<Item Name="LigCode" Type="String"></Item>
+	<Item Name="LigCount" Type="String">0</Item>
+	<Item Name="ModProteinResCount" Type="String">0</Item>
+	<Item Name="ModDNAResCount" Type="String">0</Item>
+	<Item Name="ModRNAResCount" Type="String">0</Item>
+	<Item Name="ProteinChainCount" Type="String"></Item>
+	<Item Name="DNAChainCount" Type="String"></Item>
+	<Item Name="RNAChainCount" Type="String"></Item>
+</DocSum>
+
+<DocSum>
+	<Id>39227</Id>
+	<Item Name="PdbAcc" Type="String">2EYD</Item>
+	<Item Name="PdbDescr" Type="String">Water Refined Solution Structure Of Crambin In Dpc Micelles</Item>
+	<Item Name="EC" Type="String"></Item>
+	<Item Name="Resolution" Type="String"></Item>
+	<Item Name="ExpMethod" Type="String">Solution Nmr</Item>
+	<Item Name="PdbClass" Type="String">Plant Protein</Item>
+	<Item Name="PdbDepositDate" Type="String">2005/11/09 00:00</Item>
+	<Item Name="MMDBEntryDate" Type="String">2006/06/17 00:00</Item>
+	<Item Name="OrganismList" Type="List">
+		<Item Name="string" Type="String">Crambe hispanica subsp. abyssinica</Item>
+	</Item>
+	<Item Name="LigCode" Type="String"></Item>
+	<Item Name="LigCount" Type="String">0</Item>
+	<Item Name="ModProteinResCount" Type="String">0</Item>
+	<Item Name="ModDNAResCount" Type="String">0</Item>
+	<Item Name="ModRNAResCount" Type="String">0</Item>
+	<Item Name="ProteinChainCount" Type="String"></Item>
+	<Item Name="DNAChainCount" Type="String"></Item>
+	<Item Name="RNAChainCount" Type="String"></Item>
+</DocSum>
+
+<DocSum>
+	<Id>39226</Id>
+	<Item Name="PdbAcc" Type="String">2EYC</Item>
+	<Item Name="PdbDescr" Type="String">Dmso Refined Solution Structure Of Crambin In Dpc Micelles</Item>
+	<Item Name="EC" Type="String"></Item>
+	<Item Name="Resolution" Type="String"></Item>
+	<Item Name="ExpMethod" Type="String">Solution Nmr</Item>
+	<Item Name="PdbClass" Type="String">Plant Protein</Item>
+	<Item Name="PdbDepositDate" Type="String">2005/11/09 00:00</Item>
+	<Item Name="MMDBEntryDate" Type="String">2006/06/17 00:00</Item>
+	<Item Name="OrganismList" Type="List">
+		<Item Name="string" Type="String">Crambe hispanica subsp. abyssinica</Item>
+	</Item>
+	<Item Name="LigCode" Type="String"></Item>
+	<Item Name="LigCount" Type="String">0</Item>
+	<Item Name="ModProteinResCount" Type="String">0</Item>
+	<Item Name="ModDNAResCount" Type="String">0</Item>
+	<Item Name="ModRNAResCount" Type="String">0</Item>
+	<Item Name="ProteinChainCount" Type="String"></Item>
+	<Item Name="DNAChainCount" Type="String"></Item>
+	<Item Name="RNAChainCount" Type="String"></Item>
+</DocSum>
+
+<DocSum>
+	<Id>39225</Id>
+	<Item Name="PdbAcc" Type="String">2EYB</Item>
+	<Item Name="PdbDescr" Type="String">Water Refined Solution Structure Of Crambin In AcetoneWATER</Item>
+	<Item Name="EC" Type="String"></Item>
+	<Item Name="Resolution" Type="String"></Item>
+	<Item Name="ExpMethod" Type="String">Solution Nmr</Item>
+	<Item Name="PdbClass" Type="String">Plant Protein</Item>
+	<Item Name="PdbDepositDate" Type="String">2005/11/09 00:00</Item>
+	<Item Name="MMDBEntryDate" Type="String">2006/06/17 00:00</Item>
+	<Item Name="OrganismList" Type="List">
+		<Item Name="string" Type="String">Crambe hispanica subsp. abyssinica</Item>
+	</Item>
+	<Item Name="LigCode" Type="String"></Item>
+	<Item Name="LigCount" Type="String">0</Item>
+	<Item Name="ModProteinResCount" Type="String">0</Item>
+	<Item Name="ModDNAResCount" Type="String">0</Item>
+	<Item Name="ModRNAResCount" Type="String">0</Item>
+	<Item Name="ProteinChainCount" Type="String"></Item>
+	<Item Name="DNAChainCount" Type="String"></Item>
+	<Item Name="RNAChainCount" Type="String"></Item>
+</DocSum>
+
+<DocSum>
+	<Id>39224</Id>
+	<Item Name="PdbAcc" Type="String">2EYA</Item>
+	<Item Name="PdbDescr" Type="String">Dmso Refined Solution Structure Of Crambin In AcetoneWATER</Item>
+	<Item Name="EC" Type="String"></Item>
+	<Item Name="Resolution" Type="String"></Item>
+	<Item Name="ExpMethod" Type="String">Solution Nmr</Item>
+	<Item Name="PdbClass" Type="String">Plant Protein</Item>
+	<Item Name="PdbDepositDate" Type="String">2005/11/09 00:00</Item>
+	<Item Name="MMDBEntryDate" Type="String">2006/06/17 00:00</Item>
+	<Item Name="OrganismList" Type="List">
+		<Item Name="string" Type="String">Crambe hispanica subsp. abyssinica</Item>
+	</Item>
+	<Item Name="LigCode" Type="String"></Item>
+	<Item Name="LigCount" Type="String">0</Item>
+	<Item Name="ModProteinResCount" Type="String">0</Item>
+	<Item Name="ModDNAResCount" Type="String">0</Item>
+	<Item Name="ModRNAResCount" Type="String">0</Item>
+	<Item Name="ProteinChainCount" Type="String"></Item>
+	<Item Name="DNAChainCount" Type="String"></Item>
+	<Item Name="RNAChainCount" Type="String"></Item>
+</DocSum>
+
+<DocSum>
+	<Id>37894</Id>
+	<Item Name="PdbAcc" Type="String">1YVA</Item>
+	<Item Name="PdbDescr" Type="String">Nmr Solution Structure Of Crambin In Dpc Micelles</Item>
+	<Item Name="EC" Type="String"></Item>
+	<Item Name="Resolution" Type="String"></Item>
+	<Item Name="ExpMethod" Type="String">Solution Nmr</Item>
+	<Item Name="PdbClass" Type="String">Plant Protein</Item>
+	<Item Name="PdbDepositDate" Type="String">2005/02/15 00:00</Item>
+	<Item Name="MMDBEntryDate" Type="String">2006/05/01 00:00</Item>
+	<Item Name="OrganismList" Type="List">
+		<Item Name="string" Type="String">Crambe hispanica subsp. abyssinica</Item>
+	</Item>
+	<Item Name="LigCode" Type="String"></Item>
+	<Item Name="LigCount" Type="String">0</Item>
+	<Item Name="ModProteinResCount" Type="String">0</Item>
+	<Item Name="ModDNAResCount" Type="String">0</Item>
+	<Item Name="ModRNAResCount" Type="String">0</Item>
+	<Item Name="ProteinChainCount" Type="String"></Item>
+	<Item Name="DNAChainCount" Type="String"></Item>
+	<Item Name="RNAChainCount" Type="String"></Item>
+</DocSum>
+
+<DocSum>
+	<Id>37893</Id>
+	<Item Name="PdbAcc" Type="String">1YV8</Item>
+	<Item Name="PdbDescr" Type="String">Solution Structure Of Crambin In AcetoneWATER MIXED SOLVENT</Item>
+	<Item Name="EC" Type="String"></Item>
+	<Item Name="Resolution" Type="String"></Item>
+	<Item Name="ExpMethod" Type="String">Solution Nmr</Item>
+	<Item Name="PdbClass" Type="String">Plant Protein</Item>
+	<Item Name="PdbDepositDate" Type="String">2005/02/15 00:00</Item>
+	<Item Name="MMDBEntryDate" Type="String">2006/05/01 00:00</Item>
+	<Item Name="OrganismList" Type="List">
+		<Item Name="string" Type="String">Crambe hispanica subsp. abyssinica</Item>
+	</Item>
+	<Item Name="LigCode" Type="String"></Item>
+	<Item Name="LigCount" Type="String">0</Item>
+	<Item Name="ModProteinResCount" Type="String">0</Item>
+	<Item Name="ModDNAResCount" Type="String">0</Item>
+	<Item Name="ModRNAResCount" Type="String">0</Item>
+	<Item Name="ProteinChainCount" Type="String"></Item>
+	<Item Name="DNAChainCount" Type="String"></Item>
+	<Item Name="RNAChainCount" Type="String"></Item>
+</DocSum>
+
+<DocSum>
+	<Id>37716</Id>
+	<Item Name="PdbAcc" Type="String">2F8P</Item>
+	<Item Name="PdbDescr" Type="String">Crystal Structure Of Obelin Following Ca2+ Triggered Bioluminescence Suggests Neutral Coelenteramide As The Primary Excited State</Item>
+	<Item Name="EC" Type="String"></Item>
+	<Item Name="Resolution" Type="String">1.93</Item>
+	<Item Name="ExpMethod" Type="String">X-Ray Diffraction</Item>
+	<Item Name="PdbClass" Type="String">Luminescent Protein</Item>
+	<Item Name="PdbDepositDate" Type="String">2005/12/03 00:00</Item>
+	<Item Name="MMDBEntryDate" Type="String">2006/03/24 00:00</Item>
+	<Item Name="OrganismList" Type="List">
+		<Item Name="string" Type="String">Obelia longissima</Item>
+	</Item>
+	<Item Name="LigCode" Type="String">CA|CEI</Item>
+	<Item Name="LigCount" Type="String">4</Item>
+	<Item Name="ModProteinResCount" Type="String">0</Item>
+	<Item Name="ModDNAResCount" Type="String">0</Item>
+	<Item Name="ModRNAResCount" Type="String">0</Item>
+	<Item Name="ProteinChainCount" Type="String"></Item>
+	<Item Name="DNAChainCount" Type="String"></Item>
+	<Item Name="RNAChainCount" Type="String"></Item>
+</DocSum>
+
+<DocSum>
+	<Id>34057</Id>
+	<Item Name="PdbAcc" Type="String">1SL9</Item>
+	<Item Name="PdbDescr" Type="String">Obelin From Obelia Longissima</Item>
+	<Item Name="EC" Type="String"></Item>
+	<Item Name="Resolution" Type="String">1.17</Item>
+	<Item Name="ExpMethod" Type="String">X-Ray Diffraction</Item>
+	<Item Name="PdbClass" Type="String">Luminescent Protein</Item>
+	<Item Name="PdbDepositDate" Type="String">2004/03/05 00:00</Item>
+	<Item Name="MMDBEntryDate" Type="String">2005/08/22 00:00</Item>
+	<Item Name="OrganismList" Type="List">
+		<Item Name="string" Type="String">Obelia longissima</Item>
+	</Item>
+	<Item Name="LigCode" Type="String">CZH</Item>
+	<Item Name="LigCount" Type="String">1</Item>
+	<Item Name="ModProteinResCount" Type="String">0</Item>
+	<Item Name="ModDNAResCount" Type="String">0</Item>
+	<Item Name="ModRNAResCount" Type="String">0</Item>
+	<Item Name="ProteinChainCount" Type="String"></Item>
+	<Item Name="DNAChainCount" Type="String"></Item>
+	<Item Name="RNAChainCount" Type="String"></Item>
+</DocSum>
+
+<DocSum>
+	<Id>32695</Id>
+	<Item Name="PdbAcc" Type="String">1ED0</Item>
+	<Item Name="PdbDescr" Type="String">Nmr Structural Determination Of Viscotoxin A3 From Viscum Album L</Item>
+	<Item Name="EC" Type="String"></Item>
+	<Item Name="Resolution" Type="String"></Item>
+	<Item Name="ExpMethod" Type="String">Solution Nmr</Item>
+	<Item Name="PdbClass" Type="String">Toxin</Item>
+	<Item Name="PdbDepositDate" Type="String">2000/01/26 00:00</Item>
+	<Item Name="MMDBEntryDate" Type="String">2005/04/20 00:00</Item>
+	<Item Name="OrganismList" Type="List">
+		<Item Name="string" Type="String">Viscum album</Item>
+	</Item>
+	<Item Name="LigCode" Type="String"></Item>
+	<Item Name="LigCount" Type="String">0</Item>
+	<Item Name="ModProteinResCount" Type="String">0</Item>
+	<Item Name="ModDNAResCount" Type="String">0</Item>
+	<Item Name="ModRNAResCount" Type="String">0</Item>
+	<Item Name="ProteinChainCount" Type="String"></Item>
+	<Item Name="DNAChainCount" Type="String"></Item>
+	<Item Name="RNAChainCount" Type="String"></Item>
+</DocSum>
+
+<DocSum>
+	<Id>32254</Id>
+	<Item Name="PdbAcc" Type="String">1TXE</Item>
+	<Item Name="PdbDescr" Type="String">Solution Structure Of The Active-Centre Mutant Ile14ala Of The Histidine-Containing Phosphocarrier Protein (Hpr) From Staphylococcus Carnosus</Item>
+	<Item Name="EC" Type="String"></Item>
+	<Item Name="Resolution" Type="String"></Item>
+	<Item Name="ExpMethod" Type="String">Solution Nmr</Item>
+	<Item Name="PdbClass" Type="String">Transport Protein</Item>
+	<Item Name="PdbDepositDate" Type="String">2004/07/04 00:00</Item>
+	<Item Name="MMDBEntryDate" Type="String">2005/04/20 00:00</Item>
+	<Item Name="OrganismList" Type="List">
+		<Item Name="string" Type="String">Staphylococcus carnosus</Item>
+	</Item>
+	<Item Name="LigCode" Type="String"></Item>
+	<Item Name="LigCount" Type="String">0</Item>
+	<Item Name="ModProteinResCount" Type="String">0</Item>
+	<Item Name="ModDNAResCount" Type="String">0</Item>
+	<Item Name="ModRNAResCount" Type="String">0</Item>
+	<Item Name="ProteinChainCount" Type="String"></Item>
+	<Item Name="DNAChainCount" Type="String"></Item>
+	<Item Name="RNAChainCount" Type="String"></Item>
+</DocSum>
+
+<DocSum>
+	<Id>31410</Id>
+	<Item Name="PdbAcc" Type="String">1WUW</Item>
+	<Item Name="PdbDescr" Type="String">Crystal Structure Of Beta Hordothionin</Item>
+	<Item Name="EC" Type="String"></Item>
+	<Item Name="Resolution" Type="String">1.9</Item>
+	<Item Name="ExpMethod" Type="String">X-Ray Diffraction</Item>
+	<Item Name="PdbClass" Type="String">Plant Protein</Item>
+	<Item Name="PdbDepositDate" Type="String">2004/12/09 00:00</Item>
+	<Item Name="MMDBEntryDate" Type="String">2005/03/11 00:00</Item>
+	<Item Name="OrganismList" Type="List">
+		<Item Name="string" Type="String">Hordeum vulgare</Item>
+		<Item Name="string" Type="String">Hordeum vulgare</Item>
+	</Item>
+	<Item Name="LigCode" Type="String">SER|TSU</Item>
+	<Item Name="LigCount" Type="String">4</Item>
+	<Item Name="ModProteinResCount" Type="String">0</Item>
+	<Item Name="ModDNAResCount" Type="String">0</Item>
+	<Item Name="ModRNAResCount" Type="String">0</Item>
+	<Item Name="ProteinChainCount" Type="String"></Item>
+	<Item Name="DNAChainCount" Type="String"></Item>
+	<Item Name="RNAChainCount" Type="String"></Item>
+</DocSum>
+
+<DocSum>
+	<Id>30859</Id>
+	<Item Name="PdbAcc" Type="String">1SL8</Item>
+	<Item Name="PdbDescr" Type="String">Calcium-Loaded Apo-Aequorin From Aequorea Victoria</Item>
+	<Item Name="EC" Type="String"></Item>
+	<Item Name="Resolution" Type="String">1.7</Item>
+	<Item Name="ExpMethod" Type="String">X-Ray Diffraction</Item>
+	<Item Name="PdbClass" Type="String">Luminescent Protein</Item>
+	<Item Name="PdbDepositDate" Type="String">2004/03/05 00:00</Item>
+	<Item Name="MMDBEntryDate" Type="String">2005/01/27 00:00</Item>
+	<Item Name="OrganismList" Type="List">
+		<Item Name="string" Type="String">Aequorea victoria</Item>
+	</Item>
+	<Item Name="LigCode" Type="String">CA</Item>
+	<Item Name="LigCount" Type="String">3</Item>
+	<Item Name="ModProteinResCount" Type="String">0</Item>
+	<Item Name="ModDNAResCount" Type="String">0</Item>
+	<Item Name="ModRNAResCount" Type="String">0</Item>
+	<Item Name="ProteinChainCount" Type="String"></Item>
+	<Item Name="DNAChainCount" Type="String"></Item>
+	<Item Name="RNAChainCount" Type="String"></Item>
+</DocSum>
+
+<DocSum>
+	<Id>30858</Id>
+	<Item Name="PdbAcc" Type="String">1SL7</Item>
+	<Item Name="PdbDescr" Type="String">Crystal Structure Of Calcium-Loaded Apo-Obelin From Obelia Longissima</Item>
+	<Item Name="EC" Type="String"></Item>
+	<Item Name="Resolution" Type="String">2.2</Item>
+	<Item Name="ExpMethod" Type="String">X-Ray Diffraction</Item>
+	<Item Name="PdbClass" Type="String">Luminescent Protein</Item>
+	<Item Name="PdbDepositDate" Type="String">2004/03/05 00:00</Item>
+	<Item Name="MMDBEntryDate" Type="String">2005/01/27 00:00</Item>
+	<Item Name="OrganismList" Type="List">
+		<Item Name="string" Type="String">Obelia longissima</Item>
+	</Item>
+	<Item Name="LigCode" Type="String">CA</Item>
+	<Item Name="LigCount" Type="String">3</Item>
+	<Item Name="ModProteinResCount" Type="String">0</Item>
+	<Item Name="ModDNAResCount" Type="String">0</Item>
+	<Item Name="ModRNAResCount" Type="String">0</Item>
+	<Item Name="ProteinChainCount" Type="String"></Item>
+	<Item Name="DNAChainCount" Type="String"></Item>
+	<Item Name="RNAChainCount" Type="String"></Item>
+</DocSum>
+
+<DocSum>
+	<Id>29338</Id>
+	<Item Name="PdbAcc" Type="String">1S36</Item>
+	<Item Name="PdbDescr" Type="String">Crystal Structure Of A Ca2+-Discharged Photoprotein: Implications For The Mechanisms Of The Calcium Trigger And The Bioluminescence</Item>
+	<Item Name="EC" Type="String"></Item>
+	<Item Name="Resolution" Type="String">1.96</Item>
+	<Item Name="ExpMethod" Type="String">X-Ray Diffraction</Item>
+	<Item Name="PdbClass" Type="String">Luminescent Protein</Item>
+	<Item Name="PdbDepositDate" Type="String">2004/01/12 00:00</Item>
+	<Item Name="MMDBEntryDate" Type="String">2004/11/11 00:00</Item>
+	<Item Name="OrganismList" Type="List">
+		<Item Name="string" Type="String">Obelia longissima</Item>
+	</Item>
+	<Item Name="LigCode" Type="String">CEI|CL|GOL|NA</Item>
+	<Item Name="LigCount" Type="String">4</Item>
+	<Item Name="ModProteinResCount" Type="String">0</Item>
+	<Item Name="ModDNAResCount" Type="String">0</Item>
+	<Item Name="ModRNAResCount" Type="String">0</Item>
+	<Item Name="ProteinChainCount" Type="String"></Item>
+	<Item Name="DNAChainCount" Type="String"></Item>
+	<Item Name="RNAChainCount" Type="String"></Item>
+</DocSum>
+
+<DocSum>
+	<Id>25417</Id>
+	<Item Name="PdbAcc" Type="String">1QV1</Item>
+	<Item Name="PdbDescr" Type="String">Atomic Resolution Structure Of Obelin From Obelia Longissima</Item>
+	<Item Name="EC" Type="String">1.13.12.5</Item>
+	<Item Name="Resolution" Type="String">1.1</Item>
+	<Item Name="ExpMethod" Type="String">X-Ray Diffraction</Item>
+	<Item Name="PdbClass" Type="String">Luminescent Protein</Item>
+	<Item Name="PdbDepositDate" Type="String">2003/08/26 00:00</Item>
+	<Item Name="MMDBEntryDate" Type="String">2003/12/10 00:00</Item>
+	<Item Name="OrganismList" Type="List">
+		<Item Name="string" Type="String">Obelia longissima</Item>
+	</Item>
+	<Item Name="LigCode" Type="String">CA|CO|CZH|GOL|K</Item>
+	<Item Name="LigCount" Type="String">6</Item>
+	<Item Name="ModProteinResCount" Type="String">0</Item>
+	<Item Name="ModDNAResCount" Type="String">0</Item>
+	<Item Name="ModRNAResCount" Type="String">0</Item>
+	<Item Name="ProteinChainCount" Type="String"></Item>
+	<Item Name="DNAChainCount" Type="String"></Item>
+	<Item Name="RNAChainCount" Type="String"></Item>
+</DocSum>
+
+<DocSum>
+	<Id>25416</Id>
+	<Item Name="PdbAcc" Type="String">1QV0</Item>
+	<Item Name="PdbDescr" Type="String">Atomic Resolution Structure Of Obelin From Obelia Longissima</Item>
+	<Item Name="EC" Type="String">1.13.12.5</Item>
+	<Item Name="Resolution" Type="String">1.1</Item>
+	<Item Name="ExpMethod" Type="String">X-Ray Diffraction</Item>
+	<Item Name="PdbClass" Type="String">Luminescent Protein</Item>
+	<Item Name="PdbDepositDate" Type="String">2003/08/26 00:00</Item>
+	<Item Name="MMDBEntryDate" Type="String">2003/12/10 00:00</Item>
+	<Item Name="OrganismList" Type="List">
+		<Item Name="string" Type="String">Obelia longissima</Item>
+	</Item>
+	<Item Name="LigCode" Type="String">CO|CZH|GOL|K</Item>
+	<Item Name="LigCount" Type="String">5</Item>
+	<Item Name="ModProteinResCount" Type="String">0</Item>
+	<Item Name="ModDNAResCount" Type="String">0</Item>
+	<Item Name="ModRNAResCount" Type="String">0</Item>
+	<Item Name="ProteinChainCount" Type="String"></Item>
+	<Item Name="DNAChainCount" Type="String"></Item>
+	<Item Name="RNAChainCount" Type="String"></Item>
+</DocSum>
+
+<DocSum>
+	<Id>22516</Id>
+	<Item Name="PdbAcc" Type="String">1ORL</Item>
+	<Item Name="PdbDescr" Type="String">1h Nmr Structure Determination Of Viscotoxin C1</Item>
+	<Item Name="EC" Type="String"></Item>
+	<Item Name="Resolution" Type="String"></Item>
+	<Item Name="ExpMethod" Type="String">Solution Nmr</Item>
+	<Item Name="PdbClass" Type="String">Toxin</Item>
+	<Item Name="PdbDepositDate" Type="String">2003/03/14 00:00</Item>
+	<Item Name="MMDBEntryDate" Type="String">2003/04/10 00:00</Item>
+	<Item Name="OrganismList" Type="List">
+		<Item Name="string" Type="String">Viscum album</Item>
+	</Item>
+	<Item Name="LigCode" Type="String"></Item>
+	<Item Name="LigCount" Type="String">0</Item>
+	<Item Name="ModProteinResCount" Type="String">0</Item>
+	<Item Name="ModDNAResCount" Type="String">0</Item>
+	<Item Name="ModRNAResCount" Type="String">0</Item>
+	<Item Name="ProteinChainCount" Type="String"></Item>
+	<Item Name="DNAChainCount" Type="String"></Item>
+	<Item Name="RNAChainCount" Type="String"></Item>
+</DocSum>
+
+<DocSum>
+	<Id>22386</Id>
+	<Item Name="PdbAcc" Type="String">1NBL</Item>
+	<Item Name="PdbDescr" Type="String">Nmr Structure Of Hellethionin D</Item>
+	<Item Name="EC" Type="String"></Item>
+	<Item Name="Resolution" Type="String"></Item>
+	<Item Name="ExpMethod" Type="String">Solution Nmr</Item>
+	<Item Name="PdbClass" Type="String">Toxin</Item>
+	<Item Name="PdbDepositDate" Type="String">2002/12/03 00:00</Item>
+	<Item Name="MMDBEntryDate" Type="String">2003/04/10 00:00</Item>
+	<Item Name="OrganismList" Type="List">
+		<Item Name="string" Type="String">Helleborus purpurascens</Item>
+	</Item>
+	<Item Name="LigCode" Type="String"></Item>
+	<Item Name="LigCount" Type="String">0</Item>
+	<Item Name="ModProteinResCount" Type="String">0</Item>
+	<Item Name="ModDNAResCount" Type="String">0</Item>
+	<Item Name="ModRNAResCount" Type="String">0</Item>
+	<Item Name="ProteinChainCount" Type="String"></Item>
+	<Item Name="DNAChainCount" Type="String"></Item>
+	<Item Name="RNAChainCount" Type="String"></Item>
+</DocSum>
+
+<DocSum>
+	<Id>21053</Id>
+	<Item Name="PdbAcc" Type="String">1QKK</Item>
+	<Item Name="PdbDescr" Type="String">Crystal Structure Of The Receiver Domain And Linker Region Of Dctd From Sinorhizobium Meliloti</Item>
+	<Item Name="EC" Type="String"></Item>
+	<Item Name="Resolution" Type="String">1.7</Item>
+	<Item Name="ExpMethod" Type="String">X-Ray Diffraction</Item>
+	<Item Name="PdbClass" Type="String">Transcriptional Regulatory Protein</Item>
+	<Item Name="PdbDepositDate" Type="String">1999/07/23 00:00</Item>
+	<Item Name="MMDBEntryDate" Type="String">2002/11/15 00:00</Item>
+	<Item Name="OrganismList" Type="List">
+		<Item Name="string" Type="String">Sinorhizobium meliloti</Item>
+	</Item>
+	<Item Name="LigCode" Type="String"></Item>
+	<Item Name="LigCount" Type="String">0</Item>
+	<Item Name="ModProteinResCount" Type="String">0</Item>
+	<Item Name="ModDNAResCount" Type="String">0</Item>
+	<Item Name="ModRNAResCount" Type="String">0</Item>
+	<Item Name="ProteinChainCount" Type="String"></Item>
+	<Item Name="DNAChainCount" Type="String"></Item>
+	<Item Name="RNAChainCount" Type="String"></Item>
+</DocSum>
+
+<DocSum>
+	<Id>17017</Id>
+	<Item Name="PdbAcc" Type="String">1JF0</Item>
+	<Item Name="PdbDescr" Type="String">The Crystal Structure Of Obelin From Obelia Geniculata At 1.82 A Resolution</Item>
+	<Item Name="EC" Type="String"></Item>
+	<Item Name="Resolution" Type="String">1.82</Item>
+	<Item Name="ExpMethod" Type="String">X-Ray Diffraction</Item>
+	<Item Name="PdbClass" Type="String">Luminescent Protein</Item>
+	<Item Name="PdbDepositDate" Type="String">2001/06/19 00:00</Item>
+	<Item Name="MMDBEntryDate" Type="String">2001/10/04 00:00</Item>
+	<Item Name="OrganismList" Type="List">
+		<Item Name="string" Type="String">Obelia longissima</Item>
+	</Item>
+	<Item Name="LigCode" Type="String">CZH</Item>
+	<Item Name="LigCount" Type="String">1</Item>
+	<Item Name="ModProteinResCount" Type="String">0</Item>
+	<Item Name="ModDNAResCount" Type="String">0</Item>
+	<Item Name="ModRNAResCount" Type="String">0</Item>
+	<Item Name="ProteinChainCount" Type="String"></Item>
+	<Item Name="DNAChainCount" Type="String"></Item>
+	<Item Name="RNAChainCount" Type="String"></Item>
+</DocSum>
+
+<DocSum>
+	<Id>16885</Id>
+	<Item Name="PdbAcc" Type="String">1JF2</Item>
+	<Item Name="PdbDescr" Type="String">Crystal Structure Of W92f Obelin Mutant From Obelia Longissima At 1.72 Angstrom Resolution</Item>
+	<Item Name="EC" Type="String"></Item>
+	<Item Name="Resolution" Type="String">1.72</Item>
+	<Item Name="ExpMethod" Type="String">X-Ray Diffraction</Item>
+	<Item Name="PdbClass" Type="String">Luminescent Protein</Item>
+	<Item Name="PdbDepositDate" Type="String">2001/06/19 00:00</Item>
+	<Item Name="MMDBEntryDate" Type="String">2001/10/04 00:00</Item>
+	<Item Name="OrganismList" Type="List">
+		<Item Name="string" Type="String">Obelia longissima</Item>
+	</Item>
+	<Item Name="LigCode" Type="String">CZH</Item>
+	<Item Name="LigCount" Type="String">1</Item>
+	<Item Name="ModProteinResCount" Type="String">0</Item>
+	<Item Name="ModDNAResCount" Type="String">0</Item>
+	<Item Name="ModRNAResCount" Type="String">0</Item>
+	<Item Name="ProteinChainCount" Type="String"></Item>
+	<Item Name="DNAChainCount" Type="String"></Item>
+	<Item Name="RNAChainCount" Type="String"></Item>
+</DocSum>
+
+<DocSum>
+	<Id>11210</Id>
+	<Item Name="PdbAcc" Type="String">1CXR</Item>
+	<Item Name="PdbDescr" Type="String">Automated 2d Noesy Assignment And Structure Calculation Of Crambin(S22I25) WITH SELF-Correcting Distance Geometry Based NoahDIAMOD PROGRAMS</Item>
+	<Item Name="EC" Type="String"></Item>
+	<Item Name="Resolution" Type="String"></Item>
+	<Item Name="ExpMethod" Type="String">Solution Nmr</Item>
+	<Item Name="PdbClass" Type="String">Plant Protein</Item>
+	<Item Name="PdbDepositDate" Type="String">1999/08/30 00:00</Item>
+	<Item Name="MMDBEntryDate" Type="String">1999/10/28 00:00</Item>
+	<Item Name="OrganismList" Type="List">
+		<Item Name="string" Type="String">Crambe hispanica subsp. abyssinica</Item>
+	</Item>
+	<Item Name="LigCode" Type="String"></Item>
+	<Item Name="LigCount" Type="String">0</Item>
+	<Item Name="ModProteinResCount" Type="String">0</Item>
+	<Item Name="ModDNAResCount" Type="String">0</Item>
+	<Item Name="ModRNAResCount" Type="String">0</Item>
+	<Item Name="ProteinChainCount" Type="String"></Item>
+	<Item Name="DNAChainCount" Type="String"></Item>
+	<Item Name="RNAChainCount" Type="String"></Item>
+</DocSum>
+
+</eSummaryResult>

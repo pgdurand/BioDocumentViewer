@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE eSummaryResult PUBLIC "-//NLM//DTD esummary v1 20041029//EN" "https://eutils.ncbi.nlm.nih.gov/eutils/dtd/20041029/esummary-v1.dtd">
+<eSummaryResult>
+<DocSum>
+	<Id>408359984</Id>
+	<Item Name="Caption" Type="String">P12265</Item>
+	<Item Name="Title" Type="String">RecName: Full=Beta-glucuronidase; Flags: Precursor</Item>
+	<Item Name="Extra" Type="String">gi|408359984|sp|P12265.2|BGLR_MOUSE[408359984]</Item>
+	<Item Name="Gi" Type="Integer">408359984</Item>
+	<Item Name="CreateDate" Type="String">1989/10/01</Item>
+	<Item Name="UpdateDate" Type="String">2016/09/07</Item>
+	<Item Name="Flags" Type="Integer">0</Item>
+	<Item Name="TaxId" Type="Integer">10090</Item>
+	<Item Name="Length" Type="Integer">648</Item>
+	<Item Name="Status" Type="String">live</Item>
+	<Item Name="ReplacedBy" Type="String"></Item>
+	<Item Name="Comment" Type="String"><![CDATA[  ]]></Item>
+</DocSum>
+
+</eSummaryResult>

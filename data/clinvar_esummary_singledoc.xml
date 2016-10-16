@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE eSummaryResult PUBLIC "-//NLM//DTD esummary clinvar 20151105//EN" "https://eutils.ncbi.nlm.nih.gov/eutils/dtd/20151105/esummary_clinvar.dtd">
+<eSummaryResult>
+<DocumentSummarySet status="OK">
+<DbBuild>Build160914-1005.1</DbBuild>
+
+<DocumentSummary uid="254087">
+	<obj_type>Simple</obj_type>
+	<accession></accession>
+	<accession_version></accession_version>
+	<title>NM_000051.3(ATM):c.2839-?_4109+?del</title>
+	<variation_set>
+		<variation>
+			<measure_id>248500</measure_id>
+			<variation_xrefs>
+			</variation_xrefs>
+			<variation_name>NM_000051.3(ATM):c.2839-?_4109+?del</variation_name>
+			<cdna_change>c.2839-?_4109+?del</cdna_change>
+			<aliases>
+			</aliases>
+			<variation_loc>
+			</variation_loc>
+			<allele_freq_set>
+			</allele_freq_set>
+			<variant_type>Deletion</variant_type>
+		</variation>
+	</variation_set>
+	<trait_set>
+		<trait>
+			<trait_xrefs>
+				<trait_xref>
+					<db_source>MedGen</db_source>
+					<db_id>C0004135</db_id>
+				</trait_xref>
+				<trait_xref>
+					<db_source>Orphanet</db_source>
+					<db_id>100</db_id>
+				</trait_xref>
+				<trait_xref>
+					<db_source>OMIM</db_source>
+					<db_id>208900</db_id>
+				</trait_xref>
+			</trait_xrefs>
+			<trait_name>Ataxia-telangiectasia syndrome</trait_name>
+		</trait>
+	</trait_set>
+	<supporting_submissions>
+		<scv>
+			<string>SCV000299154</string>
+		</scv>
+		<rcv>
+			<string>RCV000240238</string>
+		</rcv>
+	</supporting_submissions>
+	<clinical_significance>
+		<description>Pathogenic</description>
+		<last_evaluated>2016/03/15 00:00</last_evaluated>
+		<review_status>criteria provided, single submitter</review_status>
+	</clinical_significance>
+	<record_status></record_status>
+	<gene_sort>ATM</gene_sort>
+	<chr_sort></chr_sort>
+	<location_sort>99999999999999999999</location_sort>
+	<variation_set_name></variation_set_name>
+	<variation_set_id></variation_set_id>
+	<genes>
+		<gene>
+			<symbol>ATM</symbol>
+			<GeneID>472</GeneID>
+			<strand>+</strand>
+			<source>submitted</source>
+		</gene>
+	</genes>
+</DocumentSummary>
+
+</DocumentSummarySet>
+</eSummaryResult>

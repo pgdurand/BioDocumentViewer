@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<result>
+	<entries>
+		<entry acc="P12265" id="BGLR_MOUSE" source="uniprot">
+			<fields>
+				<field id="descRecName">
+					<values>
+						<value>Beta-glucuronidase</value>
+					</values>
+				</field>
+				<field id="organism_scientific_name">
+					<values>
+						<value>Mus musculus</value>
+					</values>
+				</field>
+				<field id="length">
+					<values>
+						<value>648</value>
+					</values>
+				</field>
+				<field id="status">
+					<values>
+						<value>Reviewed</value>
+					</values>
+				</field>
+			</fields>
+		</entry>
+	</entries>
+</result>

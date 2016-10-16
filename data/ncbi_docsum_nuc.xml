@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE eSummaryResult PUBLIC "-//NLM//DTD esummary v1 20041029//EN" "https://eutils.ncbi.nlm.nih.gov/eutils/dtd/20041029/esummary-v1.dtd">
+<eSummaryResult>
+<DocSum>
+	<Id>676312358</Id>
+	<Item Name="Caption" Type="String">CP006683</Item>
+	<Item Name="Title" Type="String">Melissococcus plutonius S1, complete genome</Item>
+	<Item Name="Extra" Type="String">gi|676312358|gnl|PRJNA215018|MEPL_chr|gb|CP006683.1|[676312358]</Item>
+	<Item Name="Gi" Type="Integer">676312358</Item>
+	<Item Name="CreateDate" Type="String">2014/09/04</Item>
+	<Item Name="UpdateDate" Type="String">2016/09/14</Item>
+	<Item Name="Flags" Type="Integer">256</Item>
+	<Item Name="TaxId" Type="Integer">1385937</Item>
+	<Item Name="Length" Type="Integer">1896191</Item>
+	<Item Name="Status" Type="String">live</Item>
+	<Item Name="ReplacedBy" Type="String"></Item>
+	<Item Name="Comment" Type="String"><![CDATA[  ]]></Item>
+</DocSum>
+
+<DocSum>
+	<Id>1057452635</Id>
+	<Item Name="Caption" Type="String">LMTQ02000035</Item>
+	<Item Name="Title" Type="String">Streptomyces sp. AVP053U2 APS67_contig000035, whole genome shotgun sequence</Item>
+	<Item Name="Extra" Type="String">gi|1057452635|gb|LMTQ02000035.1||gnl|WGS:LMTQ02|APS67_contig000035[1057452635]</Item>
+	<Item Name="Gi" Type="Integer">1057452635</Item>
+	<Item Name="CreateDate" Type="String">2016/08/19</Item>
+	<Item Name="UpdateDate" Type="String">2016/08/19</Item>
+	<Item Name="Flags" Type="Integer">0</Item>
+	<Item Name="TaxId" Type="Integer">1737066</Item>
+	<Item Name="Length" Type="Integer">80813</Item>
+	<Item Name="Status" Type="String">live</Item>
+	<Item Name="ReplacedBy" Type="String"></Item>
+	<Item Name="Comment" Type="String"><![CDATA[  ]]></Item>
+</DocSum>
+
+</eSummaryResult>

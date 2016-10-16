@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE eSummaryResult PUBLIC "-//NLM//DTD esummary clinvar 20151105//EN" "https://eutils.ncbi.nlm.nih.gov/eutils/dtd/20151105/esummary_clinvar.dtd">
+<eSummaryResult>
+<DocumentSummarySet status="OK">
+<DbBuild>Build160914-1005.1</DbBuild>
+
+<DocumentSummary uid="246468">
+  <obj_type>Simple</obj_type>
+  <accession></accession>
+  <accession_version></accession_version>
+  <title>NM_000051.3(ATM):c.5392C&gt;G (p.Leu1798Val)</title>
+  <variation_set>
+    <variation>
+      <measure_id>244616</measure_id>
+      <variation_xrefs>
+        <variation_xref>
+          <db_source>dbSNP</db_source>
+          <db_id>879254274</db_id>
+        </variation_xref>
+      </variation_xrefs>
+      <variation_name>NM_000051.3(ATM):c.5392C&gt;G (p.Leu1798Val)</variation_name>
+      <cdna_change>c.5392C&gt;G (p.Leu1798Val)</cdna_change>
+      <aliases>
+      </aliases>
+      <variation_loc>
+        <assembly_set>
+          <status>current</status>
+          <assembly_name>GRCh38</assembly_name>
+          <chr>11</chr>
+          <band>11q22.3</band>
+          <start>108302925</start>
+          <stop>108302925</stop>
+          <inner_start></inner_start>
+          <inner_stop></inner_stop>
+          <outer_start></outer_start>
+          <outer_stop></outer_stop>
+          <display_start>108302925</display_start>
+          <display_stop>108302925</display_stop>
+          <assembly_acc_ver>GCF_000001405.28</assembly_acc_ver>
+          <annotation_release></annotation_release>
+          <alt>G</alt>
+          <ref>C</ref>
+        </assembly_set>
+        <assembly_set>
+          <status>previous</status>
+          <assembly_name>GRCh37</assembly_name>
+          <chr>11</chr>
+          <band>11q22.3</band>
+          <start>108173652</start>
+          <stop>108173652</stop>
+          <inner_start></inner_start>
+          <inner_stop></inner_stop>
+          <outer_start></outer_start>
+          <outer_stop></outer_stop>
+          <display_start>108173652</display_start>
+          <display_stop>108173652</display_stop>
+          <assembly_acc_ver>GCF_000001405.25</assembly_acc_ver>
+          <annotation_release></annotation_release>
+          <alt>G</alt>
+          <ref>C</ref>
+        </assembly_set>
+      </variation_loc>
+      <allele_freq_set>
+      </allele_freq_set>
+      <variant_type>single nucleotide variant</variant_type>
+    </variation>
+  </variation_set>
+  <trait_set>
+    <trait>
+      <trait_xrefs>
+        <trait_xref>
+          <db_source>MedGen</db_source>
+          <db_id>CN169374</db_id>
+        </trait_xref>
+      </trait_xrefs>
+      <trait_name>not specified</trait_name>
+    </trait>
+  </trait_set>
+  <supporting_submissions>
+    <scv>
+      <string>SCV000294035</string>
+    </scv>
+    <rcv>
+      <string>RCV000236123</string>
+    </rcv>
+  </supporting_submissions>
+  <clinical_significance>
+    <description>Uncertain significance</description>
+    <last_evaluated>2016/03/02 00:00</last_evaluated>
+    <review_status>criteria provided, single submitter</review_status>
+  </clinical_significance>
+  <record_status></record_status>
+  <gene_sort>ATM</gene_sort>
+  <chr_sort>11</chr_sort>
+  <location_sort>00000000000108302925</location_sort>
+  <variation_set_name></variation_set_name>
+  <variation_set_id></variation_set_id>
+  <genes>
+    <gene>
+      <symbol>ATM</symbol>
+      <GeneID>472</GeneID>
+      <strand>+</strand>
+      <source>submitted</source>
+    </gene>
+  </genes>
+</DocumentSummary>
+
+</DocumentSummarySet>
+</eSummaryResult>
+
