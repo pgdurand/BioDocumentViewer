@@ -4,7 +4,7 @@
 
 ##Introduction
 
-BioDocumentViewer is a software enabling to query, browse, fetch and retrieve sequences from NCBI and EBI public servers.
+BioDocumentViewer is a software enabling to query, browse, view and retrieve sequences from NCBI and EBI public servers.
 
 The software has been made to facilitate the use of public web services so that it is easy to retrieve set of sequences in batch mode. 
 
@@ -57,9 +57,9 @@ The DocumentNavigator is displayed as soon as you get a valid answer from the ba
 
 Use the DocumentNavigator:
 
-* to navigate through entries; use [<] [>] buttons the the top right corner
+* to navigate through entries; use [<] [>] buttons located at the top right corner
 * to display an entry in the Sequence or 3D Structure viewer
-* to fetch entries as Fasta of plain format (e.g. Genbk, EMBL, Uniprot, etc.)
+* to fetch entries as Fasta or plain format (e.g. Genbank, EMBL, Uniprot, etc.)
 
 ###NCBI/EBI recommendations
 
@@ -68,9 +68,9 @@ Use the DocumentNavigator:
 Basically:
 
 * keep in mind that you are using resources that are shared by many users around the world 
-* do not overload NCBI/EBI remote serves
+* do not overload NCBI/EBI remote servers
 * retrieve sequences in batch mode using timers
-* provide your email address: NCBI or EBI can get in touch with you in case they consider your are querying too much remote services. 
+* provide your email address: NCBI or EBI can get in touch with you in case they consider your are querying too much their remote services. 
 
 More about these recommendations: [here for NCBI](https://www.ncbi.nlm.nih.gov/home/about/policies.shtml#scripting), [here for EBI](http://www.ebi.ac.uk/Tools/webservices/help/faq).
 
