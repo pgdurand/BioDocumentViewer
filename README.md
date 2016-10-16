@@ -11,6 +11,8 @@ The software has been made to facilitate the use of public web services so that 
 BioDocumentViewer also provides you with viewing capabilities to display annotated sequences and 3D structures.
 
 ![BioDocumentViewer](doc/bio-document-viewer-query-ncbi-all-s.png)
+     
+[Full size screenshot is available in the /doc directory].
 
 ##Requirements
 
