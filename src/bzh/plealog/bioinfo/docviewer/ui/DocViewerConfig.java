@@ -31,6 +31,7 @@ import javax.swing.ImageIcon;
 import bzh.plealog.bioinfo.docviewer.api.BankProvider;
 import bzh.plealog.bioinfo.docviewer.api.BankType;
 import bzh.plealog.bioinfo.docviewer.service.ebi.EbiProvider;
+import bzh.plealog.bioinfo.docviewer.service.ensembl.EnsemblProvider;
 import bzh.plealog.bioinfo.docviewer.service.ncbi.EntrezProvider;
 import bzh.plealog.bioinfo.docviewer.ui.resources.Messages;
 
@@ -127,6 +128,7 @@ public class DocViewerConfig {
     // see loadDataProviderFromJarManifest(), below.
     PROVIDER_LIST = new ArrayList<>();
     PROVIDER_LIST.add(EbiProvider.class);
+    PROVIDER_LIST.add(EnsemblProvider.class);
     PROVIDER_LIST.add(EntrezProvider.class);
   }
 

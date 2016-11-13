@@ -1,0 +1,10 @@
+<opt>
+  <data id="rs565779474" assembly_name="GRCh38" consequence_type="3_prime_UTR_variant" end="140719364" feature_type="variation" seq_region_name="7" source="dbSNP" start="140719364" strand="1">
+    <alleles>G</alleles>
+    <alleles>A</alleles>
+  </data>
+  <data id="rs761919219" assembly_name="GRCh38" consequence_type="3_prime_UTR_variant" end="140719366" feature_type="variation" seq_region_name="7" source="dbSNP" start="140719366" strand="1">
+    <alleles>A</alleles>
+    <alleles>C</alleles>
+  </data>
+</opt>
