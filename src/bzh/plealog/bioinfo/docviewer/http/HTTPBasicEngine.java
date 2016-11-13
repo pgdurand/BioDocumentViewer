@@ -24,6 +24,8 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.SocketTimeoutException;
 import java.net.URL;
+import java.util.Iterator;
+import java.util.Map;
 
 import com.plealog.genericapp.api.log.EZLogger;
 
@@ -48,12 +50,17 @@ public class HTTPBasicEngine {
     }
   }
 
+  public static File doGet(String url) {
+    return doGet(url, null);
+  }
   /**
    * Do a HTTP GET using the provided url.
    * 
    * @param url
    *          the URL. HTTP and HTTPS are supported.
    * 
+   * @param header_attrs
+   *          attributes to set in header connection
    * @return a file containing the result. Returned file is set to deleteOnExit,
    *         so you do not have to worry about deleting it.
    * 
@@ -62,7 +69,7 @@ public class HTTPBasicEngine {
    */
   // Tutorial:
   // http://stackoverflow.com/questions/2793150/using-java-net-urlconnection-to-fire-and-handle-http-requests
-  public static File doGet(String url) {
+  public static File doGet(String url, Map<String, String> header_attrs) {
     InputStream ins = null;
     byte[] buffer = new byte[4096];
     int n = -1;
@@ -90,6 +97,15 @@ public class HTTPBasicEngine {
       // open connection to the remote server
       URL myurl = new URL(url);
       HttpURLConnection con = (HttpURLConnection) myurl.openConnection();
+      if (header_attrs!=null){
+        Iterator<String> attrIter = header_attrs.keySet().iterator();
+        String key;
+        while(attrIter.hasNext()){
+          key = attrIter.next();
+          //con.setRequestProperty("Accept", "text/xml");
+          con.setRequestProperty(key, header_attrs.get(key));
+        }
+      }
       con.setConnectTimeout(CONNECT_TIMEOUT);
       con.setReadTimeout(SOCKET_TIMEOUT);
       

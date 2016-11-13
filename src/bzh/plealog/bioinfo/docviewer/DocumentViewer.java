@@ -22,7 +22,7 @@ import java.awt.Dimension;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import javax.swing.BorderFactory;
@@ -35,9 +35,8 @@ import javax.swing.JPanel;
 import org.apache.log4j.BasicConfigurator;
 
 import bzh.plealog.bioinfo.api.core.config.CoreSystemConfigurator;
+import bzh.plealog.bioinfo.docviewer.api.BankProvider;
 import bzh.plealog.bioinfo.docviewer.api.BankType;
-import bzh.plealog.bioinfo.docviewer.service.ebi.EbiBank;
-import bzh.plealog.bioinfo.docviewer.service.ncbi.EntrezBank;
 import bzh.plealog.bioinfo.docviewer.ui.DocViewerConfig;
 import bzh.plealog.bioinfo.docviewer.ui.panels.DatabaseOpener;
 import bzh.plealog.bioinfo.docviewer.ui.resources.Messages;
@@ -114,7 +113,7 @@ public class DocumentViewer {
      * not call them to setup the standard BFilter system. (More here:
      * bzh.plealog.bioinfo.docviewer.api.QueryModel)
      */
-    //FilterSystemConfigurator.initializeSystem();
+    // FilterSystemConfigurator.initializeSystem();
     /* Comment out the following only if using the FilterSystem storage */
     // FilterSystemUI.initializeSystem();
 
@@ -129,22 +128,24 @@ public class DocumentViewer {
   }
 
   private static class MyStarterListener implements EZUIStarterListener {
-    private GDesktopPane _desktop = new GDesktopPane();
-    private Component _mainCompo = null;
-    private JPanel _btnPanel;
+    private GDesktopPane _desktop   = new GDesktopPane();
+    private Component    _mainCompo = null;
+    private JPanel       _btnPanel;
 
     private Component prepareDesktop() {
       JPanel dpanel, mnuPnl;
       JButton logBtn;
-      
+
       dpanel = new JPanel(new BorderLayout());
       mnuPnl = new JPanel(new BorderLayout());
       _btnPanel = new JPanel(new BorderLayout());
 
       JMenuBar menuBar = new JMenuBar();
-      JWindowsMenu windowsMenu = new JWindowsMenu(Messages.getString("DocumentViewer.docs.mnu"),
+      JWindowsMenu windowsMenu = new JWindowsMenu(
+          Messages.getString("DocumentViewer.docs.mnu"),
           _desktop.getDesktopPane());
-      windowsMenu.setWindowPositioner(new CascadingWindowPositioner(_desktop.getDesktopPane()));
+      windowsMenu.setWindowPositioner(new CascadingWindowPositioner(_desktop
+          .getDesktopPane()));
       menuBar.add(windowsMenu);
 
       logBtn = new JButton(EZEnvironment.getImageIcon("logger.png"));
@@ -190,41 +191,38 @@ public class DocumentViewer {
       // (main frame).
 
       // Prepare the list of banks
-      ArrayList<BankType> banks = new ArrayList<>();
-      switch (DocViewerConfig.getBankProvider()) {
-      case EBI:
-        for (BankType bt : EbiBank.values()) {
-          banks.add(bt);
-        }
-        break;
-      case NCBI:
-      default:
-        for (BankType bt : EntrezBank.values()) {
-          banks.add(bt);
-        }
+      BankProvider bp = DocViewerConfig.getBankProvider();
+      if (bp!=null){
+        List<BankType> bts = bp.getBanks();
+        // prepare the query system
+        DatabaseOpener dop = new DatabaseOpener(bp.getBanks());
+        dop.setDesktop(_desktop);
+
+        // package the UI
+        _btnPanel.add(dop.getHelperField(), BorderLayout.WEST);
+
+        GInternalFrame iFrame = new GInternalFrame(dop, bts.get(0)
+            .getProviderName(), true, false, false, false);
+        iFrame.setFrameIcon(DocViewerConfig.DBXPLR_ICON);
+        Dimension dim = new Dimension(dop.getPreferredSize().width + 50,
+            dop.getPreferredSize().height + 50);
+        iFrame.setVisible(false);
+        _desktop.addGInternalFrame(iFrame);
+        // set size and pos have to be set after adding the frame in the desktop
+        iFrame.setSize(dim);
+        iFrame.setBounds(1, 1, dim.width, dim.height);
+        iFrame.setVisible(true);
+        iFrame.setDefaultCloseOperation(JInternalFrame.DO_NOTHING_ON_CLOSE);
       }
-
-      // prepare the query system
-      DatabaseOpener dop = new DatabaseOpener(banks);
-      dop.setDesktop(_desktop);
-
-      // package the UI
-      _btnPanel.add(dop.getHelperField(), BorderLayout.WEST);
-
-      GInternalFrame iFrame = new GInternalFrame(dop, banks.get(0).getProviderName(), true, false, false, false);
-      iFrame.setFrameIcon(DocViewerConfig.DBXPLR_ICON);
-      Dimension dim = new Dimension(dop.getPreferredSize().width + 50, dop.getPreferredSize().height + 50);
-      iFrame.setVisible(false);
-      _desktop.addGInternalFrame(iFrame);
-      // set size and pos have to be set after adding the frame in the desktop
-      iFrame.setSize(dim);
-      iFrame.setBounds(1, 1, dim.width, dim.height);
-      iFrame.setVisible(true);
-      iFrame.setDefaultCloseOperation(JInternalFrame.DO_NOTHING_ON_CLOSE);
+      else{
+        EZEnvironment.displayErrorMessage(EZEnvironment.getParentFrame(), "Unable to find a BankProvider.");
+      }
 
       DocViewerConfig.dumpApplicationProperties();
 
-      EZLogger.info(String.format("%s - %s", EZApplicationBranding.getAppName(), EZApplicationBranding.getAppVersion()));
+      EZLogger.info(String.format("%s - %s",
+          EZApplicationBranding.getAppName(),
+          EZApplicationBranding.getAppVersion()));
       EZLogger.info(EZApplicationBranding.getCopyRight());
     }
 
@@ -240,10 +238,10 @@ public class DocumentViewer {
    */
   private static class ShowLoggerFrame implements ActionListener {
     private JFrame frame;
-    
+
     @Override
     public void actionPerformed(ActionEvent e) {
-      if (frame==null){
+      if (frame == null) {
         makeFrame();
       }
       frame.setVisible(!frame.isVisible());
@@ -254,10 +252,10 @@ public class DocumentViewer {
       frame = new JFrame(Messages.getString("DocumentViewer.docs.tab2"));
       frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
       Rectangle rect = EZEnvironment.getParentFrame().getBounds();
-      rect.x+=delta;
-      rect.y+=delta;
-      rect.width-=2*delta;
-      rect.height-=2*delta;
+      rect.x += delta;
+      rect.y += delta;
+      rect.width -= 2 * delta;
+      rect.height -= 2 * delta;
       frame.getContentPane().add(EZLoggerManager.getUILogger());
       frame.setBounds(rect);
     }

@@ -115,7 +115,7 @@ public class EbiSummaryLoader {
       // case for EBI, so we set from to zero, and this value will be updated
       // accordingly here: EbiQueryEngine.getIds/Summary(int from, int nb)
       summary.setFrom(0);
-      // Service provider should report the grabd total number of documents
+      // Service provider should report the grand total number of documents
       // available in the DB. ok for EBI, so we retrieve that value.
       // Otherwise, we would have to update that value here:
       // EbiQueryEngine.getIds/Summary(int from, int nb)

@@ -72,19 +72,11 @@
 </target>
 
 <!-- ============================================================= -->
-<target name="makedistrib" depends="compile" >
+<target name="makejar" depends="compile" >
     <jar destfile="${pbc.libJar}">
       <fileset dir="${Dlib}">
         <include name="bzh/plealog/bioinfo/**"/>
       </fileset>
-      <restrict>
-         <name name="**/*"/>
-         <archives>
-           <zips>
-             <fileset dir="jar" includes="**/*.jar"/>
-           </zips>
-         </archives>
-      </restrict>
       <manifest>
         <attribute name="Main-Class" value="bzh.plealog.bioinfo.docviewer.DocumentViewer"/>
         <attribute name="Built-By" value="Patrick G. Durand"/>
@@ -96,5 +88,31 @@
 	    <zipfileset dir="${basedir}" includes="*.txt"/>
 	  </jar>
 </target>
+
+	<!-- ============================================================= -->
+	<target name="makedistrib" depends="compile" >
+	    <jar destfile="${pbc.libJar}">
+	      <fileset dir="${Dlib}">
+	        <include name="bzh/plealog/bioinfo/**"/>
+	      </fileset>
+	      <restrict>
+	         <name name="**/*"/>
+	         <archives>
+	           <zips>
+	             <fileset dir="jar" includes="**/*.jar"/>
+	           </zips>
+	         </archives>
+	      </restrict>
+	      <manifest>
+	        <attribute name="Main-Class" value="bzh.plealog.bioinfo.docviewer.DocumentViewer"/>
+	        <attribute name="Built-By" value="Patrick G. Durand"/>
+	        <attribute name="Title" value="${prg.name}"/>
+	        <attribute name="Version" value="${prg.version}"/>
+	      </manifest>
+	    </jar>
+	    <jar destfile="${pbc.libJar}" update="true">
+	      <zipfileset dir="${basedir}" includes="*.txt"/>
+	    </jar>
+	</target>
 
 </project>

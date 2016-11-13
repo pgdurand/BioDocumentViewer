@@ -56,7 +56,7 @@ public class EbiSearchLoader {
       // case for EBI, so we set from to zero, and this value will be updated
       // accordingly here: EbiQueryEngine.getIds(int from, int nb)
       search.setFrom(0);
-      // Service provider should report the grabd total number of documents
+      // Service provider should report the grand total number of documents
       // available in the DB. ok for EBI, so we retrieve that value.
       // Otherwise, we would have to update that value here:
       // EbiQueryEngine.getIds(int from, int nb)
