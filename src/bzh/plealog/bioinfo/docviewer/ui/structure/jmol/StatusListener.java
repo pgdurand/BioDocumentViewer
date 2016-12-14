@@ -27,9 +27,9 @@ import org.jmol.viewer.Viewer;
 
 import com.plealog.genericapp.api.log.EZLogger;
 
+import bzh.plealog.bioinfo.api.core.config.CoreSystemConfigurator;
 import bzh.plealog.bioinfo.api.data.feature.Feature;
 import bzh.plealog.bioinfo.api.data.feature.FeatureTable;
-import bzh.plealog.bioinfo.api.data.feature.utils.FeatureSystem;
 import bzh.plealog.bioinfo.api.data.sequence.DRulerModel;
 import bzh.plealog.bioinfo.docviewer.ui.structure.model.PdbModel;
 import bzh.plealog.bioinfo.docviewer.ui.structure.model.PdbModelListener;
@@ -192,7 +192,7 @@ public class StatusListener implements JmolStatusListener {
   private FeatureTable analyseStructure(PdbSequence chain) {
     FeatureTable fTable;
 
-    fTable = FeatureSystem.getFeatureTableFactory().getFTInstance();
+    fTable = CoreSystemConfigurator.getFeatureTableFactory().getFTInstance();
     analyseStructure(chain, fTable, "helix");
     analyseStructure(chain, fTable, "sheet");
     fTable.sort(FeatureTable.POS_SORTER);

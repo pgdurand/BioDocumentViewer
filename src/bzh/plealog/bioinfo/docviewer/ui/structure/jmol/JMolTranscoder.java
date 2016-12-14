@@ -20,13 +20,14 @@ import java.io.StringReader;
 import java.util.Hashtable;
 import java.util.Vector;
 
+import bzh.plealog.bioinfo.api.core.config.CoreSystemConfigurator;
 import bzh.plealog.bioinfo.api.data.feature.Feature;
 import bzh.plealog.bioinfo.api.data.feature.FeatureTable;
 import bzh.plealog.bioinfo.api.data.sequence.DRulerModel;
 import bzh.plealog.bioinfo.api.data.sequence.DSequence;
 import bzh.plealog.bioinfo.api.data.sequence.DSequenceException;
-import bzh.plealog.bioinfo.api.data.sequence.DViewerSystem;
 import bzh.plealog.bioinfo.docviewer.ui.structure.model.PdbSequence;
+import bzh.plealog.bioinfo.util.DAlphabetUtils;
 
 /**
  * Amino acide transcoder from JMol representation.
@@ -175,14 +176,14 @@ public class JMolTranscoder {
 		}
 		if (szBuf.length()!=0){
 			if (proteic){
-				dSeq = DViewerSystem.getSequenceFactory().getSequence(
+				dSeq = CoreSystemConfigurator.getSequenceFactory().getSequence(
 						new StringReader(szBuf.toString()),
-			            DViewerSystem.getIUPAC_Protein_Alphabet());
+			            DAlphabetUtils.getIUPAC_Protein_Alphabet());
 			}
 			else{
-				dSeq = DViewerSystem.getSequenceFactory().getSequence(
+				dSeq = CoreSystemConfigurator.getSequenceFactory().getSequence(
 						new StringReader(szBuf.toString()),
-			            DViewerSystem.getIUPAC_DNA_Alphabet());
+						DAlphabetUtils.getIUPAC_DNA_Alphabet());
 			}
 			dSeq.createRulerModel(coords);
 			chain = new PdbSequence(dSeq);

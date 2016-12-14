@@ -38,6 +38,11 @@ import javax.swing.JTabbedPane;
 import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
 
+import com.plealog.genericapp.api.EZEnvironment;
+import com.plealog.genericapp.ui.common.ContextMenuElement;
+import com.plealog.genericapp.ui.common.ImageManagerAction;
+
+import bzh.plealog.bioinfo.api.core.config.CoreSystemConfigurator;
 import bzh.plealog.bioinfo.api.data.feature.Feature;
 import bzh.plealog.bioinfo.api.data.feature.FeatureTable;
 import bzh.plealog.bioinfo.api.data.feature.utils.FeatureSelectionEvent;
@@ -45,7 +50,6 @@ import bzh.plealog.bioinfo.api.data.feature.utils.FeatureSelectionListener;
 import bzh.plealog.bioinfo.api.data.sequence.DRulerModel;
 import bzh.plealog.bioinfo.api.data.sequence.DSequence;
 import bzh.plealog.bioinfo.api.data.sequence.DSequenceModel;
-import bzh.plealog.bioinfo.api.data.sequence.DViewerSystem;
 import bzh.plealog.bioinfo.docviewer.ui.resources.Messages;
 import bzh.plealog.bioinfo.docviewer.ui.structure.jmol.JMolCommander;
 import bzh.plealog.bioinfo.docviewer.ui.structure.model.PdbModelEvent;
@@ -60,10 +64,7 @@ import bzh.plealog.bioinfo.ui.sequence.basic.DSequenceViewer;
 import bzh.plealog.bioinfo.ui.sequence.basic.DViewerScroller;
 import bzh.plealog.bioinfo.ui.sequence.event.DSelectionListenerSupport;
 import bzh.plealog.bioinfo.ui.sequence.event.SelectSequenceAction;
-
-import com.plealog.genericapp.api.EZEnvironment;
-import com.plealog.genericapp.ui.common.ContextMenuElement;
-import com.plealog.genericapp.ui.common.ImageManagerAction;
+import bzh.plealog.bioinfo.util.DAlphabetUtils;
 
 /**
  * Setup sequence viewer.
@@ -201,7 +202,9 @@ public class PdbSeqViewer extends JPanel implements PdbModelListener {
 		DSequenceListViewer example = new DSequenceListViewer();
 		example.setFont(_fnt);
 
-		DSequenceModel model = new DSequenceModel(DViewerSystem.getSequenceFactory().getSequence(new StringReader(seq), DViewerSystem.getIUPAC_Protein_Alphabet()));
+		DSequenceModel model = new DSequenceModel(
+		    CoreSystemConfigurator.getSequenceFactory().getSequence(
+		        new StringReader(seq), DAlphabetUtils.getIUPAC_Protein_Alphabet()));
 		example.setModel(model);
 		return (example);
 	}

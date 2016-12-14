@@ -359,4 +359,9 @@ public class EntrezQueryModel implements QueryModel {
   public BRuleFactory getRuleFactory() {
     return new BRuleFactoryImplem();
   }
+
+  @Override
+  public void addAccessorEntry(BAccessorEntry arg0) {
+    // no need to do anything here
+  }
 }
