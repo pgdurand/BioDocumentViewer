@@ -68,6 +68,7 @@ public class EnsemblSummaryLoader {
         doc.add(EnsemblBank.EnsemblDbSummaryDocPresentationModel.RES_HEADERS[EnsemblBank.EnsemblDbSummaryDocPresentationModel.LOCATION_HDR], entry.getLocation());
         doc.add(EnsemblBank.EnsemblDbSummaryDocPresentationModel.RES_HEADERS[EnsemblBank.EnsemblDbSummaryDocPresentationModel.CONSEQUENCE_HDR], entry.getConsequence_type());
         doc.add(EnsemblBank.EnsemblDbSummaryDocPresentationModel.RES_HEADERS[EnsemblBank.EnsemblDbSummaryDocPresentationModel.VARIATION_HDR], entry.getAllelesStr());
+        doc.add(EnsemblBank.EnsemblDbSummaryDocPresentationModel.RES_HEADERS[EnsemblBank.EnsemblDbSummaryDocPresentationModel.CLINICAL_SIGNIFICANCE_HDR], entry.getClinical_significance());
       }
       // Service provider should report current page of ids. This is not the
       // case for Ensembl, so we set from to zero, and this value will be updated

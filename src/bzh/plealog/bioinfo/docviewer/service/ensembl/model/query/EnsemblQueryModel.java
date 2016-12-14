@@ -37,12 +37,17 @@ public class EnsemblQueryModel implements QueryModel {
   private Hashtable<String, String> opeSymbolToTxt_;
   private Hashtable<String, String> opeTxtToSymbol_;
 
-  private static final String[] EBI_OPE_FOR_STRING_1 = { OPE_Equal};
+  private static final String[] ENS_OPE_FOR_STRING_1 = { OPE_Equal };
+  private static final String[] ENS_OPE_FOR_STRING_2 = { OPE_MatchRegExp };
   
-  private static final String V_TYPE = "V";
+  public static final String OH_TYPE  = "OH";//Other and Human
+  public static final String H_TYPE = "H";//Human only
+  public static final String O_TYPE = "O";//Other only, i.e. all but human
   
-  public static String GENE_NAME_KEY = "GN_K";
-  public static String SPECIES_KEY = "S_K";
+  public static String GENE_NAME_KEY   = "GN_K";
+  public static String SPECIES_KEY     = "S_K";
+  public static String REGION_KEY      = "R_K";
+  public static String VARIANT_SET_KEY = "VS_K";
   
   public EnsemblQueryModel() {
     init();
@@ -88,27 +93,43 @@ public class EnsemblQueryModel implements QueryModel {
     entry = new BAccessorEntry(
         "Gene name", // query field as displayed to the user in the editor
         GENE_NAME_KEY,      // query field to use in the EBI-Eye query
-        V_TYPE,  // field available for (N)nucleotide and (P) protein banks (see EbiBank class)
-        EBI_OPE_FOR_STRING_1, //this field relies on string operators
+        OH_TYPE,  // field available for (N)nucleotide and (P) protein banks (see EbiBank class)
+        ENS_OPE_FOR_STRING_1, //this field relies on string operators
         DGMAttribute.DT_STRING); //argument is a string
     // field is not case sensitive (use this method with 'false' to disable case sensitive
     // check box; not used to query remote server)
     entry.setAllowCaseSensitive(false); 
     entry.setHelpMsg(
-        "Gene name.");
+        "Gene name. Require to set 'Species'.");
     accessors_.put(entry.getAccessorVisibleName(), entry);
-    //id" name="id" description="Identifier"
-    entry = new BAccessorEntry("Species", SPECIES_KEY, V_TYPE, EBI_OPE_FOR_STRING_1, DGMAttribute.DT_STRING);
+    //Region; e.g. 17:7573008-7579839
+    entry = new BAccessorEntry("Region", REGION_KEY, OH_TYPE, ENS_OPE_FOR_STRING_2, DGMAttribute.DT_STRING);
     entry.setAllowCaseSensitive(false);
-    entry.setHelpMsg("Species names. ");
+    entry.setHelpMsg("Region on a chromosome (e.g. 17:7573008-7579839). Require to set 'Species'.");
+    accessors_.put(entry.getAccessorVisibleName(), entry);
+    //species; e.g. "chicken"
+    entry = new BAccessorEntry("Species", SPECIES_KEY, O_TYPE, ENS_OPE_FOR_STRING_1, DGMAttribute.DT_STRING);
+    entry.setAllowCaseSensitive(false);
+    entry.setHelpMsg("Species names (e.g. chicken). Require to set 'Region' or 'Gene name'.");
+    accessors_.put(entry.getAccessorVisibleName(), entry);
+    //variant_set; e.g. "ClinVar"; when not set, retrieve all variants of any types
+    entry = new BAccessorEntry("Variant set", VARIANT_SET_KEY, OH_TYPE, ENS_OPE_FOR_STRING_2, DGMAttribute.DT_STRING);
+    entry.setAllowCaseSensitive(false);
+    entry.setHelpMsg(
+        "Variant type (e.g. ClinVar). Retrieve all variants when not set. Accepted values: see "+
+        "short_name list at http://www.ensembl.org/info/genome/variation/data_description.html#variation_sets. "+
+        "Use comma separated list when providing several variant set names."
+    );
     accessors_.put(entry.getAccessorVisibleName(), entry);
     
     //setup operators mapping (operator sign vs. its human-readable counterpart)
     opeSymbolToTxt_ = new Hashtable<>();
     opeSymbolToTxt_.put(OPE_Equal, "is equal to");
+    opeSymbolToTxt_.put(OPE_MatchRegExp, "is");
 
     opeTxtToSymbol_ = new Hashtable<>();
     opeTxtToSymbol_.put("is equal to", OPE_Equal);
+    opeTxtToSymbol_.put("is", OPE_MatchRegExp);
 
   }
 
@@ -200,5 +221,9 @@ public class EnsemblQueryModel implements QueryModel {
 
   public BRuleFactory getRuleFactory() {
     return new BRuleFactoryImplem();
+  }
+  @Override
+  public void addAccessorEntry(BAccessorEntry arg0) {
+    // no need to do anything here
   }
 }

@@ -76,6 +76,9 @@ public class OptDataItem {
 
   @XmlElement(name = "alleles", required = false)
   protected List<Alleles> alleles;
+  @XmlElement(name = "clinical_significance", required = false)
+  protected String        clinical_significance;
+  
   private String          allelesStr;
   private String          locationStr;
 
@@ -165,6 +168,14 @@ public class OptDataItem {
 
   public void setStrand(int strand) {
     this.strand = strand;
+  }
+
+  public String getClinical_significance() {
+    return clinical_significance==null ? "?" : clinical_significance;
+  }
+
+  public void setClinical_significance(String clinical_significance) {
+    this.clinical_significance = clinical_significance;
   }
 
   public String getLocation(){

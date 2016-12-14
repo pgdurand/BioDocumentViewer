@@ -19,6 +19,8 @@ package bzh.plealog.bioinfo.docviewer.service.ensembl.io;
 import bzh.plealog.bioinfo.docviewer.api.ServerConfiguration;
 import bzh.plealog.bioinfo.docviewer.http.HTTPBasicEngine;
 
+import java.util.StringTokenizer;
+
 import com.plealog.genericapp.api.file.EZFileUtils;
 
 public class EnsemblServerConfiguration implements ServerConfiguration {
@@ -27,7 +29,8 @@ public class EnsemblServerConfiguration implements ServerConfiguration {
   private static final String H37_SERVER_URL="http://grch37.rest.ensembl.org";
   
   private static final String GENE_TO_ENSG_SERVICE="xrefs/symbol/@SPECIES@/@GENE_NAME@?object_type=gene";
-  private static final String FETCH_VAR_SERVICE = "overlap/id/@ENSG_ID@?feature=variation";//;variant_set=ClinVar";
+  private static final String FETCH_VAR_SERVICE_BY_ENSID = "overlap/id/@ENSG_ID@?feature=variation";//;variant_set=ClinVar";
+  private static final String FETCH_VAR_SERVICE_BY_REGION = "overlap/region/@SPECIES@/@REGION@?feature=variation";//;variant_set=ClinVar";
   
   private String _defaultServer;
   
@@ -86,9 +89,29 @@ public class EnsemblServerConfiguration implements ServerConfiguration {
   public String getFetchVariationUrl(String ensg_id){
     String str;
     
-    str = EZFileUtils.terminateURL(_defaultServer)+FETCH_VAR_SERVICE;
+    str = EZFileUtils.terminateURL(_defaultServer)+FETCH_VAR_SERVICE_BY_ENSID;
     
     str = str.replaceAll("@ENSG_ID@", ensg_id);
     return str;
+  }
+
+  public String getFetchVariationUrl(String species,String region){
+    String str;
+    
+    str = EZFileUtils.terminateURL(_defaultServer)+FETCH_VAR_SERVICE_BY_REGION;
+    
+    str = str.replaceAll("@SPECIES@", species);
+    str = str.replaceAll("@REGION@", region);
+    return str;
+  }
+  
+  public String formatVariant(String variant_set_names){
+    StringBuffer buf=new StringBuffer();
+    StringTokenizer tokenizer = new StringTokenizer(variant_set_names, ",");
+    while (tokenizer.hasMoreTokens()){
+      buf.append(";variant_set=");
+      buf.append(tokenizer.nextToken().trim());
+    }
+    return buf.toString();
   }
 }

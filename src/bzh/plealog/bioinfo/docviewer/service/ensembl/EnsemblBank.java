@@ -21,6 +21,8 @@ import java.util.List;
 
 import javax.swing.SwingConstants;
 
+import com.plealog.genericapp.api.EZEnvironment;
+
 import bzh.plealog.bioinfo.api.filter.BFilter;
 import bzh.plealog.bioinfo.docviewer.api.BankType;
 import bzh.plealog.bioinfo.docviewer.api.QueryEngine;
@@ -35,11 +37,10 @@ import bzh.plealog.bioinfo.docviewer.service.ensembl.io.EnsemblServerConfigurati
 import bzh.plealog.bioinfo.docviewer.service.ensembl.model.EnsemblSearchLoader;
 import bzh.plealog.bioinfo.docviewer.service.ensembl.model.EnsemblSummaryLoader;
 import bzh.plealog.bioinfo.docviewer.service.ensembl.model.query.EnsemblQueryModel;
+import bzh.plealog.bioinfo.docviewer.service.ensembl.model.query.HumanVariationQueryModel;
 import bzh.plealog.bioinfo.docviewer.service.ensembl.model.query.VariationQueryModel;
 import bzh.plealog.bioinfo.ui.util.TableColumnManager;
 import bzh.plealog.bioinfo.ui.util.TableHeaderColumnItem;
-
-import com.plealog.genericapp.api.EZEnvironment;
 
 /**
  * Describe the banks from Ensembl that are available for querying with this software.
@@ -51,7 +52,9 @@ import com.plealog.genericapp.api.EZEnvironment;
 public enum EnsemblBank implements BankType {
   //format: data code (one letter), bank name for user presentation, ENSEMBL bank code, 
   // figure out whether or not this bank enables sequence retrieval, reader type
-  VARIATION  ("V", "Variation", "variation", false, ReaderType.UNKNOWN)
+  VARIATION_h38  (EnsemblQueryModel.H_TYPE, EnsemblQueryEngine.HUMAN_KEY+" Variation (GRCh38)", "variation", false, ReaderType.UNKNOWN),
+  VARIATION_h37  (EnsemblQueryModel.H_TYPE, EnsemblQueryEngine.HUMAN_KEY+" Variation (GRCh37)", "variation", false, ReaderType.UNKNOWN),
+  VARIATION      (EnsemblQueryModel.O_TYPE, "Variation", "variation", false, ReaderType.UNKNOWN)
   ; 
   
   // By region: 
@@ -60,7 +63,7 @@ public enum EnsemblBank implements BankType {
   // by gene name:
   // gene name - > ensembl id: 
   //   http://rest.ensembl.org/xrefs/symbol/human/BRAF?object_type=gene
-  // enesembl id -> variations:
+  // ensembl id -> variations:
   //   http://rest.ensembl.org/overlap/id/ENSG00000157764?feature=variation;variant_set=ClinVar
   // To get XML: set Header with "Accept: text/xml"
   
@@ -86,7 +89,11 @@ public enum EnsemblBank implements BankType {
     switch (type) {
     // for each bank type, we setup the filter model (used to prepare Query Dialogue Box)
     // and the presentation model (used to display results).
-    case "V":
+    case EnsemblQueryModel.H_TYPE:
+      pModel = new EnsemblDbSummaryDocPresentationModel("V", "ens.var.docSumTable.columns");
+      filterModel = new HumanVariationQueryModel();
+      break;
+    case EnsemblQueryModel.O_TYPE:
     default:
       pModel = new EnsemblDbSummaryDocPresentationModel("V", "ens.var.docSumTable.columns");
       filterModel = new VariationQueryModel();
@@ -153,7 +160,7 @@ public enum EnsemblBank implements BankType {
   }
 
   public ServerConfiguration getServerConfiguration(){
-    return new EnsemblServerConfiguration();
+    return new EnsemblServerConfiguration(userName.contains("h37"));
   }
   
   /**
@@ -162,7 +169,7 @@ public enum EnsemblBank implements BankType {
   public static class EnsemblDbSummaryDocPresentationModel implements SummaryDocPresentationModel {
 
     //this key is used to store displayed columns in Application Preferences 
-    private String _defColPropKey = "ens.docSumTable.columns";
+    private String _defColPropKey = "ens.var.docSumTable.columns";
     //this is used to setup the displayed columns
     private TableHeaderColumnItem[] _presModel;
 
@@ -176,13 +183,14 @@ public enum EnsemblBank implements BankType {
     public static final int VARIATION_HDR = 4;// e.g. A/C for SNP
     public static final int CONSEQUENCE_HDR = 5;// e.g. 3_prime_UTR_variant
     public static final int SOURCE_HDR = 6;//e.g. dbSNP
+    public static final int CLINICAL_SIGNIFICANCE_HDR = 7;//e.g. likely benign
 
     // Then, we define the corresponding names. Again, you can add new entries,
     // but never insert.
     // Be aware that these strings also serve as key in the class Summary
     // for Ensembl DocSum preparation: see EensemblSummaryLoader class.
     public static final String[] RES_HEADERS = { "Num", "Identifier", 
-        "Assembly", "Location", "Variation", "Consequence", "Source"};
+        "Assembly", "Location", "Variation", "Consequence", "Source", "Clinical significance"};
 
     /**
      * Constructor.
@@ -190,21 +198,22 @@ public enum EnsemblBank implements BankType {
     private EnsemblDbSummaryDocPresentationModel(String type, String propertyKey) {
       _defColPropKey = propertyKey;
       switch (type) {
-      case "V":
+      case EnsemblQueryModel.H_TYPE:
+      case EnsemblQueryModel.O_TYPE:
       default:
         _presModel = getVariationPresentationModel();
       }
     }
-     private TableHeaderColumnItem[] getVariationPresentationModel() {
+    private TableHeaderColumnItem[] getVariationPresentationModel() {
       String defColIDs;
       List<Integer> idSet;
       TableHeaderColumnItem[] refColumnIds;
 
       defColIDs = EZEnvironment.getApplicationProperty(_defColPropKey);
       if (defColIDs == null)
-        defColIDs = "0,1,2,6,3,4,5,6";//XXX_HDR values
+        defColIDs = "0,1,2,6,3,4,5,6,7";//XXX_HDR values
       idSet = TableColumnManager.getDefColumns(defColIDs);
-      refColumnIds = new TableHeaderColumnItem[7];
+      refColumnIds = new TableHeaderColumnItem[8];
       refColumnIds[0] = new TableHeaderColumnItem(RES_HEADERS[NUM_HDR], NUM_HDR, true, idSet.contains(NUM_HDR));
       refColumnIds[1] = new TableHeaderColumnItem(RES_HEADERS[Identifier_HDR], Identifier_HDR, false,
           idSet.contains(Identifier_HDR));
@@ -221,6 +230,9 @@ public enum EnsemblBank implements BankType {
       refColumnIds[6] = new TableHeaderColumnItem(RES_HEADERS[SOURCE_HDR], SOURCE_HDR, false,
           idSet.contains(SOURCE_HDR));
       refColumnIds[6].setHorizontalAlignment(SwingConstants.LEFT);
+      refColumnIds[7] = new TableHeaderColumnItem(RES_HEADERS[CLINICAL_SIGNIFICANCE_HDR], CLINICAL_SIGNIFICANCE_HDR, false,
+          idSet.contains(CLINICAL_SIGNIFICANCE_HDR));
+      refColumnIds[7].setHorizontalAlignment(SwingConstants.LEFT);
       return refColumnIds;
     }
     @Override

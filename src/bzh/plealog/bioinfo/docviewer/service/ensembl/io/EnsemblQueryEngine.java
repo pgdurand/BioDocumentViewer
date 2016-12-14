@@ -49,6 +49,8 @@ public class EnsemblQueryEngine implements QueryEngine {
   
   private Hashtable<String, String> _header_attrs;
   
+  public static final String HUMAN_KEY = "Human";
+  
   /**
    * No default constructor available.
    */
@@ -80,7 +82,7 @@ public class EnsemblQueryEngine implements QueryEngine {
 
     _ensQuery = query;
     this._dbName = dbName;
-    _serverConfig = new EnsemblServerConfiguration();
+    _serverConfig = (EnsemblServerConfiguration) dbName.getServerConfiguration();
   }
 
   public Object clone() {
@@ -137,8 +139,8 @@ public class EnsemblQueryEngine implements QueryEngine {
     return null;
   }
 
-  private String getEnsemblGeneId(){
-    String species="", gene_name="", key, value;
+  private String getServiceURLfromQuery(){
+    String species="", gene_name="", region_span="", variant_set="", url, key, value;
     StringTokenizer tokenizer, tokenizer2;
     Search res;
     
@@ -155,39 +157,68 @@ public class EnsemblQueryEngine implements QueryEngine {
       else if (key.equals(EnsemblQueryModel.SPECIES_KEY)){
         species=value;
       }
+      else if (key.equals(EnsemblQueryModel.REGION_KEY)){
+        region_span=value;
+      }
+      else if (key.equals(EnsemblQueryModel.VARIANT_SET_KEY)){
+        variant_set=value;
+      }
     }
     
-    if (gene_name.isEmpty()){
-      throw new QueryEngineException("gene name is missing");
+    if (_dbName.getUserName().contains(HUMAN_KEY)){
+      species=HUMAN_KEY;
     }
+    if (gene_name.isEmpty() && region_span.isEmpty()){
+      throw new QueryEngineException("provide Gene Name or Region");
+    }
+
+    if (!gene_name.isEmpty() && !region_span.isEmpty()){
+      throw new QueryEngineException("cannot set Gene Name and Region simultaneously");
+    }
+
     if (species.isEmpty()){
       throw new QueryEngineException("species is missing");
     }
     
-    EZLogger.debug("gene name: "+gene_name);
     EZLogger.debug("species: "+species);
-    
-    // using gene name and sepeices, query Ensembl to get Ensembl IDs
-    res = _dbName.getSearch(HTTPBasicEngine.doGet(_serverConfig.getGene2EnsgIdUrl(species, gene_name), _header_attrs));
-    if (res.getError() != null) {
-      throw new QueryEngineException(res.getError());
-    }
-    if (res.getIds().isEmpty()){
-      throw new QueryEngineException("unable to retrieve Ensembl ID for gene name:"+gene_name);
-    }
-    // we need an official ENSG ID...
-    for(String id : res.getIds()){
-      if (id.startsWith("ENSG")){
-        return id;
+    if (!gene_name.isEmpty()){
+      EZLogger.debug("gene name: "+gene_name);
+      // using gene name and species, query Ensembl to get Ensembl IDs
+      res = _dbName.getSearch(HTTPBasicEngine.doGet(_serverConfig.getGene2EnsgIdUrl(species, gene_name), _header_attrs));
+      if (res.getError() != null) {
+        throw new QueryEngineException(res.getError());
       }
+      if (res.getIds().isEmpty()){
+        throw new QueryEngineException("unable to retrieve Ensembl ID for gene name:"+gene_name);
+      }
+      // we need an official ENSG ID...
+      for(String id : res.getIds()){
+        if (id.startsWith("ENSG")){
+          url = _serverConfig.getFetchVariationUrl(id);
+          if (!variant_set.isEmpty()){
+            url += _serverConfig.formatVariant(variant_set);
+          }
+          return url;
+        }
+      }
+      throw new QueryEngineException("unable to find Ensembl ID for gene name:"+gene_name);
     }
-    throw new QueryEngineException("unable to find Ensembl ID for gene name:"+gene_name);
+    if (!region_span.isEmpty()){
+      EZLogger.debug("region span: "+region_span);
+      url = _serverConfig.getFetchVariationUrl(species, region_span);
+      if (!variant_set.isEmpty()){
+        url += _serverConfig.formatVariant(variant_set);
+      }
+      return url;
+    }
+    //should not happen
+    throw new QueryEngineException("unknown query (neither Gene Name nor Region provided)");
   }
   
   private void prepareSearchData(){
     if (_searchData==null){
-      String ensId = getEnsemblGeneId();
-      Search res = _dbName.getSearch(HTTPBasicEngine.doGet(_serverConfig.getFetchVariationUrl(ensId), _header_attrs));
+      String url = getServiceURLfromQuery();
+      Search res = _dbName.getSearch(HTTPBasicEngine.doGet(url, _header_attrs));
       if (res.getError() != null) {
         throw new QueryEngineException(res.getError());
       }
@@ -197,8 +228,8 @@ public class EnsemblQueryEngine implements QueryEngine {
   
   private void prepareSummaryData(){
     if (_summaryData==null){
-      String ensId = getEnsemblGeneId();
-      Summary res = _dbName.getSummary(HTTPBasicEngine.doGet(_serverConfig.getFetchVariationUrl(ensId), _header_attrs));
+      String url = getServiceURLfromQuery();
+      Summary res = _dbName.getSummary(HTTPBasicEngine.doGet(url, _header_attrs));
       if (res.getError() != null) {
         throw new QueryEngineException(res.getError());
       }

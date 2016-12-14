@@ -20,18 +20,18 @@ import java.util.Enumeration;
 
 /**
  * This class can be used to create an instance of a Filter data model suitable to deal with
- * Ensembl expressions that will target variation databanks other than human. 
+ * Ensembl expressions that will target human variation databanks. 
  * 
  * @author Patrick G. Durand
  */
-public class VariationQueryModel extends EnsemblQueryModel {
+public class HumanVariationQueryModel extends EnsemblQueryModel {
 
-	public VariationQueryModel() {
+	public HumanVariationQueryModel() {
 		super();
 	}
 
 	public Enumeration<String> getAccessorVisibleNames() {
-		return getAccessorVisibleNames(EnsemblQueryModel.O_TYPE);
+		return getAccessorVisibleNames(EnsemblQueryModel.H_TYPE);
 	}
 
 }
