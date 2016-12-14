@@ -343,7 +343,7 @@ public class DocViewerConfig {
     StringTokenizer tokenizer, tokenizer2;
     Manifest m;
     Attributes attr;
-
+    
     EZLogger.debug("Loading external BankProviders");
     strClassPath = System.getProperty("java.class.path");
     tokenizer = new StringTokenizer(strClassPath, File.pathSeparator);
@@ -353,8 +353,8 @@ public class DocViewerConfig {
         continue;
       }
       EZLogger.debug("  Looking for BankProvider in: " + token);
-      try {
-        m = new JarFile(token).getManifest();
+      try (JarFile jr = new JarFile(token)) {
+        m = jr.getManifest();
         attr = m.getMainAttributes();
         if (attr != null) {
           attrValue = attr.getValue(MF_DOC_PROVIDER_ATTR);
