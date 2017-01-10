@@ -155,7 +155,7 @@ public class EnsemblQueryEngine implements QueryEngine {
     }
 
     // get URL to use to query Ensembl and get the entry
-    url = _serverConfig.getLoadVepURL(species, ids);
+    url = _serverConfig.getLoadVariantURL(species, ids);
     
     File answer;
     //refine HTTP GET errors; e.g. on 404/Bad request, ENSEMBL

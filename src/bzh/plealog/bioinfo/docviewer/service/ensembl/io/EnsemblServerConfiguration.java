@@ -128,7 +128,7 @@ public class EnsemblServerConfiguration implements ServerConfiguration {
     str = EZFileUtils.terminateURL(_defaultServer)+LOAD_VEP_SERVICE;
     
     str = str.replaceAll("@SPECIES@", species);
-    str = str.replaceAll("@VAR_ID@", "rs6929137");
+    str = str.replaceAll("@VAR_ID@", id);
     return str;
   }
 
