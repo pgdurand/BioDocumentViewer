@@ -119,7 +119,15 @@ public class HTTPBasicEngine {
 
       // response code is checked before opening input stream
       if (con.getResponseCode() != HttpURLConnection.HTTP_OK) {
-        throw new HTTPEngineException("Failed to connect to server", url, con.getResponseCode());
+        ins = con.getErrorStream();
+        while ((n = ins.read(buffer)) != -1) {
+          output.write(buffer, 0, n);
+        }
+        output.flush();
+        output.close();
+        HTTPEngineException hte = new HTTPEngineException("Failed to connect to server", url, con.getResponseCode());
+        hte.setAnswerFile(answerFile);
+        throw hte;
       }
 
       // 200 OK: read server answer

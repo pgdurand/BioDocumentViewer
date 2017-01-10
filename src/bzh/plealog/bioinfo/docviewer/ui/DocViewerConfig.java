@@ -99,6 +99,7 @@ public class DocViewerConfig {
   public static ImageIcon                            WORKING_ICON;
   public static ImageIcon                            DBXPLR_ICON;
   public static ImageIcon                            DNA_ICON;
+  public static ImageIcon                            VAR_DNA_ICON;
   public static ImageIcon                            PROTEIN_ICON;
   public static ImageIcon                            STRUCT_ICON;
 
@@ -121,6 +122,7 @@ public class DocViewerConfig {
     DBXPLR_ICON = EZEnvironment.getImageIcon("dbXplor.png");
 
     DNA_ICON = EZEnvironment.getImageIcon("dnaIcon.png");
+    VAR_DNA_ICON = EZEnvironment.getImageIcon("varDnaIcon.png");
     PROTEIN_ICON = EZEnvironment.getImageIcon("protIcon.png");
     STRUCT_ICON = EZEnvironment.getImageIcon("alphaHelix.png");
 

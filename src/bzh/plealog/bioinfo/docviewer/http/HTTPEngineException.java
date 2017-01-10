@@ -16,12 +16,15 @@
  */
 package bzh.plealog.bioinfo.docviewer.http;
 
+import java.io.File;
+
 public class HTTPEngineException extends RuntimeException {
 
   private static final long serialVersionUID = 4332507260541550768L;
 
   private int httpCode;
   private String url;
+  private File answerFile;
   
   /** 1001: unable to create response file, i.e. the file in which HTTPBasicEngine 
    * writes server answer.
@@ -82,6 +85,26 @@ public class HTTPEngineException extends RuntimeException {
    * Figures out whether or not we have an HTTP error code 404.
    */
   public boolean isWrongUrl(){
-    return httpCode==400;
+    return httpCode==404;
+  }
+  
+  /**
+   * Set an answerFile. See getter method for more details.
+   * 
+   * @param answerFile a file
+   */
+  public void setAnswerFile(File answerFile){
+    this.answerFile = answerFile;
+  }
+  
+  /**
+   * Return a file containing HTTP server answer. Since this class is a 
+   * kind of error, such an answerFile, if any provided, may contain 
+   * server side error giving you more details about the problem.
+   * 
+   * @return a file or null.
+   */
+  public File getAnswerFile(){
+    return answerFile;
   }
 }

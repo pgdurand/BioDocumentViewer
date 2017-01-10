@@ -22,5 +22,5 @@ package bzh.plealog.bioinfo.docviewer.api;
  * @author Patrick G. Durand
  */
 public enum ReaderType {
-  EMBL, GENBANK, GENPEPT, UNIPROT, FASTADNA, FASTAPROT, PDB, UNKNOWN 
+  EMBL, GENBANK, GENPEPT, UNIPROT, FASTADNA, FASTAPROT, PDB, UNKNOWN, VARIATION 
 }

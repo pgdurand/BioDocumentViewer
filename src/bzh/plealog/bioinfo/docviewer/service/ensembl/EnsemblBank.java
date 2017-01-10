@@ -52,9 +52,9 @@ import bzh.plealog.bioinfo.ui.util.TableHeaderColumnItem;
 public enum EnsemblBank implements BankType {
   //format: data code (one letter), bank name for user presentation, ENSEMBL bank code, 
   // figure out whether or not this bank enables sequence retrieval, reader type
-  VARIATION_h38  (EnsemblQueryModel.H_TYPE, EnsemblQueryEngine.HUMAN_KEY+" Variation (GRCh38)", "variation", false, ReaderType.UNKNOWN),
-  VARIATION_h37  (EnsemblQueryModel.H_TYPE, EnsemblQueryEngine.HUMAN_KEY+" Variation (GRCh37)", "variation", false, ReaderType.UNKNOWN),
-  VARIATION      (EnsemblQueryModel.O_TYPE, "Variation", "variation", false, ReaderType.UNKNOWN)
+  VARIATION_h38  (EnsemblQueryModel.H_TYPE, EnsemblQueryEngine.HUMAN_KEY+" Variation (GRCh38)", "variation", false, ReaderType.VARIATION),
+  VARIATION_h37  (EnsemblQueryModel.H_TYPE, EnsemblQueryEngine.HUMAN_KEY+" Variation (GRCh37)", "variation", false, ReaderType.VARIATION),
+  VARIATION      (EnsemblQueryModel.O_TYPE, "Variation (all species)",                          "variation", false, ReaderType.VARIATION)
   ; 
   
   // By region: 
@@ -66,8 +66,21 @@ public enum EnsemblBank implements BankType {
   // ensembl id -> variations:
   //   http://rest.ensembl.org/overlap/id/ENSG00000157764?feature=variation;variant_set=ClinVar
   // To get XML: set Header with "Accept: text/xml"
+  // Other types of variants: variant_set=xxx where 'xxx' is one of: 
+  //  http://www.ensembl.org/info/genome/variation/data_description.html#variation_sets
+  // Somatic variants (e.g. Cosmic) :
+  //  http://rest.ensembl.org/overlap/id/ENSG00000141510?feature=somatic_variation
+  //
+  // To get variant full description:
+  //   http://rest.ensembl.org/variation/human/rs56116432
+  //   (doc: http://rest.ensembl.org/documentation/info/variation_id)
+  //
+  // Using VEP:
+  //   http://rest.ensembl.org/vep/human/id/rs56116432
+  //
+  // Simple text on the cmd-line:
+  // curl -H 'Content-type:text/xml' -o data.xml 'http://rest.ensembl.org/variation/human/rs56116432'
   
-  //ena_sequence
   private final String type;
   private final ReaderType rType;
   private final String userName;

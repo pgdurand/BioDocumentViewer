@@ -16,12 +16,10 @@
  */
 package bzh.plealog.bioinfo.docviewer.service.ensembl.io;
 
+import com.plealog.genericapp.api.file.EZFileUtils;
+
 import bzh.plealog.bioinfo.docviewer.api.ServerConfiguration;
 import bzh.plealog.bioinfo.docviewer.http.HTTPBasicEngine;
-
-import java.util.StringTokenizer;
-
-import com.plealog.genericapp.api.file.EZFileUtils;
 
 public class EnsemblServerConfiguration implements ServerConfiguration {
 
@@ -29,8 +27,15 @@ public class EnsemblServerConfiguration implements ServerConfiguration {
   private static final String H37_SERVER_URL="http://grch37.rest.ensembl.org";
   
   private static final String GENE_TO_ENSG_SERVICE="xrefs/symbol/@SPECIES@/@GENE_NAME@?object_type=gene";
-  private static final String FETCH_VAR_SERVICE_BY_ENSID = "overlap/id/@ENSG_ID@?feature=variation";//;variant_set=ClinVar";
-  private static final String FETCH_VAR_SERVICE_BY_REGION = "overlap/region/@SPECIES@/@REGION@?feature=variation";//;variant_set=ClinVar";
+  
+  //note: in the following URLs, variant_type is not added here. It is done by this.formatVariant() method
+  private static final String FETCH_VAR_SERVICE_BY_ENSID = "overlap/id/@ENSG_ID@?feature=@VARIANT_TYPE@";
+  private static final String FETCH_VAR_SERVICE_BY_REGION = "overlap/region/@SPECIES@/@REGION@?feature=@VARIANT_TYPE@";
+  
+  private static final String LOAD_VAR_SERVICE = "variation/@SPECIES@/@VAR_ID@";
+  private static final String LOAD_VEP_SERVICE = "vep/@SPECIES@/id/@VAR_ID@";
+  
+  //variation/human/COSM6137
   
   private String _defaultServer;
   
@@ -86,32 +91,76 @@ public class EnsemblServerConfiguration implements ServerConfiguration {
     return str;
   }
   
-  public String getFetchVariationUrl(String ensg_id){
+  public String getFetchVariationUrl(String ensg_id, String variant_set_name){
     String str;
     
     str = EZFileUtils.terminateURL(_defaultServer)+FETCH_VAR_SERVICE_BY_ENSID;
     
     str = str.replaceAll("@ENSG_ID@", ensg_id);
+    str = formatVariant(str, variant_set_name);
     return str;
   }
 
-  public String getFetchVariationUrl(String species,String region){
+  public String getFetchVariationUrl(String species, String region, String variant_set_name){
     String str;
     
     str = EZFileUtils.terminateURL(_defaultServer)+FETCH_VAR_SERVICE_BY_REGION;
     
     str = str.replaceAll("@SPECIES@", species);
     str = str.replaceAll("@REGION@", region);
+    str = formatVariant(str, variant_set_name);
+    return str;
+  }
+
+  public String getLoadVariantURL(String species, String id){
+    String str;
+    
+    str = EZFileUtils.terminateURL(_defaultServer)+LOAD_VAR_SERVICE;
+    
+    str = str.replaceAll("@SPECIES@", species);
+    str = str.replaceAll("@VAR_ID@", id);
     return str;
   }
   
-  public String formatVariant(String variant_set_names){
-    StringBuffer buf=new StringBuffer();
-    StringTokenizer tokenizer = new StringTokenizer(variant_set_names, ",");
-    while (tokenizer.hasMoreTokens()){
-      buf.append(";variant_set=");
-      buf.append(tokenizer.nextToken().trim());
+  public String getLoadVepURL(String species, String id){
+    String str;
+    
+    str = EZFileUtils.terminateURL(_defaultServer)+LOAD_VEP_SERVICE;
+    
+    str = str.replaceAll("@SPECIES@", species);
+    str = str.replaceAll("@VAR_ID@", "rs6929137");
+    return str;
+  }
+
+  /**
+   * Format a URL to retrieve variants given a variant set name.
+   * 
+   * @param url the url to update
+   * @param variant_set_name name of the variant set. This is an internal keyword as defined
+   * in XXX.
+   */
+  private String formatVariant(String url, String variant_set_name){
+    // Documentation to understand this code:
+    //  http://rest.ensembl.org/documentation/info/overlap_id
+    //  http://www.ensembl.org/info/genome/variation/data_description.html#variation_sets
+    //  https://www.biostars.org/p/230261/
+    
+    // handle specific variation types first
+    if ("clinvar".equalsIgnoreCase(variant_set_name)){
+      return url.replaceAll("@VARIANT_TYPE@", "variation;variant_set=ClinVar");
     }
-    return buf.toString();
+    else if ("phencode".equalsIgnoreCase(variant_set_name)){
+      return url.replaceAll("@VARIANT_TYPE@", "variation;variant_set=phencode");
+    }
+    else if ("cosmic".equalsIgnoreCase(variant_set_name)){
+      return url.replaceAll("@VARIANT_TYPE@", "somatic_variation");
+    }
+    else if ("all".equalsIgnoreCase(variant_set_name)){
+      return url.replaceAll("@VARIANT_TYPE@", "variation");
+    }
+    else {
+      //default is: a variant_set on variant type 
+      return url.replaceAll("@VARIANT_TYPE@", "variation;variant_set="+variant_set_name);
+    }
   }
 }

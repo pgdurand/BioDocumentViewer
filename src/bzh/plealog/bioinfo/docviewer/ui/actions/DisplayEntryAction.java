@@ -22,6 +22,8 @@ import java.text.MessageFormat;
 
 import javax.swing.AbstractAction;
 import javax.swing.Icon;
+import javax.swing.JScrollPane;
+import javax.swing.JTree;
 
 import com.plealog.genericapp.api.EZEnvironment;
 import com.plealog.genericapp.api.file.EZFileUtils;
@@ -35,6 +37,7 @@ import bzh.plealog.bioinfo.docviewer.ui.DocViewerConfig;
 import bzh.plealog.bioinfo.docviewer.ui.panels.DatabaseOpener;
 import bzh.plealog.bioinfo.docviewer.ui.resources.Messages;
 import bzh.plealog.bioinfo.docviewer.ui.structure.ThreeDStructureViewer;
+import bzh.plealog.bioinfo.docviewer.ui.variation.SAXTreeUtil;
 import bzh.plealog.bioinfo.seqvertor.BiojavaUtils;
 import bzh.plealog.bioinfo.seqvertor.SequenceDataBag;
 import bzh.plealog.bioinfo.ui.feature.FeatureWebLinker;
@@ -100,6 +103,46 @@ public class DisplayEntryAction extends AbstractAction {
   }
 
   /**
+   * Fetch a variation entry from a remote server then display a VariantViewer.
+   */
+  private void handleVariation() {
+    String varID;
+    File tmpFile = null;
+    JTree tree;
+
+    // Load entry
+    varID = _curDoc.getValue(_qEngine.getBankType().getPresentationModel().getAccessionFieldKey());
+    try {
+      tmpFile = _qEngine.load(varID, _qEngine.getBankType().getCode(), true);
+    } catch (Exception ex) {
+      tmpFile.delete();
+      EZLogger.warn(ex.toString());
+      MessageFormat mf = new MessageFormat(Messages.getString("DisplayEntryAction.msg1"));
+      EZEnvironment.displayWarnMessage(EZEnvironment.getParentFrame(),
+          mf.format(new Object[] { varID, _qEngine.getBankType().getUserName() }));
+      return;
+    }
+
+    // Create a Tree viewer
+    try {
+      tree = new JTree(SAXTreeUtil.loadXMLDocument("Variant: " + varID, tmpFile));
+    } catch (Exception ex) {
+      EZLogger.warn(ex.toString());
+      MessageFormat mf = new MessageFormat(Messages.getString("DisplayEntryAction.msg3"));
+      EZEnvironment.displayWarnMessage(EZEnvironment.getParentFrame(), mf.format(new Object[] { varID }));
+      return;
+    } finally {
+      tmpFile.delete();
+    }
+
+    JScrollPane scrollPane = new JScrollPane(tree);
+    SAXTreeUtil.expandAll(tree);
+
+    // Put the viewer into the DocViewer
+    DatabaseOpener.displayInternalFrame(scrollPane, varID, DocViewerConfig.VAR_DNA_ICON);
+  }
+
+  /**
    * Fetch a sequence entry from a remote server then display a SequenceViewer.
    */
   private void handleSequenceEntry(boolean isProteic) {
@@ -109,12 +152,11 @@ public class DisplayEntryAction extends AbstractAction {
 
     // Load entry
     seqId = _curDoc.getValue(_qEngine.getBankType().getPresentationModel().getAccessionFieldKey());
-    DatabaseOpener.setHelperMessage(MF.format(new Object[]{seqId}));
+    DatabaseOpener.setHelperMessage(MF.format(new Object[] { seqId }));
 
-    try{
+    try {
       tmpFile = _qEngine.load(seqId, _qEngine.getBankType().getCode(), true);
-    }
-    catch(Exception ex){
+    } catch (Exception ex) {
       tmpFile.delete();
       EZLogger.warn(ex.toString());
       MessageFormat mf = new MessageFormat(Messages.getString("DisplayEntryAction.msg1"));
@@ -160,12 +202,14 @@ public class DisplayEntryAction extends AbstractAction {
     }
     viewer.setData(descriptor);
 
-    //open a new internal frame on the desktop
-    DatabaseOpener.displayInternalFrame(viewer, seqId, isProteic?DocViewerConfig.PROTEIN_ICON:DocViewerConfig.DNA_ICON);
+    // open a new internal frame on the desktop
+    DatabaseOpener.displayInternalFrame(viewer, seqId,
+        isProteic ? DocViewerConfig.PROTEIN_ICON : DocViewerConfig.DNA_ICON);
   }
 
   /**
-   * Fetch a structure entry from a remote server then display a StructureVuiewer.
+   * Fetch a structure entry from a remote server then display a
+   * StructureVuiewer.
    */
   private void handle3DStructureEntry() {
     // Locate the FeatureWebLinker Resource
@@ -174,30 +218,31 @@ public class DisplayEntryAction extends AbstractAction {
     // Get the PDB id
     String pdbCode = _curDoc.getValue(_qEngine.getBankType().getPresentationModel().getAccessionFieldKey());
 
-    DatabaseOpener.setHelperMessage("Downloading "+pdbCode);
+    DatabaseOpener.setHelperMessage("Downloading " + pdbCode);
     // Format URL and download PDB entry from remote server
     String url = linker.getURL("PDBgz", pdbCode);
 
-    if (url == null){
+    if (url == null) {
       EZLogger.warn("Unable to format PDB URL");
       return;
     }
 
     File pdbFile_gz = HTTPBasicEngine.doGet(url);
 
-    if (pdbFile_gz == null){
+    if (pdbFile_gz == null) {
       EZLogger.warn("Unable to retrieve PDB entry from server");
       return;
     }
 
-    //downloaded file is compressed (gzip). We need to uncompress it (3D viewer provides
-    //a PDB text viewer, so we need the uncompressed file)
-    File   pdbFile = new File(pdbFile_gz.getAbsoluteFile()+".txt");
-    //notice: gunzipFile() logs errors if any
-    if (!EZFileUtils.gunzipFile(pdbFile_gz.getAbsolutePath(), pdbFile.getAbsolutePath())){
+    // downloaded file is compressed (gzip). We need to uncompress it (3D viewer
+    // provides
+    // a PDB text viewer, so we need the uncompressed file)
+    File pdbFile = new File(pdbFile_gz.getAbsoluteFile() + ".txt");
+    // notice: gunzipFile() logs errors if any
+    if (!EZFileUtils.gunzipFile(pdbFile_gz.getAbsolutePath(), pdbFile.getAbsolutePath())) {
       return;
     }
-    
+
     // Everything ok? Start the 3D Viewer!
     ThreeDStructureViewer viewer = new ThreeDStructureViewer();
     if (viewer.getMolPanel().openFile(pdbFile.getAbsolutePath(), pdbCode, null, null)) {
@@ -209,22 +254,25 @@ public class DisplayEntryAction extends AbstractAction {
     }
     viewer.setOpenedPdbFile(pdbFile);
     viewer.updateTxtDisplay();
-    try {Thread.sleep(2000);} catch (InterruptedException e) {}
-    
-    //open a new internal frame on the desktop
+    try {
+      Thread.sleep(2000);
+    } catch (InterruptedException e) {
+    }
+
+    // open a new internal frame on the desktop
     DatabaseOpener.displayInternalFrame(viewer, pdbCode, DocViewerConfig.STRUCT_ICON);
   }
 
   /**
    * Avoid dead-locking UI event thread by running a separate thread.
    */
-  private class DisplayEntryThread extends Thread{
+  private class DisplayEntryThread extends Thread {
     @Override
-    public void run(){
+    public void run() {
       _loadInProgress = true;
       DisplayEntryAction.this.setEnabled(false);
       EZEnvironment.setWaitCursor();
-      try{
+      try {
         switch (_qEngine.getBankType().getReaderType()) {
         case PDB:
           handle3DStructureEntry();
@@ -238,15 +286,15 @@ public class DisplayEntryAction extends AbstractAction {
         case UNIPROT:
         case FASTAPROT:
           handleSequenceEntry(true);
+        case VARIATION:
+          handleVariation();
         default:
         }
-      }
-      catch(Exception e){
-        //JRE 1.8/OSX: from time to time, got a weird exception from swing
-        //for now: monitor it. Did not find what happens...
+      } catch (Exception e) {
+        // JRE 1.8/OSX: from time to time, got a weird exception from swing
+        // for now: monitor it. Did not find what happens...
         EZLogger.debug(e.toString());
-      }
-      finally{
+      } finally {
       }
       DisplayEntryAction.this.setEnabled(true);
       EZEnvironment.setDefaultCursor();

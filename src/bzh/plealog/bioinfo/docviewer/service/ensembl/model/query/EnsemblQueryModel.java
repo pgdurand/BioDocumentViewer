@@ -116,9 +116,9 @@ public class EnsemblQueryModel implements QueryModel {
     entry = new BAccessorEntry("Variant set", VARIANT_SET_KEY, OH_TYPE, ENS_OPE_FOR_STRING_2, DGMAttribute.DT_STRING);
     entry.setAllowCaseSensitive(false);
     entry.setHelpMsg(
-        "Variant type (e.g. ClinVar). Retrieve all variants when not set. Accepted values: see "+
-        "short_name list at http://www.ensembl.org/info/genome/variation/data_description.html#variation_sets. "+
-        "Use comma separated list when providing several variant set names."
+        // this code is closely associated to EnsemblServerConfiguration.formatVariant()
+        "Variant type to retrieve. Reserved keys: all, clinvar, cosmic. Otherwise, use one of: "+
+        "http://www.ensembl.org/info/genome/variation/data_description.html#variation_sets"
     );
     accessors_.put(entry.getAccessorVisibleName(), entry);
     

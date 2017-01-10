@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.StringTokenizer;
 
+import com.plealog.genericapp.api.log.EZLogger;
+
 import bzh.plealog.bioinfo.api.filter.BFilter;
 import bzh.plealog.bioinfo.docviewer.api.BankType;
 import bzh.plealog.bioinfo.docviewer.api.QueryEngine;
@@ -29,12 +31,11 @@ import bzh.plealog.bioinfo.docviewer.api.Search;
 import bzh.plealog.bioinfo.docviewer.api.ServerConfiguration;
 import bzh.plealog.bioinfo.docviewer.api.Summary;
 import bzh.plealog.bioinfo.docviewer.http.HTTPBasicEngine;
+import bzh.plealog.bioinfo.docviewer.http.HTTPEngineException;
 import bzh.plealog.bioinfo.docviewer.service.ensembl.model.query.EnsemblQueryExpressionBuilder;
 import bzh.plealog.bioinfo.docviewer.service.ensembl.model.query.EnsemblQueryModel;
 import bzh.plealog.bioinfo.docviewer.service.ncbi.model.query.SimpleStringExpressionBuilder;
 import bzh.plealog.bioinfo.docviewer.ui.DocViewerConfig;
-
-import com.plealog.genericapp.api.log.EZLogger;
 
 public class EnsemblQueryEngine implements QueryEngine {
   private EnsemblServerConfiguration _serverConfig;
@@ -135,8 +136,41 @@ public class EnsemblQueryEngine implements QueryEngine {
 
   @Override
   public File load(String ids, String dbCode, boolean fullEntryFormat) {
-    // not available for now
-    return null;
+    String url, species="", key, value;
+    StringTokenizer tokenizer, tokenizer2;
+    
+    // get species from query
+    // see EnsemblQueryExpressionBuilder.compile() to see how the query is created
+    tokenizer = new StringTokenizer(_ensQuery.toString(),"|");
+    while(tokenizer.hasMoreTokens()){
+      tokenizer2 = new StringTokenizer(tokenizer.nextToken(),"=");
+      key = tokenizer2.nextToken();
+      value = tokenizer2.nextToken();
+      if (key.equals(EnsemblQueryModel.SPECIES_KEY)){
+        species=value;
+      }
+    }
+    if (_dbName.getUserName().contains(HUMAN_KEY)){
+      species=HUMAN_KEY;
+    }
+
+    // get URL to use to query Ensembl and get the entry
+    url = _serverConfig.getLoadVepURL(species, ids);
+    
+    File answer;
+    //refine HTTP GET errors; e.g. on 404/Bad request, ENSEMBL
+    //server provides more information that is retrieved in the
+    //answer file
+    try {
+      answer = HTTPBasicEngine.doGet(url, _header_attrs);
+    } catch (HTTPEngineException e) {
+      if (e.getAnswerFile()==null){
+        throw e;
+      }
+      answer = e.getAnswerFile();
+    }
+    
+    return answer;
   }
 
   private String getServiceURLfromQuery(){
@@ -194,10 +228,7 @@ public class EnsemblQueryEngine implements QueryEngine {
       // we need an official ENSG ID...
       for(String id : res.getIds()){
         if (id.startsWith("ENSG")){
-          url = _serverConfig.getFetchVariationUrl(id);
-          if (!variant_set.isEmpty()){
-            url += _serverConfig.formatVariant(variant_set);
-          }
+          url = _serverConfig.getFetchVariationUrl(id, variant_set);
           return url;
         }
       }
@@ -205,10 +236,7 @@ public class EnsemblQueryEngine implements QueryEngine {
     }
     if (!region_span.isEmpty()){
       EZLogger.debug("region span: "+region_span);
-      url = _serverConfig.getFetchVariationUrl(species, region_span);
-      if (!variant_set.isEmpty()){
-        url += _serverConfig.formatVariant(variant_set);
-      }
+      url = _serverConfig.getFetchVariationUrl(species, region_span, variant_set);
       return url;
     }
     //should not happen
@@ -218,7 +246,19 @@ public class EnsemblQueryEngine implements QueryEngine {
   private void prepareSearchData(){
     if (_searchData==null){
       String url = getServiceURLfromQuery();
-      Search res = _dbName.getSearch(HTTPBasicEngine.doGet(url, _header_attrs));
+      File answer;
+      //refine HTTP GET errors; e.g. on 404/Bad request, ENSEMBL
+      //server provides more information that is retrieved in the
+      //answer file
+      try {
+        answer = HTTPBasicEngine.doGet(url, _header_attrs);
+      } catch (HTTPEngineException e) {
+        if (e.getAnswerFile()==null){
+          throw e;
+        }
+        answer = e.getAnswerFile();
+      }
+      Search res = _dbName.getSearch(answer);
       if (res.getError() != null) {
         throw new QueryEngineException(res.getError());
       }
@@ -229,7 +269,19 @@ public class EnsemblQueryEngine implements QueryEngine {
   private void prepareSummaryData(){
     if (_summaryData==null){
       String url = getServiceURLfromQuery();
-      Summary res = _dbName.getSummary(HTTPBasicEngine.doGet(url, _header_attrs));
+      File answer;
+      //refine HTTP GET errors; e.g. on 404/Bad request, ENSEMBL
+      //server provides more information that is retrieved in the
+      //answer file
+      try {
+        answer = HTTPBasicEngine.doGet(url, _header_attrs);
+      } catch (HTTPEngineException e) {
+        if (e.getAnswerFile()==null){
+          throw e;
+        }
+        answer = e.getAnswerFile();
+      }
+      Summary res = _dbName.getSummary(answer);
       if (res.getError() != null) {
         throw new QueryEngineException(res.getError());
       }
@@ -241,7 +293,7 @@ public class EnsemblQueryEngine implements QueryEngine {
     Search s = new Search();
     ArrayList<String> ids = new ArrayList<>();
     
-    int total = from+nb;
+    int total = Math.min(from+nb, _searchData.getTotal());
     for(int i=from; i<total;i++){
       ids.add(_searchData.getId(i));
     }
@@ -255,7 +307,7 @@ public class EnsemblQueryEngine implements QueryEngine {
     Summary s;
     s = new Summary();
     
-    int total = from+nb;
+    int total = Math.min(from+nb, _summaryData.getTotal());
     for(int i=from; i<total;i++){
       s.addDoc(_summaryData.getDoc(i));
     }
