@@ -1,6 +1,7 @@
 #BioDocumentViewer
 
-[![License](https://img.shields.io/badge/license-Affero%20GPL%203.0-blue.svg)](https://www.gnu.org/licenses/agpl-3.0.txt)
+[![Build Status](https://travis-ci.org/pgdurand/BioDocumentViewer.svg?branch=master)](https://travis-ci.org/pgdurand/BioDocumentViewer)
+[![License AGPL](https://img.shields.io/badge/license-Affero%20GPL%203.0-blue.svg)](https://www.gnu.org/licenses/agpl-3.0.txt)
 
 ##Introduction
 
