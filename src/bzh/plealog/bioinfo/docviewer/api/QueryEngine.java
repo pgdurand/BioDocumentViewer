@@ -26,6 +26,8 @@ import bzh.plealog.bioinfo.api.filter.BFilter;
  * @author Patrick G. Durand
  */
 public interface QueryEngine {
+  public static final int PAGE_SIZE            = 100;
+
   /**
    * Return the bank type associated to this query engine.
    */
@@ -90,4 +92,21 @@ public interface QueryEngine {
    * Load sequences from the remote server.
    */
   public File load(String ids, String dbCode, boolean fullEntryFormat);
+  
+  /**
+   * Returns data page size.
+   * 
+   * Default value is {@link QueryEngine#PAGE_SIZE}
+   */
+  public default int getPageSize(){
+    return QueryEngine.PAGE_SIZE;
+  }
+  
+  /**
+   * Figures out whether or not a QueryEngine enables to provide Search and
+   * Summary using pagination. Default is true .
+   */
+  public default boolean enablePagination(){
+    return true;
+  }
 }
