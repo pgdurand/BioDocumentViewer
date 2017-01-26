@@ -106,8 +106,6 @@ public class DocViewerConfig {
   private static String                              USER_EMAIL;
   private static BankProvider                        DEFAULT_PROVIDER     = null;
 
-  public static int                                  PAGE_SIZE            = 100;
-
   private static List<Class<? extends BankProvider>> PROVIDER_LIST;
 
   static {
