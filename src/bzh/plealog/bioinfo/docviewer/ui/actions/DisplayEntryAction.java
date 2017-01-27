@@ -16,8 +16,6 @@
  */
 package bzh.plealog.bioinfo.docviewer.ui.actions;
 
-import static org.junit.Assert.assertTrue;
-
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.FileWriter;
@@ -167,14 +165,15 @@ public class DisplayEntryAction extends AbstractAction {
 
     try (FileWriter fw = new FileWriter(wFile)) {
       DIWrapper diw = new DIWrapper(tmpFile);
-      assertTrue(DataFormatter.dump(fw, diw, FORMAT.ENSEMBL_VAR_HTML));
+      if (!DataFormatter.dump(fw, diw, FORMAT.ENSEMBL_VAR_HTML)){
+        throw new RuntimeException("Cannot format HTML document");
+      }
     } catch (Exception ex) {
       EZLogger.warn(ex.toString());
       EZEnvironment.displayWarnMessage(EZEnvironment.getParentFrame(), Messages.getString("DisplayEntryAction.err2"));
       return;
     } finally {
       wFile.deleteOnExit();
-
     }
 
     if (_varViewType.equals(VAR_VIEWER_TYPE.WEB_BROWSER)) {
