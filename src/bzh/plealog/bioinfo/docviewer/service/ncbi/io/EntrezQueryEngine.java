@@ -31,7 +31,6 @@ import bzh.plealog.bioinfo.docviewer.api.Summary;
 import bzh.plealog.bioinfo.docviewer.http.HTTPBasicEngine;
 import bzh.plealog.bioinfo.docviewer.service.ncbi.model.query.EntrezQueryExpressionBuilder;
 import bzh.plealog.bioinfo.docviewer.service.ncbi.model.query.SimpleStringExpressionBuilder;
-import bzh.plealog.bioinfo.docviewer.ui.DocViewerConfig;
 
 /**
  * This is the engine capable of querying the NCBI Entrez server to fetch some
@@ -49,7 +48,7 @@ import bzh.plealog.bioinfo.docviewer.ui.DocViewerConfig;
 public class EntrezQueryEngine implements QueryEngine {
   private BFilter entrezQuery;
   private BankType dbName;
-  private int defPageSize = DocViewerConfig.PAGE_SIZE;
+  private int defPageSize = QueryEngine.PAGE_SIZE;
   private EntrezServerConfiguration _serverConfig;
   
   /**

@@ -25,15 +25,17 @@ import java.util.Map;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 
+import com.plealog.genericapp.api.EZApplicationBranding;
+import com.plealog.genericapp.api.configuration.DirectoryManager;
+import com.plealog.genericapp.api.log.EZLogger;
+import com.plealog.genericapp.ui.common.Utils;
+
 import bzh.plealog.bioinfo.docviewer.api.ServerConfiguration;
+import bzh.plealog.bioinfo.docviewer.config.DocViewerDirectoryType;
 import bzh.plealog.bioinfo.docviewer.http.HTTPBasicEngine;
 import bzh.plealog.bioinfo.docviewer.ui.DocViewerConfig;
 import bzh.plealog.bioinfo.docviewer.ui.resources.Messages;
 import bzh.plealog.bioinfo.util.CoreUtil;
-
-import com.plealog.genericapp.api.EZApplicationBranding;
-import com.plealog.genericapp.api.log.EZLogger;
-import com.plealog.genericapp.ui.common.Utils;
 
 /**
  * This class stores the Sequence server configuration to be used by a client of
@@ -121,7 +123,7 @@ public class EntrezServerConfiguration implements ServerConfiguration{
     conf = new Hashtable<>();
     try {
       // first, try to locate the file in the user conf dir
-      str = DocViewerConfig.getConfigurationPath();
+      str = DirectoryManager.getPath(DocViewerDirectoryType.CONF);
       if (str!=null){
         str += CONF_RESOURCE;
         f = new File(str);

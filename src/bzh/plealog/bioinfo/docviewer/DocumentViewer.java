@@ -34,25 +34,27 @@ import javax.swing.JPanel;
 
 import org.apache.log4j.BasicConfigurator;
 
-import bzh.plealog.bioinfo.api.core.config.CoreSystemConfigurator;
-import bzh.plealog.bioinfo.docviewer.api.BankProvider;
-import bzh.plealog.bioinfo.docviewer.api.BankType;
-import bzh.plealog.bioinfo.docviewer.ui.DocViewerConfig;
-import bzh.plealog.bioinfo.docviewer.ui.panels.DatabaseOpener;
-import bzh.plealog.bioinfo.docviewer.ui.resources.Messages;
-import bzh.plealog.bioinfo.ui.config.UISystemConfigurator;
-import bzh.plealog.bioinfo.ui.filter.resources.FilterMessages;
-
 import com.plealog.genericapp.api.EZApplicationBranding;
 import com.plealog.genericapp.api.EZEnvironment;
 import com.plealog.genericapp.api.EZGenericApplication;
 import com.plealog.genericapp.api.EZUIStarterListener;
+import com.plealog.genericapp.api.configuration.DirectoryManager;
 import com.plealog.genericapp.api.log.EZLogger;
 import com.plealog.genericapp.api.log.EZLoggerManager;
 import com.plealog.genericapp.ui.desktop.CascadingWindowPositioner;
 import com.plealog.genericapp.ui.desktop.GDesktopPane;
 import com.plealog.genericapp.ui.desktop.GInternalFrame;
 import com.plealog.genericapp.ui.desktop.JWindowsMenu;
+
+import bzh.plealog.bioinfo.api.core.config.CoreSystemConfigurator;
+import bzh.plealog.bioinfo.docviewer.api.BankProvider;
+import bzh.plealog.bioinfo.docviewer.api.BankType;
+import bzh.plealog.bioinfo.docviewer.config.DocViewerDirectoryType;
+import bzh.plealog.bioinfo.docviewer.ui.DocViewerConfig;
+import bzh.plealog.bioinfo.docviewer.ui.panels.DatabaseOpener;
+import bzh.plealog.bioinfo.docviewer.ui.resources.Messages;
+import bzh.plealog.bioinfo.ui.config.UISystemConfigurator;
+import bzh.plealog.bioinfo.ui.filter.resources.FilterMessages;
 
 /**
  * Starter class of the DocumentViewer.
@@ -94,6 +96,9 @@ public class DocumentViewer {
     // setup the logging system
     EZLoggerManager.initialize();
 
+    // Prepare software local storage dir
+    DirectoryManager.prepareApplicationDataPath(true, DocViewerDirectoryType.getAllValues());
+    
     // some third party libraries rely on log4j
     BasicConfigurator.configure();
 

@@ -28,20 +28,21 @@ import java.util.jar.Manifest;
 
 import javax.swing.ImageIcon;
 
-import bzh.plealog.bioinfo.docviewer.api.BankProvider;
-import bzh.plealog.bioinfo.docviewer.api.BankType;
-import bzh.plealog.bioinfo.docviewer.service.ebi.EbiProvider;
-import bzh.plealog.bioinfo.docviewer.service.ensembl.EnsemblProvider;
-import bzh.plealog.bioinfo.docviewer.service.ncbi.EntrezProvider;
-import bzh.plealog.bioinfo.docviewer.ui.resources.Messages;
-
 import com.plealog.genericapp.api.EZEnvironment;
+import com.plealog.genericapp.api.configuration.DirectoryManager;
 import com.plealog.genericapp.api.file.EZFileTypes;
 import com.plealog.genericapp.api.file.EZFileUtils;
 import com.plealog.genericapp.api.log.EZLogger;
 import com.plealog.genericapp.api.log.EZLoggerManager;
 import com.plealog.genericapp.api.log.EZLoggerManager.LogLevel;
 import com.plealog.genericapp.api.log.EZSingleLineFormatter;
+
+import bzh.plealog.bioinfo.docviewer.api.BankProvider;
+import bzh.plealog.bioinfo.docviewer.api.BankType;
+import bzh.plealog.bioinfo.docviewer.service.ebi.EbiProvider;
+import bzh.plealog.bioinfo.docviewer.service.ensembl.EnsemblProvider;
+import bzh.plealog.bioinfo.docviewer.service.ncbi.EntrezProvider;
+import bzh.plealog.bioinfo.docviewer.ui.resources.Messages;
 
 /**
  * Contains some configuration elements of the software.
@@ -55,7 +56,7 @@ public class DocViewerConfig {
    * JVM optional argument. Switch debug mode to true or false. If not provided,
    * debug mode is disabled. Sample use: -DV_DEBUG=true
    */
-  public static final String                         JVM_ARG_DEBUG        = "V_DEBUG";
+  public static final String JVM_ARG_DEBUG = "V_DEBUG";
   /**
    * JVM optional argument. Provide an email address, usually required by
    * NCBI/EBI to use their web services. It enables Public Institutes to get in
@@ -67,18 +68,20 @@ public class DocViewerConfig {
    * https://www.ncbi.nlm.nih.gov/home/about/policies.shtml#scripting<br>
    * http://www.ebi.ac.uk/Tools/webservices/help/faq<br>
    */
-  public static final String                         JVM_ARG_EMAIL        = "V_EMAIL";
+  public static final String JVM_ARG_EMAIL = "V_EMAIL";
   /**
-   * JVM optional argument. Provide a configuration directory. If not provided,
-   * software locates its resources and configuration files within compiled Java
-   * codes. Sample use: -DV_CONF=./config
+   * JVM optional argument. Provide the directory where the application can store
+   * its data locally. If not provided, a default directory is created in the home
+   * directory of the software; @see DocViewerConfig#prepareApplicationDataPath().
+   * Sample use: -DV_CONF=/my/path/DocViewer
    */
-  public static final String                         JVM_ARG_CONF         = "V_CONF";
+  //this line added so that all available JVM arguments are listed in THIS class.
+  public static final String JVM_ARG_CONF = DirectoryManager.JVM_ARG_CONF;
   /**
    * JVM optional argument. Provide a bank provider. If not provided, software
    * uses NCBI as default. Sample use: -DV_PROVIDER=EBI
    */
-  public static final String                         JVM_ARG_BK_PROVIDER  = "V_PROVIDER";
+  public static final String JVM_ARG_BK_PROVIDER = "V_PROVIDER";
 
   /**
    * The following enables to add BankProvider as plugins. Simply design a new
@@ -90,21 +93,21 @@ public class DocViewerConfig {
    * Sample MANIFEST.mf line:<br>
    * doc-viewer-bank-provider=com.foo.bar.MyBankProvider
    */
-  public static String                               MF_DOC_PROVIDER_ATTR = "doc-viewer-bank-provider";
+  public static String MF_DOC_PROVIDER_ATTR = "doc-viewer-bank-provider";
 
-  public static final String                         FAS_FEXT             = "fas";
-  public static final String                         DAT_FEXT             = "dat";
-  public static final String                         PNG_FEXT             = "png";
+  public static final String FAS_FEXT = "fas";
+  public static final String DAT_FEXT = "dat";
+  public static final String PNG_FEXT = "png";
 
-  public static ImageIcon                            WORKING_ICON;
-  public static ImageIcon                            DBXPLR_ICON;
-  public static ImageIcon                            DNA_ICON;
-  public static ImageIcon                            VAR_DNA_ICON;
-  public static ImageIcon                            PROTEIN_ICON;
-  public static ImageIcon                            STRUCT_ICON;
+  public static ImageIcon WORKING_ICON;
+  public static ImageIcon DBXPLR_ICON;
+  public static ImageIcon DNA_ICON;
+  public static ImageIcon VAR_DNA_ICON;
+  public static ImageIcon PROTEIN_ICON;
+  public static ImageIcon STRUCT_ICON;
 
-  private static String                              USER_EMAIL;
-  private static BankProvider                        DEFAULT_PROVIDER     = null;
+  private static String USER_EMAIL;
+  private static BankProvider DEFAULT_PROVIDER = null;
 
   private static List<Class<? extends BankProvider>> PROVIDER_LIST;
 
@@ -208,8 +211,7 @@ public class DocViewerConfig {
           } catch (InstantiationException e) {
             EZLogger.warn("Unable to instantiate BankProvider:" + bt.getName());
           } catch (IllegalAccessException e) {
-            EZLogger.warn("Unable to get access to BankProvider:"
-                + bt.getName());
+            EZLogger.warn("Unable to get access to BankProvider:" + bt.getName());
           }
           if (bp != null && bp.getProviderName().equalsIgnoreCase(provider)) {
             DEFAULT_PROVIDER = bp;
@@ -247,28 +249,11 @@ public class DocViewerConfig {
   public static void initLogLevel() {
     String dbg = System.getProperty(JVM_ARG_DEBUG);
     if (dbg != null) {
-      EZLoggerManager
-          .setLevel(dbg.toLowerCase().equals("true") ? LogLevel.debug
-              : LogLevel.info);
+      EZLoggerManager.setLevel(dbg.toLowerCase().equals("true") ? LogLevel.debug : LogLevel.info);
     }
     // set the Formatter of the UI logger: in debug mode, provide full
     // class/method names
-    EZLoggerManager.setUILoggerFormatter(new EZSingleLineFormatter(
-        EZLoggerManager.getLevel() == LogLevel.debug));
-  }
-
-  /**
-   * Return the software configuration file. By default, there is no such
-   * directory available. Has to be setup using JRM argument: DV_CONF, with
-   * value targeting a directory.
-   */
-  public static String getConfigurationPath() {
-    String confP = System.getProperty(JVM_ARG_CONF);
-
-    if (confP == null)
-      return null;
-
-    return EZFileUtils.terminatePath(confP);
+    EZLoggerManager.setUILoggerFormatter(new EZSingleLineFormatter(EZLoggerManager.getLevel() == LogLevel.debug));
   }
 
   /**
@@ -276,8 +261,7 @@ public class DocViewerConfig {
    */
   public static Properties getVersionProperties() {
     Properties props = new Properties();
-    try (InputStream in = DocViewerConfig.class
-        .getResourceAsStream("version.properties");) {
+    try (InputStream in = DocViewerConfig.class.getResourceAsStream("version.properties");) {
       props.load(in);
       in.close();
     } catch (Exception ex) {// should not happen
@@ -299,8 +283,7 @@ public class DocViewerConfig {
       return;
     EZLogger.debug("Environment is: ");
     for (String key : keys) {
-      EZLogger.debug(String.format("  %s: %s", key,
-          EZEnvironment.getApplicationProperty(key)));
+      EZLogger.debug(String.format("  %s: %s", key, EZEnvironment.getApplicationProperty(key)));
     }
   }
 
@@ -319,9 +302,8 @@ public class DocViewerConfig {
 
     str = props.getProperty("prg.name");
 
-    f = new File(EZFileUtils.terminatePath(System.getProperty("user.home"))
-        + "." + str + File.separator + "filters" + File.separator
-        + bt.getProviderName() + File.separator + bt.getCode());
+    f = new File(EZFileUtils.terminatePath(System.getProperty("user.home")) + "." + str + File.separator + "filters"
+        + File.separator + bt.getProviderName() + File.separator + bt.getCode());
     if (!f.exists()) {
       if (!f.mkdirs()) {
         EZLogger.warn("Unable to create path: " + f.getAbsolutePath());
@@ -343,7 +325,7 @@ public class DocViewerConfig {
     StringTokenizer tokenizer, tokenizer2;
     Manifest m;
     Attributes attr;
-    
+
     EZLogger.debug("Loading external BankProviders");
     strClassPath = System.getProperty("java.class.path");
     tokenizer = new StringTokenizer(strClassPath, File.pathSeparator);
@@ -367,8 +349,7 @@ public class DocViewerConfig {
                 // we could check that provided class in an appropriate
                 // BankProvider using Reflection... well, let JRE does
                 // the job: the following may throw a ClassCastException
-                PROVIDER_LIST.add((Class<? extends BankProvider>) Class
-                    .forName(token2));
+                PROVIDER_LIST.add((Class<? extends BankProvider>) Class.forName(token2));
                 EZLogger.debug("      provider ok");
               } catch (Exception ex) {
                 EZLogger.debug("      cannot use it: " + ex.toString());

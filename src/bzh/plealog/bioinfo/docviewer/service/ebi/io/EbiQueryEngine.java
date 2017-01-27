@@ -30,7 +30,6 @@ import bzh.plealog.bioinfo.docviewer.api.Summary;
 import bzh.plealog.bioinfo.docviewer.http.HTTPBasicEngine;
 import bzh.plealog.bioinfo.docviewer.service.ebi.model.query.EbiQueryExpressionBuilder;
 import bzh.plealog.bioinfo.docviewer.service.ncbi.model.query.SimpleStringExpressionBuilder;
-import bzh.plealog.bioinfo.docviewer.ui.DocViewerConfig;
 
 /**
  * This is the engine capable of querying the EBI-Eye server to fetch some
@@ -45,7 +44,7 @@ public class EbiQueryEngine implements QueryEngine {
   private EbiServerConfiguration _serverConfig;
   private BFilter _ebiQuery;
   private BankType _dbName;
-  private int _defPageSize = DocViewerConfig.PAGE_SIZE;
+  private int _defPageSize = QueryEngine.PAGE_SIZE;
 
   /**
    * No default constructor available.

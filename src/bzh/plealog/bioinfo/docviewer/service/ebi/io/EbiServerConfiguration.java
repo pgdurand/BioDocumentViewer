@@ -25,10 +25,12 @@ import java.util.Hashtable;
 import java.util.Properties;
 
 import com.plealog.genericapp.api.EZApplicationBranding;
+import com.plealog.genericapp.api.configuration.DirectoryManager;
 import com.plealog.genericapp.api.log.EZLogger;
 
 import bzh.plealog.bioinfo.docviewer.api.QueryEngineException;
 import bzh.plealog.bioinfo.docviewer.api.ServerConfiguration;
+import bzh.plealog.bioinfo.docviewer.config.DocViewerDirectoryType;
 import bzh.plealog.bioinfo.docviewer.http.HTTPBasicEngine;
 import bzh.plealog.bioinfo.docviewer.ui.DocViewerConfig;
 
@@ -79,7 +81,7 @@ public class EbiServerConfiguration implements ServerConfiguration{
     
     try {
       // first, try to locate the file in the user conf dir
-      str = DocViewerConfig.getConfigurationPath();
+      str = DirectoryManager.getPath(DocViewerDirectoryType.CONF);
       if (str!=null){
         str += CONF_RESOURCE;
         f = new File(str);
