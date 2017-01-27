@@ -1,5 +1,6 @@
-/* Copyright (C) 2006-2016 Patrick G. Durand
- *
+/* Copyright (C) 2017 Inria
+ * Author: Patrick G. Durand
+ * 
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU Affero General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
@@ -16,24 +17,11 @@
  */
 package bzh.plealog.bioinfo.docviewer.service.ensembl.model.data;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlValue;
-
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlRootElement(name = "Alleles")
-public class Alleles implements SimpleElement {
-
-  @XmlValue
-  protected String value;
-
-  public String getvalue() {
-    return value;
-  }
-
-  public void setvalue(String value) {
-    this.value = value;
-  }
-
+/**
+ * Define a simple data flavor.
+ * 
+ * @author Patrick.G. Durand
+ */
+public interface SimpleElement {
+  public String getvalue();
 }

@@ -1,4 +1,4 @@
-/* Copyright (C) 2006-2016 Patrick G. Durand
+/* Copyright (C) 2006-2017 Patrick G. Durand
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU Affero General Public License as published by
@@ -17,7 +17,6 @@
 package bzh.plealog.bioinfo.docviewer.service.ensembl.model.data;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -33,8 +32,10 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 @XmlRootElement(name = "data")
 public class OptDataItem {
 
+  //undefined values: String->null ; numbers->-1 ; List<>->empty
+
   // error reported by Ensembl service
-  @XmlAttribute(name = "error", required = true)
+  @XmlAttribute(name = "error", required = false)
   @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
   protected String        error;
   
@@ -43,6 +44,11 @@ public class OptDataItem {
   @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
   protected String        id;
 
+  @XmlAttribute(name = "name", required = true)
+  @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
+  protected String        name;
+  
+  
   @XmlAttribute(name = "type", required = false)
   @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
   protected String        type;
@@ -63,156 +69,122 @@ public class OptDataItem {
   @XmlAttribute(name = "source", required = false)
   @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
   protected String        source;
+  
+  
+  @XmlAttribute(name = "var_class", required = false)
+  @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
+  protected String        var_class;
 
+  @XmlAttribute(name = "allele_string", required = false)
+  @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
+  protected String        allele_string;
+  
+  @XmlAttribute(name = "most_severe_consequence", required = false)
+  @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
+  protected String        most_severe_consequence;
+  
+  @XmlAttribute(name = "ambiguity", required = false)
+  @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
+  protected String        ambiguity;
+  
+  @XmlAttribute(name = "ancestral_allele", required = false)
+  @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
+  protected String        ancestral_allele;
+  
   @XmlAttribute(name = "seq_region_name", required = false)
   @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
   protected String        seq_region_name;
   @XmlAttribute(name = "start", required = false)
-  protected int           start;
+  protected int           start=-1;
   @XmlAttribute(name = "end", required = false)
-  protected int           end;
+  protected int           end=-1;
   @XmlAttribute(name = "strand", required = false)
-  protected int           strand;
+  protected int           strand=-1;
 
   @XmlElement(name = "alleles", required = false)
   protected List<Alleles> alleles;
-  @XmlElement(name = "clinical_significance", required = false)
-  protected String        clinical_significance;
   
-  private String          allelesStr;
-  private String          locationStr;
+  @XmlElement(name = "clinical_significance", required = false)
+  protected List<ClinicalSignificance> clinical_significance;
+  
+  @XmlElement(name = "evidence", required = false)
+  protected List<Evidence> evidence;
+  
+  @XmlElement(name = "synonyms", required = false)
+  protected List<Synonyms> synonyms;
+
+  @XmlElement(name = "mappings", required = false)
+  protected List<Mappings> mappings;
+
+  @XmlElement(name = "transcript_consequences", required = false)
+  protected List<TranscriptConsequences> transcript_consequences;
 
   public String getError() {
     return error;
-  }
-
-  public void setError(String error) {
-    this.error = error;
   }
 
   public String getId() {
     return id;
   }
 
-  public void setId(String value) {
-    this.id = value;
+  public String getName(){
+    return name;
   }
-
+  
   public String getType() {
     return type;
-  }
-
-  public void setType(String value) {
-    this.type = value;
   }
 
   public String getAssembly_name() {
     return assembly_name;
   }
 
-  public void setAssembly_name(String assembly_name) {
-    this.assembly_name = assembly_name;
-  }
-
   public String getConsequence_type() {
     return consequence_type;
-  }
-
-  public void setConsequence_type(String consequence_type) {
-    this.consequence_type = consequence_type;
   }
 
   public String getFeature_type() {
     return feature_type;
   }
 
-  public void setFeature_type(String feature_type) {
-    this.feature_type = feature_type;
-  }
-
   public String getSource() {
     return source;
   }
 
-  public void setSource(String source) {
-    this.source = source;
+  public String getVariantClass() {
+    return var_class;
+  }
+  
+  public String getAllele_string() {
+    return allele_string;
+  }
+
+  public String getMost_severe_consequence() {
+    return most_severe_consequence;
+  }
+
+  public String getAmbiguity() {
+    return ambiguity;
+  }
+
+  public String getAncestral_allele() {
+    return ancestral_allele;
   }
 
   public String getSeq_region_name() {
     return seq_region_name;
   }
 
-  public void setSeq_region_name(String seq_region_name) {
-    this.seq_region_name = seq_region_name;
-  }
-
   public int getStart() {
     return start;
-  }
-
-  public void setStart(int start) {
-    this.start = start;
   }
 
   public int getEnd() {
     return end;
   }
 
-  public void setEnd(int end) {
-    this.end = end;
-  }
-
   public int getStrand() {
     return strand;
-  }
-
-  public void setStrand(int strand) {
-    this.strand = strand;
-  }
-
-  public String getClinical_significance() {
-    return clinical_significance==null ? "?" : clinical_significance;
-  }
-
-  public void setClinical_significance(String clinical_significance) {
-    this.clinical_significance = clinical_significance;
-  }
-
-  public String getLocation(){
-    if (locationStr!=null){
-      return locationStr;
-    }
-    StringBuffer buf = new StringBuffer();
-    buf.append(seq_region_name);
-    buf.append(":");
-    buf.append(start);
-    if (start!=end){
-      buf.append("-");
-      buf.append(end);
-    }
-    buf.append(" (");
-    buf.append(strand>0?"+":"-");
-    buf.append(")");
-    locationStr = buf.toString();
-    return locationStr;
-  }
-  public String getAllelesStr() {
-    if (allelesStr != null) {
-      return allelesStr;
-    }
-    if (alleles == null || alleles.isEmpty()) {
-      return "";
-    }
-    StringBuffer buf = new StringBuffer();
-    Iterator<Alleles> iter = alleles.iterator();
-    while(iter.hasNext()){
-      buf.append(iter.next().getvalue());
-      if (iter.hasNext()){
-        buf.append("/");
-      }
-    }
-    allelesStr = buf.toString();
-    return allelesStr;
   }
 
   public List<Alleles> getAlleles() {
@@ -222,4 +194,39 @@ public class OptDataItem {
     return alleles;
   }
 
+  public List<ClinicalSignificance> getClinical_significance() {
+    if (clinical_significance == null) {
+      clinical_significance = new ArrayList<ClinicalSignificance>();
+    }
+    return clinical_significance;
+  }
+
+  public List<Evidence> getEvidence() {
+    if (evidence == null) {
+      evidence = new ArrayList<Evidence>();
+    }
+    return evidence;
+  }
+
+  public List<Synonyms> getSynonyms() {
+    if (synonyms == null) {
+      synonyms = new ArrayList<Synonyms>();
+    }
+    return synonyms;
+  }
+
+  public List<Mappings> getMappings() {
+    if (mappings == null) {
+      mappings = new ArrayList<Mappings>();
+    }
+    return mappings;
+  }
+  
+  public List<TranscriptConsequences> getTranscriptConsequences() {
+    if (transcript_consequences == null) {
+      transcript_consequences = new ArrayList<TranscriptConsequences>();
+    }
+    return transcript_consequences;
+  }
+  
 }
