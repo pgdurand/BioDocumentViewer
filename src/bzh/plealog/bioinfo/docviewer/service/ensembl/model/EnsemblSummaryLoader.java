@@ -25,6 +25,7 @@ import bzh.plealog.bioinfo.docviewer.api.SummaryDoc;
 import bzh.plealog.bioinfo.docviewer.service.ensembl.EnsemblBank;
 import bzh.plealog.bioinfo.docviewer.service.ensembl.model.data.Opt;
 import bzh.plealog.bioinfo.docviewer.service.ensembl.model.data.OptDataItem;
+import bzh.plealog.bioinfo.docviewer.service.ensembl.model.format.DIWrapper;
 
 /**
  * A convenient class to convert Opt XML documents into Summary objects.
@@ -39,7 +40,8 @@ public class EnsemblSummaryLoader {
     Summary summary;
     Opt result;
     SummaryDoc doc;
-
+    DIWrapper wrapper;
+    
     // We create a new summary doc. Note: do not worry about using
     // summary.setFrom() and summary.setTotal() methods on the
     // new summary object: these are used by the caller of this
@@ -60,15 +62,16 @@ public class EnsemblSummaryLoader {
       // then, we get results
       for (OptDataItem entry : result.getItem()) {
         doc = new SummaryDoc();
+        wrapper = new DIWrapper(entry);
         summary.addDoc(doc);
         doc.setId(entry.getId());
-        doc.add(EnsemblBank.EnsemblDbSummaryDocPresentationModel.RES_HEADERS[EnsemblBank.EnsemblDbSummaryDocPresentationModel.Identifier_HDR], entry.getId());
-        doc.add(EnsemblBank.EnsemblDbSummaryDocPresentationModel.RES_HEADERS[EnsemblBank.EnsemblDbSummaryDocPresentationModel.ASSEMBLY_HDR], entry.getAssembly_name());
-        doc.add(EnsemblBank.EnsemblDbSummaryDocPresentationModel.RES_HEADERS[EnsemblBank.EnsemblDbSummaryDocPresentationModel.SOURCE_HDR], entry.getSource());
-        doc.add(EnsemblBank.EnsemblDbSummaryDocPresentationModel.RES_HEADERS[EnsemblBank.EnsemblDbSummaryDocPresentationModel.LOCATION_HDR], entry.getLocation());
-        doc.add(EnsemblBank.EnsemblDbSummaryDocPresentationModel.RES_HEADERS[EnsemblBank.EnsemblDbSummaryDocPresentationModel.CONSEQUENCE_HDR], entry.getConsequence_type());
-        doc.add(EnsemblBank.EnsemblDbSummaryDocPresentationModel.RES_HEADERS[EnsemblBank.EnsemblDbSummaryDocPresentationModel.VARIATION_HDR], entry.getAllelesStr());
-        doc.add(EnsemblBank.EnsemblDbSummaryDocPresentationModel.RES_HEADERS[EnsemblBank.EnsemblDbSummaryDocPresentationModel.CLINICAL_SIGNIFICANCE_HDR], entry.getClinical_significance());
+        doc.add(EnsemblBank.EnsemblDbSummaryDocPresentationModel.RES_HEADERS[EnsemblBank.EnsemblDbSummaryDocPresentationModel.Identifier_HDR], wrapper.getId());
+        doc.add(EnsemblBank.EnsemblDbSummaryDocPresentationModel.RES_HEADERS[EnsemblBank.EnsemblDbSummaryDocPresentationModel.ASSEMBLY_HDR], wrapper.getAssembly_name());
+        doc.add(EnsemblBank.EnsemblDbSummaryDocPresentationModel.RES_HEADERS[EnsemblBank.EnsemblDbSummaryDocPresentationModel.SOURCE_HDR], wrapper.getSource());
+        doc.add(EnsemblBank.EnsemblDbSummaryDocPresentationModel.RES_HEADERS[EnsemblBank.EnsemblDbSummaryDocPresentationModel.LOCATION_HDR], wrapper.getLocation());
+        doc.add(EnsemblBank.EnsemblDbSummaryDocPresentationModel.RES_HEADERS[EnsemblBank.EnsemblDbSummaryDocPresentationModel.CONSEQUENCE_HDR], wrapper.getConsequence_type());
+        doc.add(EnsemblBank.EnsemblDbSummaryDocPresentationModel.RES_HEADERS[EnsemblBank.EnsemblDbSummaryDocPresentationModel.VARIATION_HDR], wrapper.getAllelesStr());
+        doc.add(EnsemblBank.EnsemblDbSummaryDocPresentationModel.RES_HEADERS[EnsemblBank.EnsemblDbSummaryDocPresentationModel.CLINICAL_SIGNIFICANCE_HDR], wrapper.getClinical_significanceStr());
       }
       // Service provider should report current page of ids. This is not the
       // case for Ensembl, so we set from to zero, and this value will be updated
