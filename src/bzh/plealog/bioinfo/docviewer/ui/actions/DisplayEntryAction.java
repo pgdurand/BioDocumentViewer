@@ -1,4 +1,4 @@
-/* Copyright (C) 2006-2016 Patrick G. Durand
+/* Copyright (C) 2006-2017 Patrick G. Durand
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU Affero General Public License as published by
@@ -16,8 +16,12 @@
  */
 package bzh.plealog.bioinfo.docviewer.ui.actions;
 
+import static org.junit.Assert.assertTrue;
+
 import java.awt.event.ActionEvent;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.MessageFormat;
 
 import javax.swing.AbstractAction;
@@ -25,14 +29,20 @@ import javax.swing.Icon;
 import javax.swing.JScrollPane;
 import javax.swing.JTree;
 
+import com.Ostermiller.util.Browser;
 import com.plealog.genericapp.api.EZEnvironment;
+import com.plealog.genericapp.api.configuration.DirectoryManager;
 import com.plealog.genericapp.api.file.EZFileUtils;
 import com.plealog.genericapp.api.log.EZLogger;
 
 import bzh.plealog.bioinfo.api.data.sequence.BankSequenceDescriptor;
 import bzh.plealog.bioinfo.docviewer.api.QueryEngine;
 import bzh.plealog.bioinfo.docviewer.api.SummaryDoc;
+import bzh.plealog.bioinfo.docviewer.config.DocViewerDirectoryType;
+import bzh.plealog.bioinfo.docviewer.format.DataFormatter;
+import bzh.plealog.bioinfo.docviewer.format.DataFormatter.FORMAT;
 import bzh.plealog.bioinfo.docviewer.http.HTTPBasicEngine;
+import bzh.plealog.bioinfo.docviewer.service.ensembl.model.format.DIWrapper;
 import bzh.plealog.bioinfo.docviewer.ui.DocViewerConfig;
 import bzh.plealog.bioinfo.docviewer.ui.panels.DatabaseOpener;
 import bzh.plealog.bioinfo.docviewer.ui.resources.Messages;
@@ -54,8 +64,13 @@ public class DisplayEntryAction extends AbstractAction {
   private SummaryDoc _curDoc;
   private QueryEngine _qEngine;
   private boolean _loadInProgress = false;
+  private VAR_VIEWER_TYPE _varViewType = VAR_VIEWER_TYPE.WEB_BROWSER;
 
   private static final MessageFormat MF = new MessageFormat(Messages.getString("FetchFastaAction.dwnld.msg"));
+
+  private enum VAR_VIEWER_TYPE {
+    TREE, FX_WEB, WEB_BROWSER
+  }
 
   /**
    * Action Constructor.
@@ -103,16 +118,104 @@ public class DisplayEntryAction extends AbstractAction {
   }
 
   /**
+   * Display variant data using a Tree Viewer. Actually, that viewer displays
+   * the structure of the content of tmpFile which is XML formated.
+   * 
+   * @param varID
+   *          variant ID
+   * @param tmpFile
+   *          file containing the data to display. Should be XML formated.
+   */
+  private void handleVariationInTreeViewer(String varID, File tmpFile) {
+    // Create a Tree viewer
+    JTree tree;
+    try {
+      tree = new JTree(SAXTreeUtil.loadXMLDocument("Variant: " + varID, tmpFile, "opt"));
+    } catch (Exception ex) {
+      EZLogger.warn(ex.toString());
+      MessageFormat mf = new MessageFormat(Messages.getString("DisplayEntryAction.msg3"));
+      EZEnvironment.displayWarnMessage(EZEnvironment.getParentFrame(), mf.format(new Object[] { varID }));
+      return;
+    }
+    JScrollPane scrollPane = new JScrollPane(tree);
+    SAXTreeUtil.setVariationTreeRenderer(tree);
+    SAXTreeUtil.expandAll(tree);
+    DatabaseOpener.displayInternalFrame(scrollPane, varID, DocViewerConfig.VAR_DNA_ICON);
+  }
+
+  /**
+   * Display variant data using a Web Viewer. That viewer can be either an
+   * embedded JavaFX based viewer or an external browser; it depends upon the
+   * value of _varViewType class variable. Default is WEB_BROWSER, i.e. an
+   * external browser.
+   * 
+   * @param varID
+   *          variant ID
+   * @param tmpFile
+   *          file containing the data to display. Should be HTML formated.
+   */
+  private void handleVariationInWebViewer(String varID, File tmpFile) {
+    File wFile;
+    try {
+      wFile = File.createTempFile("var_", ".html",
+          new File(DirectoryManager.getPath(DocViewerDirectoryType.WEB_TEMPLATE)));
+    } catch (IOException ex) {
+      EZLogger.warn(ex.toString());
+      EZEnvironment.displayWarnMessage(EZEnvironment.getParentFrame(), Messages.getString("DisplayEntryAction.err1"));
+      return;
+    }
+
+    try (FileWriter fw = new FileWriter(wFile)) {
+      DIWrapper diw = new DIWrapper(tmpFile);
+      assertTrue(DataFormatter.dump(fw, diw, FORMAT.ENSEMBL_VAR_HTML));
+    } catch (Exception ex) {
+      EZLogger.warn(ex.toString());
+      EZEnvironment.displayWarnMessage(EZEnvironment.getParentFrame(), Messages.getString("DisplayEntryAction.err2"));
+      return;
+    } finally {
+      wFile.deleteOnExit();
+
+    }
+
+    if (_varViewType.equals(VAR_VIEWER_TYPE.WEB_BROWSER)) {
+      try {
+        Browser.init();
+        EZEnvironment.setWaitCursor();
+        Browser.displayURL("file://" + wFile.getAbsolutePath());
+        EZEnvironment.setDefaultCursor();
+      } catch (Exception ex) {
+        EZLogger.warn(ex.toString());
+        EZEnvironment.displayWarnMessage(EZEnvironment.getParentFrame(), Messages.getString("DisplayEntryAction.err3"));
+      }
+    } else {
+      DatabaseOpener.displayWebDocument(wFile.getAbsolutePath(), varID, DocViewerConfig.VAR_DNA_ICON);
+    }
+
+  }
+
+  /**
    * Fetch a variation entry from a remote server then display a VariantViewer.
+   * For now, only handles Ensembl Variation data.
    */
   private void handleVariation() {
     String varID;
     File tmpFile = null;
-    JTree tree;
 
     // Load entry
     varID = _curDoc.getValue(_qEngine.getBankType().getPresentationModel().getAccessionFieldKey());
     try {
+      // varID = "rs879254030";// simple snp
+      // varID = "rs587781858";// snp with polyphen and sift scores
+      // ClinVar entry (NCBI view:
+      // https://www.ncbi.nlm.nih.gov/clinvar/variation/245980/)
+      // accessing CLinVar directly at NCBI: https://www.biostars.org/p/137256/
+      // Possible pipeline:
+      // dnSNP at NCBI:
+      // https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=snp&id=879254030&report=XML
+      // from dbSNP to clinvar at NCBI:
+      // https://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?dbfrom=snp&db=clinvar&id=879254030
+      // clinvar at NCBI:
+      // https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=clinvar&id=245980&retmode=xml
       tmpFile = _qEngine.load(varID, _qEngine.getBankType().getCode(), true);
     } catch (Exception ex) {
       tmpFile.delete();
@@ -123,23 +226,19 @@ public class DisplayEntryAction extends AbstractAction {
       return;
     }
 
-    // Create a Tree viewer
-    try {
-      tree = new JTree(SAXTreeUtil.loadXMLDocument("Variant: " + varID, tmpFile));
-    } catch (Exception ex) {
-      EZLogger.warn(ex.toString());
-      MessageFormat mf = new MessageFormat(Messages.getString("DisplayEntryAction.msg3"));
-      EZEnvironment.displayWarnMessage(EZEnvironment.getParentFrame(), mf.format(new Object[] { varID }));
-      return;
-    } finally {
-      tmpFile.delete();
+    // ensure deletion of temp file
+    tmpFile.deleteOnExit();
+
+    switch (_varViewType) {
+    case FX_WEB:
+    case WEB_BROWSER:
+      handleVariationInWebViewer(varID, tmpFile);
+      break;
+    case TREE:
+    default:
+      handleVariationInTreeViewer(varID, tmpFile);
+      break;
     }
-
-    JScrollPane scrollPane = new JScrollPane(tree);
-    SAXTreeUtil.expandAll(tree);
-
-    // Put the viewer into the DocViewer
-    DatabaseOpener.displayInternalFrame(scrollPane, varID, DocViewerConfig.VAR_DNA_ICON);
   }
 
   /**
@@ -286,6 +385,7 @@ public class DisplayEntryAction extends AbstractAction {
         case UNIPROT:
         case FASTAPROT:
           handleSequenceEntry(true);
+          break;
         case VARIATION:
           handleVariation();
         default:
