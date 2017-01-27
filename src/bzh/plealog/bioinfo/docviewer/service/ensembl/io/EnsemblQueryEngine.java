@@ -29,6 +29,7 @@ import bzh.plealog.bioinfo.api.filter.BFilter;
 import bzh.plealog.bioinfo.docviewer.api.BankType;
 import bzh.plealog.bioinfo.docviewer.api.QueryEngine;
 import bzh.plealog.bioinfo.docviewer.api.QueryEngineException;
+import bzh.plealog.bioinfo.docviewer.api.ReaderType;
 import bzh.plealog.bioinfo.docviewer.api.Search;
 import bzh.plealog.bioinfo.docviewer.api.ServerConfiguration;
 import bzh.plealog.bioinfo.docviewer.api.Summary;
@@ -207,7 +208,10 @@ public class EnsemblQueryEngine implements QueryEngine {
   
   @Override
   public boolean enablePagination(){
-    return true;
+    if (_dbName.getReaderType().equals(ReaderType.VARIATION))
+      return false;
+    else
+      return true;
   }
   
   private File mergeData(File varFile, File vepFile) throws Exception{
