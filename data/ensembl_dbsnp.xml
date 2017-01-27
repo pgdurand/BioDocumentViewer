@@ -1,0 +1,32 @@
+<!-- curl -H 'Content-type:text/xml' -o variations.xml 'http://rest.ensembl.org/variation/Human/rs879254030' 
+     This SNP has only: clinical_significance=uncertain significance 
+                        and
+                        evidence=Phenotype or Disease
+     All other values added to test icons in viewer.
+-->
+<opt>
+  <data name="rs879254030" MAF="" ambiguity="M" ancestral_allele="C" minor_allele="" most_severe_consequence="3_prime_UTR_variant" source="Variants of clinical significance imported from ClinVar" var_class="sequence_alteration">
+    <clinical_significance>association</clinical_significance>
+    <clinical_significance>benign</clinical_significance>
+    <clinical_significance>confers sensitivity</clinical_significance>
+    <clinical_significance>drug response</clinical_significance>
+    <clinical_significance>likely benign</clinical_significance>
+    <clinical_significance>likely pathogenic</clinical_significance>
+    <clinical_significance>not provided</clinical_significance>
+    <clinical_significance>other</clinical_significance>
+    <clinical_significance>pathogenic</clinical_significance>
+    <clinical_significance>protective</clinical_significance>
+    <clinical_significance>risk factor</clinical_significance>
+    <clinical_significance>uncertain significance</clinical_significance>
+    <evidence>Multiple observations</evidence>
+    <evidence>Frequency</evidence>
+    <evidence>Cited</evidence>
+    <evidence>Phenotype or Disease</evidence>
+    <evidence>1000 Genomes</evidence>
+    <evidence>ExAC</evidence>
+    <evidence>HapMap</evidence>
+    <evidence>ESP</evidence>
+    <mappings allele_string="C/A" assembly_name="GRCh38" coord_system="chromosome" end="7669593" location="17:7669593-7669593" seq_region_name="17" start="7669593" strand="1" />
+    <synonyms>RCV000236302</synonyms>
+  </data>
+</opt>

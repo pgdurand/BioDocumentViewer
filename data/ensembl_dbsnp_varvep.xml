@@ -1,0 +1,327 @@
+<!-- concatenation of two data elements from:
+ curl -H 'Content-type:text/xml' -o variations.xml 'http://rest.ensembl.org/variation/Human/rs587781858'
+ curl -H 'Content-type:text/xml' -o variations.xml 'http://rest.ensembl.org/vep/Human/id/rs587781858' 
+ 
+ Views:
+   https://www.ncbi.nlm.nih.gov/SNP/snp_ref.cgi?rs=rs587781858
+   http://www.ensembl.org/Homo_sapiens/Variation/Explore?db=core;g=ENSG00000141510;r=17:7661779-7687550;v=rs587781858;vdb=variation;vf=110805787
+   ./data/ensembl_dbsnp_vep.png
+-->
+<opt>
+  <data name="rs587781858" allele_string="C/A/G/T" assembly_name="GRCh38" MAF="" ambiguity="N" ancestral_allele="C" minor_allele="" most_severe_consequence="missense_variant" source="Variants (including SNPs and indels) imported from dbSNP" var_class="SNP" end="7669671" input="rs587781858" seq_region_name="17" start="7669671" strand="1">
+    <clinical_significance>uncertain significance</clinical_significance>
+    <clinical_significance>likely benign</clinical_significance>
+    <evidence>Phenotype_or_Disease</evidence>
+    <evidence>ExAC</evidence>
+    <mappings allele_string="C/A/G/T" assembly_name="GRCh38" coord_system="chromosome" end="7669671" location="17:7669671-7669671" seq_region_name="17" start="7669671" strand="1" />
+    <synonyms>NM_001126115.1:c.724G&gt;A</synonyms>
+    <synonyms>NM_001126116.1:c.*227G&gt;T</synonyms>
+    <synonyms>NM_001276699.1:c.*139G&gt;A</synonyms>
+    <synonyms>NM_001126114.2:c.*227G&gt;C</synonyms>
+    <synonyms>NP_001263690.1:p.Gly335Cys</synonyms>
+    <synonyms>NM_001276695.1:c.*139G&gt;T</synonyms>
+    <synonyms>NP_000537.3:p.Gly374Ser</synonyms>
+    <synonyms>NM_001276697.1:c.643G&gt;A</synonyms>
+    <synonyms>NP_001263626.1:p.Gly215Ser</synonyms>
+    <synonyms>NM_001276697.1:c.643G&gt;C</synonyms>
+    <synonyms>NM_001126113.2:c.*139G&gt;A</synonyms>
+    <synonyms>NM_001126118.1:c.1003G&gt;A</synonyms>
+    <synonyms>NP_001263690.1:p.Gly335Arg</synonyms>
+    <synonyms>NM_001126112.2:c.1120G&gt;A</synonyms>
+    <synonyms>NM_001276761.1:c.1003G&gt;A</synonyms>
+    <synonyms>NM_001126117.1:c.*139G&gt;T</synonyms>
+    <synonyms>NM_000546.5:c.1120G&gt;T</synonyms>
+    <synonyms>NM_001276760.1:c.1003G&gt;A</synonyms>
+    <synonyms>NP_001263689.1:p.Gly335Cys</synonyms>
+    <synonyms>NM_001276696.1:c.*227G&gt;T</synonyms>
+    <synonyms>NM_001276698.1:c.*227G&gt;T</synonyms>
+    <synonyms>NP_001263626.1:p.Gly215Arg</synonyms>
+    <synonyms>NP_001119590.1:p.Gly335Ser</synonyms>
+    <synonyms>NP_001119587.1:p.Gly242Arg</synonyms>
+    <synonyms>NM_001126118.1:c.1003G&gt;C</synonyms>
+    <synonyms>NM_001126113.2:c.*139G&gt;C</synonyms>
+    <synonyms>NP_001263690.1:p.Gly335Ser</synonyms>
+    <synonyms>NM_001126112.2:c.1120G&gt;T</synonyms>
+    <synonyms>NM_001126117.1:c.*139G&gt;A</synonyms>
+    <synonyms>NM_001126112.2:c.1120G&gt;C</synonyms>
+    <synonyms>NM_001276698.1:c.*227G&gt;C</synonyms>
+    <synonyms>NM_001276761.1:c.1003G&gt;T</synonyms>
+    <synonyms>NM_001276760.1:c.1003G&gt;C</synonyms>
+    <synonyms>NM_001276695.1:c.*139G&gt;C</synonyms>
+    <synonyms>NP_001119590.1:p.Gly335Arg</synonyms>
+    <synonyms>NP_001263626.1:p.Gly215Cys</synonyms>
+    <synonyms>NM_001126116.1:c.*227G&gt;A</synonyms>
+    <synonyms>NM_001276699.1:c.*139G&gt;C</synonyms>
+    <synonyms>NM_001126113.2:c.*139G&gt;T</synonyms>
+    <synonyms>NM_000546.5:c.1120G&gt;A</synonyms>
+    <synonyms>NM_001276696.1:c.*227G&gt;C</synonyms>
+    <synonyms>NM_001276699.1:c.*139G&gt;T</synonyms>
+    <synonyms>NM_001126116.1:c.*227G&gt;C</synonyms>
+    <synonyms>NM_001276696.1:c.*227G&gt;A</synonyms>
+    <synonyms>NM_001276698.1:c.*227G&gt;A</synonyms>
+    <synonyms>NP_001119584.1:p.Gly374Cys</synonyms>
+    <synonyms>NM_001126115.1:c.724G&gt;C</synonyms>
+    <synonyms>NM_001276697.1:c.643G&gt;T</synonyms>
+    <synonyms>NP_001119587.1:p.Gly242Ser</synonyms>
+    <synonyms>NM_001276760.1:c.1003G&gt;T</synonyms>
+    <synonyms>NP_001119584.1:p.Gly374Ser</synonyms>
+    <synonyms>NP_001119587.1:p.Gly242Cys</synonyms>
+    <synonyms>NP_001119590.1:p.Gly335Cys</synonyms>
+    <synonyms>NM_001126114.2:c.*227G&gt;T</synonyms>
+    <synonyms>NM_001276695.1:c.*139G&gt;A</synonyms>
+    <synonyms>NP_001119584.1:p.Gly374Arg</synonyms>
+    <synonyms>NP_001263689.1:p.Gly335Arg</synonyms>
+    <synonyms>NM_001126118.1:c.1003G&gt;T</synonyms>
+    <synonyms>NM_000546.5:c.1120G&gt;C</synonyms>
+    <synonyms>NM_001126117.1:c.*139G&gt;C</synonyms>
+    <synonyms>NP_000537.3:p.Gly374Arg</synonyms>
+    <synonyms>NP_000537.3:p.Gly374Cys</synonyms>
+    <synonyms>NM_001126114.2:c.*227G&gt;A</synonyms>
+    <synonyms>NM_001126115.1:c.724G&gt;T</synonyms>
+    <synonyms>NP_001263689.1:p.Gly335Ser</synonyms>
+    <synonyms>NM_001276761.1:c.1003G&gt;C</synonyms>
+    <synonyms>RCV000217404</synonyms>
+    <synonyms>RCV000235558</synonyms>
+    <synonyms>RCV000130166</synonyms>
+    <colocated_variants id="COSM4984777" allele_string="COSMIC_MUTATION" end="7669671" phenotype_or_disease="1" seq_region_name="17" somatic="1" start="7669671" strand="1" />
+    <colocated_variants id="COSM4984778" allele_string="COSMIC_MUTATION" end="7669671" phenotype_or_disease="1" seq_region_name="17" somatic="1" start="7669671" strand="1" />
+    <colocated_variants id="rs587781858" allele_string="C/A/G/T" clin_sig="uncertain_significance,likely_benign" end="7669671" exac_adj_allele="G" exac_adj_maf="8.238e-06" exac_afr_allele="G" exac_afr_maf="9.615e-05" exac_allele="G" exac_amr_allele="G" exac_amr_maf="0" exac_eas_allele="G" exac_eas_maf="0" exac_fin_allele="G" exac_fin_maf="0" exac_maf="8.236e-06" exac_nfe_allele="G" exac_nfe_maf="0" exac_oth_allele="G" exac_oth_maf="0" exac_sas_allele="G" exac_sas_maf="0" phenotype_or_disease="1" seq_region_name="17" start="7669671" strand="1" />
+    <transcript_consequences amino_acids="G/C" biotype="protein_coding" cdna_end="1310" cdna_start="1310" cds_end="1120" cds_start="1120" codons="Ggt/Tgt" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODERATE" polyphen_prediction="probably_damaging" polyphen_score="0.986" protein_end="374" protein_start="374" sift_prediction="deleterious" sift_score="0.01" strand="-1" transcript_id="ENST00000269305" variant_allele="A">
+      <consequence_terms>missense_variant</consequence_terms>
+    </transcript_consequences>
+    <transcript_consequences amino_acids="G/R" biotype="protein_coding" cdna_end="1310" cdna_start="1310" cds_end="1120" cds_start="1120" codons="Ggt/Cgt" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODERATE" polyphen_prediction="benign" polyphen_score="0.157" protein_end="374" protein_start="374" sift_prediction="tolerated" sift_score="0.16" strand="-1" transcript_id="ENST00000269305" variant_allele="G">
+      <consequence_terms>missense_variant</consequence_terms>
+    </transcript_consequences>
+    <transcript_consequences amino_acids="G/S" biotype="protein_coding" cdna_end="1310" cdna_start="1310" cds_end="1120" cds_start="1120" codons="Ggt/Agt" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODERATE" polyphen_prediction="possibly_damaging" polyphen_score="0.78" protein_end="374" protein_start="374" sift_prediction="tolerated" sift_score="0.07" strand="-1" transcript_id="ENST00000269305" variant_allele="T">
+      <consequence_terms>missense_variant</consequence_terms>
+    </transcript_consequences>
+    <transcript_consequences biotype="protein_coding" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODIFIER" strand="-1" transcript_id="ENST00000359597" variant_allele="A">
+      <consequence_terms>intron_variant</consequence_terms>
+    </transcript_consequences>
+    <transcript_consequences biotype="protein_coding" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODIFIER" strand="-1" transcript_id="ENST00000359597" variant_allele="G">
+      <consequence_terms>intron_variant</consequence_terms>
+    </transcript_consequences>
+    <transcript_consequences biotype="protein_coding" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODIFIER" strand="-1" transcript_id="ENST00000359597" variant_allele="T">
+      <consequence_terms>intron_variant</consequence_terms>
+    </transcript_consequences>
+    <transcript_consequences biotype="protein_coding" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODIFIER" strand="-1" transcript_id="ENST00000413465" variant_allele="A">
+      <consequence_terms>intron_variant</consequence_terms>
+    </transcript_consequences>
+    <transcript_consequences biotype="protein_coding" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODIFIER" strand="-1" transcript_id="ENST00000413465" variant_allele="G">
+      <consequence_terms>intron_variant</consequence_terms>
+    </transcript_consequences>
+    <transcript_consequences biotype="protein_coding" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODIFIER" strand="-1" transcript_id="ENST00000413465" variant_allele="T">
+      <consequence_terms>intron_variant</consequence_terms>
+    </transcript_consequences>
+    <transcript_consequences biotype="protein_coding" cdna_end="1386" cdna_start="1386" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODIFIER" strand="-1" transcript_id="ENST00000420246" variant_allele="A">
+      <consequence_terms>3_prime_UTR_variant</consequence_terms>
+    </transcript_consequences>
+    <transcript_consequences biotype="protein_coding" cdna_end="1386" cdna_start="1386" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODIFIER" strand="-1" transcript_id="ENST00000420246" variant_allele="G">
+      <consequence_terms>3_prime_UTR_variant</consequence_terms>
+    </transcript_consequences>
+    <transcript_consequences biotype="protein_coding" cdna_end="1386" cdna_start="1386" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODIFIER" strand="-1" transcript_id="ENST00000420246" variant_allele="T">
+      <consequence_terms>3_prime_UTR_variant</consequence_terms>
+    </transcript_consequences>
+    <transcript_consequences amino_acids="G/C" biotype="protein_coding" cdna_end="1256" cdna_start="1256" cds_end="1120" cds_start="1120" codons="Ggt/Tgt" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODERATE" polyphen_prediction="probably_damaging" polyphen_score="0.986" protein_end="374" protein_start="374" sift_prediction="deleterious" sift_score="0.01" strand="-1" transcript_id="ENST00000445888" variant_allele="A">
+      <consequence_terms>missense_variant</consequence_terms>
+    </transcript_consequences>
+    <transcript_consequences amino_acids="G/R" biotype="protein_coding" cdna_end="1256" cdna_start="1256" cds_end="1120" cds_start="1120" codons="Ggt/Cgt" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODERATE" polyphen_prediction="benign" polyphen_score="0.157" protein_end="374" protein_start="374" sift_prediction="tolerated" sift_score="0.16" strand="-1" transcript_id="ENST00000445888" variant_allele="G">
+      <consequence_terms>missense_variant</consequence_terms>
+    </transcript_consequences>
+    <transcript_consequences amino_acids="G/S" biotype="protein_coding" cdna_end="1256" cdna_start="1256" cds_end="1120" cds_start="1120" codons="Ggt/Agt" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODERATE" polyphen_prediction="possibly_damaging" polyphen_score="0.78" protein_end="374" protein_start="374" sift_prediction="tolerated" sift_score="0.07" strand="-1" transcript_id="ENST00000445888" variant_allele="T">
+      <consequence_terms>missense_variant</consequence_terms>
+    </transcript_consequences>
+    <transcript_consequences biotype="protein_coding" cdna_end="1313" cdna_start="1313" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODIFIER" strand="-1" transcript_id="ENST00000455263" variant_allele="A">
+      <consequence_terms>3_prime_UTR_variant</consequence_terms>
+    </transcript_consequences>
+    <transcript_consequences biotype="protein_coding" cdna_end="1313" cdna_start="1313" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODIFIER" strand="-1" transcript_id="ENST00000455263" variant_allele="G">
+      <consequence_terms>3_prime_UTR_variant</consequence_terms>
+    </transcript_consequences>
+    <transcript_consequences biotype="protein_coding" cdna_end="1313" cdna_start="1313" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODIFIER" strand="-1" transcript_id="ENST00000455263" variant_allele="T">
+      <consequence_terms>3_prime_UTR_variant</consequence_terms>
+    </transcript_consequences>
+    <transcript_consequences biotype="protein_coding" cdna_end="1062" cdna_start="1062" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODIFIER" strand="-1" transcript_id="ENST00000504290" variant_allele="A">
+      <consequence_terms>3_prime_UTR_variant</consequence_terms>
+    </transcript_consequences>
+    <transcript_consequences biotype="protein_coding" cdna_end="1062" cdna_start="1062" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODIFIER" strand="-1" transcript_id="ENST00000504290" variant_allele="G">
+      <consequence_terms>3_prime_UTR_variant</consequence_terms>
+    </transcript_consequences>
+    <transcript_consequences biotype="protein_coding" cdna_end="1062" cdna_start="1062" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODIFIER" strand="-1" transcript_id="ENST00000504290" variant_allele="T">
+      <consequence_terms>3_prime_UTR_variant</consequence_terms>
+    </transcript_consequences>
+    <transcript_consequences amino_acids="G/C" biotype="protein_coding" cdna_end="1002" cdna_start="1002" cds_end="724" cds_start="724" codons="Ggt/Tgt" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODERATE" polyphen_prediction="probably_damaging" polyphen_score="0.986" protein_end="242" protein_start="242" sift_prediction="deleterious" sift_score="0" strand="-1" transcript_id="ENST00000504937" variant_allele="A">
+      <consequence_terms>missense_variant</consequence_terms>
+    </transcript_consequences>
+    <transcript_consequences amino_acids="G/R" biotype="protein_coding" cdna_end="1002" cdna_start="1002" cds_end="724" cds_start="724" codons="Ggt/Cgt" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODERATE" polyphen_prediction="benign" polyphen_score="0.157" protein_end="242" protein_start="242" sift_prediction="tolerated" sift_score="0.22" strand="-1" transcript_id="ENST00000504937" variant_allele="G">
+      <consequence_terms>missense_variant</consequence_terms>
+    </transcript_consequences>
+    <transcript_consequences amino_acids="G/S" biotype="protein_coding" cdna_end="1002" cdna_start="1002" cds_end="724" cds_start="724" codons="Ggt/Agt" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODERATE" polyphen_prediction="possibly_damaging" polyphen_score="0.78" protein_end="242" protein_start="242" sift_prediction="tolerated" sift_score="0.06" strand="-1" transcript_id="ENST00000504937" variant_allele="T">
+      <consequence_terms>missense_variant</consequence_terms>
+    </transcript_consequences>
+    <transcript_consequences biotype="retained_intron" distance="4855" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODIFIER" strand="-1" transcript_id="ENST00000505014" variant_allele="A">
+      <consequence_terms>downstream_gene_variant</consequence_terms>
+    </transcript_consequences>
+    <transcript_consequences biotype="retained_intron" distance="4855" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODIFIER" strand="-1" transcript_id="ENST00000505014" variant_allele="G">
+      <consequence_terms>downstream_gene_variant</consequence_terms>
+    </transcript_consequences>
+    <transcript_consequences biotype="retained_intron" distance="4855" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODIFIER" strand="-1" transcript_id="ENST00000505014" variant_allele="T">
+      <consequence_terms>downstream_gene_variant</consequence_terms>
+    </transcript_consequences>
+    <transcript_consequences biotype="protein_coding" distance="3864" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODIFIER" strand="-1" transcript_id="ENST00000509690" variant_allele="A">
+      <consequence_terms>downstream_gene_variant</consequence_terms>
+      <flags>cds_end_NF</flags>
+    </transcript_consequences>
+    <transcript_consequences biotype="protein_coding" distance="3864" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODIFIER" strand="-1" transcript_id="ENST00000509690" variant_allele="G">
+      <consequence_terms>downstream_gene_variant</consequence_terms>
+      <flags>cds_end_NF</flags>
+    </transcript_consequences>
+    <transcript_consequences biotype="protein_coding" distance="3864" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODIFIER" strand="-1" transcript_id="ENST00000509690" variant_allele="T">
+      <consequence_terms>downstream_gene_variant</consequence_terms>
+      <flags>cds_end_NF</flags>
+    </transcript_consequences>
+    <transcript_consequences biotype="protein_coding" cdna_end="1135" cdna_start="1135" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODIFIER" strand="-1" transcript_id="ENST00000510385" variant_allele="A">
+      <consequence_terms>3_prime_UTR_variant</consequence_terms>
+    </transcript_consequences>
+    <transcript_consequences biotype="protein_coding" cdna_end="1135" cdna_start="1135" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODIFIER" strand="-1" transcript_id="ENST00000510385" variant_allele="G">
+      <consequence_terms>3_prime_UTR_variant</consequence_terms>
+    </transcript_consequences>
+    <transcript_consequences biotype="protein_coding" cdna_end="1135" cdna_start="1135" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODIFIER" strand="-1" transcript_id="ENST00000510385" variant_allele="T">
+      <consequence_terms>3_prime_UTR_variant</consequence_terms>
+    </transcript_consequences>
+    <transcript_consequences biotype="protein_coding" distance="4546" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODIFIER" strand="-1" transcript_id="ENST00000514944" variant_allele="A">
+      <consequence_terms>downstream_gene_variant</consequence_terms>
+      <flags>cds_end_NF</flags>
+    </transcript_consequences>
+    <transcript_consequences biotype="protein_coding" distance="4546" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODIFIER" strand="-1" transcript_id="ENST00000514944" variant_allele="G">
+      <consequence_terms>downstream_gene_variant</consequence_terms>
+      <flags>cds_end_NF</flags>
+    </transcript_consequences>
+    <transcript_consequences biotype="protein_coding" distance="4546" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODIFIER" strand="-1" transcript_id="ENST00000514944" variant_allele="T">
+      <consequence_terms>downstream_gene_variant</consequence_terms>
+      <flags>cds_end_NF</flags>
+    </transcript_consequences>
+    <transcript_consequences biotype="processed_transcript" distance="4583" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODIFIER" strand="-1" transcript_id="ENST00000574684" variant_allele="A">
+      <consequence_terms>downstream_gene_variant</consequence_terms>
+    </transcript_consequences>
+    <transcript_consequences biotype="processed_transcript" distance="4583" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODIFIER" strand="-1" transcript_id="ENST00000574684" variant_allele="G">
+      <consequence_terms>downstream_gene_variant</consequence_terms>
+    </transcript_consequences>
+    <transcript_consequences biotype="processed_transcript" distance="4583" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODIFIER" strand="-1" transcript_id="ENST00000574684" variant_allele="T">
+      <consequence_terms>downstream_gene_variant</consequence_terms>
+    </transcript_consequences>
+    <transcript_consequences amino_acids="G/V" biotype="protein_coding" cdna_end="73" cdna_start="73" cds_end="74" cds_start="74" codons="gGg/gTg" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODERATE" polyphen_prediction="unknown" polyphen_score="0" protein_end="25" protein_start="25" strand="-1" transcript_id="ENST00000576024" variant_allele="A">
+      <consequence_terms>missense_variant</consequence_terms>
+      <flags>cds_start_NF</flags>
+    </transcript_consequences>
+    <transcript_consequences amino_acids="G/A" biotype="protein_coding" cdna_end="73" cdna_start="73" cds_end="74" cds_start="74" codons="gGg/gCg" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODERATE" polyphen_prediction="unknown" polyphen_score="0" protein_end="25" protein_start="25" strand="-1" transcript_id="ENST00000576024" variant_allele="G">
+      <consequence_terms>missense_variant</consequence_terms>
+      <flags>cds_start_NF</flags>
+    </transcript_consequences>
+    <transcript_consequences amino_acids="G/E" biotype="protein_coding" cdna_end="73" cdna_start="73" cds_end="74" cds_start="74" codons="gGg/gAg" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODERATE" polyphen_prediction="unknown" polyphen_score="0" protein_end="25" protein_start="25" strand="-1" transcript_id="ENST00000576024" variant_allele="T">
+      <consequence_terms>missense_variant</consequence_terms>
+      <flags>cds_start_NF</flags>
+    </transcript_consequences>
+    <transcript_consequences amino_acids="G/C" biotype="protein_coding" cdna_end="1370" cdna_start="1370" cds_end="1003" cds_start="1003" codons="Ggt/Tgt" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODERATE" polyphen_prediction="probably_damaging" polyphen_score="0.986" protein_end="335" protein_start="335" sift_prediction="deleterious" sift_score="0" strand="-1" transcript_id="ENST00000610292" variant_allele="A">
+      <consequence_terms>missense_variant</consequence_terms>
+    </transcript_consequences>
+    <transcript_consequences amino_acids="G/R" biotype="protein_coding" cdna_end="1370" cdna_start="1370" cds_end="1003" cds_start="1003" codons="Ggt/Cgt" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODERATE" polyphen_prediction="benign" polyphen_score="0.157" protein_end="335" protein_start="335" sift_prediction="tolerated" sift_score="0.19" strand="-1" transcript_id="ENST00000610292" variant_allele="G">
+      <consequence_terms>missense_variant</consequence_terms>
+    </transcript_consequences>
+    <transcript_consequences amino_acids="G/S" biotype="protein_coding" cdna_end="1370" cdna_start="1370" cds_end="1003" cds_start="1003" codons="Ggt/Agt" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODERATE" polyphen_prediction="possibly_damaging" polyphen_score="0.78" protein_end="335" protein_start="335" sift_prediction="deleterious" sift_score="0.05" strand="-1" transcript_id="ENST00000610292" variant_allele="T">
+      <consequence_terms>missense_variant</consequence_terms>
+    </transcript_consequences>
+    <transcript_consequences biotype="protein_coding" cdna_end="1313" cdna_start="1313" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODIFIER" strand="-1" transcript_id="ENST00000610538" variant_allele="A">
+      <consequence_terms>3_prime_UTR_variant</consequence_terms>
+    </transcript_consequences>
+    <transcript_consequences biotype="protein_coding" cdna_end="1313" cdna_start="1313" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODIFIER" strand="-1" transcript_id="ENST00000610538" variant_allele="G">
+      <consequence_terms>3_prime_UTR_variant</consequence_terms>
+    </transcript_consequences>
+    <transcript_consequences biotype="protein_coding" cdna_end="1313" cdna_start="1313" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODIFIER" strand="-1" transcript_id="ENST00000610538" variant_allele="T">
+      <consequence_terms>3_prime_UTR_variant</consequence_terms>
+    </transcript_consequences>
+    <transcript_consequences biotype="protein_coding" cdna_end="1062" cdna_start="1062" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODIFIER" strand="-1" transcript_id="ENST00000610623" variant_allele="A">
+      <consequence_terms>3_prime_UTR_variant</consequence_terms>
+    </transcript_consequences>
+    <transcript_consequences biotype="protein_coding" cdna_end="1062" cdna_start="1062" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODIFIER" strand="-1" transcript_id="ENST00000610623" variant_allele="G">
+      <consequence_terms>3_prime_UTR_variant</consequence_terms>
+    </transcript_consequences>
+    <transcript_consequences biotype="protein_coding" cdna_end="1062" cdna_start="1062" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODIFIER" strand="-1" transcript_id="ENST00000610623" variant_allele="T">
+      <consequence_terms>3_prime_UTR_variant</consequence_terms>
+    </transcript_consequences>
+    <transcript_consequences amino_acids="G/C" biotype="protein_coding" cdna_end="1087" cdna_start="1087" cds_end="1087" cds_start="1087" codons="Ggt/Tgt" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODERATE" polyphen_prediction="benign" polyphen_score="0.136" protein_end="363" protein_start="363" sift_prediction="deleterious" sift_score="0" strand="-1" transcript_id="ENST00000615910" variant_allele="A">
+      <consequence_terms>missense_variant</consequence_terms>
+    </transcript_consequences>
+    <transcript_consequences amino_acids="G/R" biotype="protein_coding" cdna_end="1087" cdna_start="1087" cds_end="1087" cds_start="1087" codons="Ggt/Cgt" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODERATE" polyphen_prediction="benign" polyphen_score="0.024" protein_end="363" protein_start="363" sift_prediction="tolerated" sift_score="0.15" strand="-1" transcript_id="ENST00000615910" variant_allele="G">
+      <consequence_terms>missense_variant</consequence_terms>
+    </transcript_consequences>
+    <transcript_consequences amino_acids="G/S" biotype="protein_coding" cdna_end="1087" cdna_start="1087" cds_end="1087" cds_start="1087" codons="Ggt/Agt" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODERATE" polyphen_prediction="possibly_damaging" polyphen_score="0.543" protein_end="363" protein_start="363" sift_prediction="deleterious" sift_score="0.05" strand="-1" transcript_id="ENST00000615910" variant_allele="T">
+      <consequence_terms>missense_variant</consequence_terms>
+    </transcript_consequences>
+    <transcript_consequences biotype="protein_coding" cdna_end="1455" cdna_start="1455" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODIFIER" strand="-1" transcript_id="ENST00000617185" variant_allele="A">
+      <consequence_terms>3_prime_UTR_variant</consequence_terms>
+    </transcript_consequences>
+    <transcript_consequences biotype="protein_coding" cdna_end="1455" cdna_start="1455" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODIFIER" strand="-1" transcript_id="ENST00000617185" variant_allele="G">
+      <consequence_terms>3_prime_UTR_variant</consequence_terms>
+    </transcript_consequences>
+    <transcript_consequences biotype="protein_coding" cdna_end="1455" cdna_start="1455" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODIFIER" strand="-1" transcript_id="ENST00000617185" variant_allele="T">
+      <consequence_terms>3_prime_UTR_variant</consequence_terms>
+    </transcript_consequences>
+    <transcript_consequences biotype="protein_coding" cdna_end="1135" cdna_start="1135" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODIFIER" strand="-1" transcript_id="ENST00000618944" variant_allele="A">
+      <consequence_terms>3_prime_UTR_variant</consequence_terms>
+    </transcript_consequences>
+    <transcript_consequences biotype="protein_coding" cdna_end="1135" cdna_start="1135" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODIFIER" strand="-1" transcript_id="ENST00000618944" variant_allele="G">
+      <consequence_terms>3_prime_UTR_variant</consequence_terms>
+    </transcript_consequences>
+    <transcript_consequences biotype="protein_coding" cdna_end="1135" cdna_start="1135" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODIFIER" strand="-1" transcript_id="ENST00000618944" variant_allele="T">
+      <consequence_terms>3_prime_UTR_variant</consequence_terms>
+    </transcript_consequences>
+    <transcript_consequences amino_acids="G/C" biotype="protein_coding" cdna_end="1002" cdna_start="1002" cds_end="643" cds_start="643" codons="Ggt/Tgt" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODERATE" polyphen_prediction="probably_damaging" polyphen_score="0.986" protein_end="215" protein_start="215" sift_prediction="deleterious" sift_score="0" strand="-1" transcript_id="ENST00000619186" variant_allele="A">
+      <consequence_terms>missense_variant</consequence_terms>
+    </transcript_consequences>
+    <transcript_consequences amino_acids="G/R" biotype="protein_coding" cdna_end="1002" cdna_start="1002" cds_end="643" cds_start="643" codons="Ggt/Cgt" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODERATE" polyphen_prediction="benign" polyphen_score="0.157" protein_end="215" protein_start="215" sift_prediction="tolerated" sift_score="0.23" strand="-1" transcript_id="ENST00000619186" variant_allele="G">
+      <consequence_terms>missense_variant</consequence_terms>
+    </transcript_consequences>
+    <transcript_consequences amino_acids="G/S" biotype="protein_coding" cdna_end="1002" cdna_start="1002" cds_end="643" cds_start="643" codons="Ggt/Agt" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODERATE" polyphen_prediction="possibly_damaging" polyphen_score="0.78" protein_end="215" protein_start="215" sift_prediction="tolerated" sift_score="0.06" strand="-1" transcript_id="ENST00000619186" variant_allele="T">
+      <consequence_terms>missense_variant</consequence_terms>
+    </transcript_consequences>
+    <transcript_consequences amino_acids="G/C" biotype="protein_coding" cdna_end="1256" cdna_start="1256" cds_end="1003" cds_start="1003" codons="Ggt/Tgt" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODERATE" polyphen_prediction="probably_damaging" polyphen_score="0.986" protein_end="335" protein_start="335" sift_prediction="deleterious" sift_score="0" strand="-1" transcript_id="ENST00000619485" variant_allele="A">
+      <consequence_terms>missense_variant</consequence_terms>
+    </transcript_consequences>
+    <transcript_consequences amino_acids="G/R" biotype="protein_coding" cdna_end="1256" cdna_start="1256" cds_end="1003" cds_start="1003" codons="Ggt/Cgt" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODERATE" polyphen_prediction="benign" polyphen_score="0.157" protein_end="335" protein_start="335" sift_prediction="tolerated" sift_score="0.19" strand="-1" transcript_id="ENST00000619485" variant_allele="G">
+      <consequence_terms>missense_variant</consequence_terms>
+    </transcript_consequences>
+    <transcript_consequences amino_acids="G/S" biotype="protein_coding" cdna_end="1256" cdna_start="1256" cds_end="1003" cds_start="1003" codons="Ggt/Agt" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODERATE" polyphen_prediction="possibly_damaging" polyphen_score="0.78" protein_end="335" protein_start="335" sift_prediction="deleterious" sift_score="0.05" strand="-1" transcript_id="ENST00000619485" variant_allele="T">
+      <consequence_terms>missense_variant</consequence_terms>
+    </transcript_consequences>
+    <transcript_consequences amino_acids="G/C" biotype="protein_coding" cdna_end="1310" cdna_start="1310" cds_end="1003" cds_start="1003" codons="Ggt/Tgt" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODERATE" polyphen_prediction="probably_damaging" polyphen_score="0.986" protein_end="335" protein_start="335" sift_prediction="deleterious" sift_score="0" strand="-1" transcript_id="ENST00000620739" variant_allele="A">
+      <consequence_terms>missense_variant</consequence_terms>
+    </transcript_consequences>
+    <transcript_consequences amino_acids="G/R" biotype="protein_coding" cdna_end="1310" cdna_start="1310" cds_end="1003" cds_start="1003" codons="Ggt/Cgt" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODERATE" polyphen_prediction="benign" polyphen_score="0.157" protein_end="335" protein_start="335" sift_prediction="tolerated" sift_score="0.19" strand="-1" transcript_id="ENST00000620739" variant_allele="G">
+      <consequence_terms>missense_variant</consequence_terms>
+    </transcript_consequences>
+    <transcript_consequences amino_acids="G/S" biotype="protein_coding" cdna_end="1310" cdna_start="1310" cds_end="1003" cds_start="1003" codons="Ggt/Agt" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODERATE" polyphen_prediction="possibly_damaging" polyphen_score="0.78" protein_end="335" protein_start="335" sift_prediction="deleterious" sift_score="0.05" strand="-1" transcript_id="ENST00000620739" variant_allele="T">
+      <consequence_terms>missense_variant</consequence_terms>
+    </transcript_consequences>
+    <transcript_consequences biotype="protein_coding" cdna_end="1386" cdna_start="1386" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODIFIER" strand="-1" transcript_id="ENST00000622645" variant_allele="A">
+      <consequence_terms>3_prime_UTR_variant</consequence_terms>
+    </transcript_consequences>
+    <transcript_consequences biotype="protein_coding" cdna_end="1386" cdna_start="1386" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODIFIER" strand="-1" transcript_id="ENST00000622645" variant_allele="G">
+      <consequence_terms>3_prime_UTR_variant</consequence_terms>
+    </transcript_consequences>
+    <transcript_consequences biotype="protein_coding" cdna_end="1386" cdna_start="1386" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODIFIER" strand="-1" transcript_id="ENST00000622645" variant_allele="T">
+      <consequence_terms>3_prime_UTR_variant</consequence_terms>
+    </transcript_consequences>
+    <transcript_consequences biotype="nonsense_mediated_decay" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODIFIER" strand="-1" transcript_id="ENST00000635293" variant_allele="A">
+      <consequence_terms>intron_variant</consequence_terms>
+      <consequence_terms>NMD_transcript_variant</consequence_terms>
+    </transcript_consequences>
+    <transcript_consequences biotype="nonsense_mediated_decay" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODIFIER" strand="-1" transcript_id="ENST00000635293" variant_allele="G">
+      <consequence_terms>intron_variant</consequence_terms>
+      <consequence_terms>NMD_transcript_variant</consequence_terms>
+    </transcript_consequences>
+    <transcript_consequences biotype="nonsense_mediated_decay" gene_id="ENSG00000141510" gene_symbol="TP53" gene_symbol_source="HGNC" hgnc_id="HGNC:11998" impact="MODIFIER" strand="-1" transcript_id="ENST00000635293" variant_allele="T">
+      <consequence_terms>intron_variant</consequence_terms>
+      <consequence_terms>NMD_transcript_variant</consequence_terms>
+    </transcript_consequences>
+  </data>
+</opt>

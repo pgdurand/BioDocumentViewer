@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.StringTokenizer;
 
+import org.atteo.xmlcombiner.XmlCombiner;
+
 import com.plealog.genericapp.api.log.EZLogger;
 
 import bzh.plealog.bioinfo.api.filter.BFilter;
@@ -35,23 +37,22 @@ import bzh.plealog.bioinfo.docviewer.http.HTTPEngineException;
 import bzh.plealog.bioinfo.docviewer.service.ensembl.model.query.EnsemblQueryExpressionBuilder;
 import bzh.plealog.bioinfo.docviewer.service.ensembl.model.query.EnsemblQueryModel;
 import bzh.plealog.bioinfo.docviewer.service.ncbi.model.query.SimpleStringExpressionBuilder;
-import bzh.plealog.bioinfo.docviewer.ui.DocViewerConfig;
 
 public class EnsemblQueryEngine implements QueryEngine {
   private EnsemblServerConfiguration _serverConfig;
   private BFilter _ensQuery;
   private BankType _dbName;
-  private int _defPageSize = DocViewerConfig.PAGE_SIZE;
+  private int _defPageSize = QueryEngine.PAGE_SIZE;
 
-  //Ensembl API does not support pagination. So we support that feature here.
-  //For now: everything in RAM.
+  // Ensembl API does not support pagination. So we support that feature here.
+  // For now: everything in RAM.
   private Search _searchData;
   private Summary _summaryData;
-  
+
   private Hashtable<String, String> _header_attrs;
-  
+
   public static final String HUMAN_KEY = "Human";
-  
+
   /**
    * No default constructor available.
    */
@@ -70,13 +71,15 @@ public class EnsemblQueryEngine implements QueryEngine {
    *          EbiQueryExpressionBuilder object.
    *
    * @throws QueryEngineException
-   *           if query is not an instance of EbiQueryExpressionBuilder, if dbName is
-   *           null of if the configuration resource cannot be found or read.
+   *           if query is not an instance of EbiQueryExpressionBuilder, if
+   *           dbName is null of if the configuration resource cannot be found
+   *           or read.
    */
   public EnsemblQueryEngine(BankType dbName, BFilter query) throws QueryEngineException {
     this();
 
-    if ((query instanceof EnsemblQueryExpressionBuilder == false) && (query instanceof SimpleStringExpressionBuilder == false))
+    if ((query instanceof EnsemblQueryExpressionBuilder == false)
+        && (query instanceof SimpleStringExpressionBuilder == false))
       throw new QueryEngineException("invalid filter type");
     if (dbName == null)
       throw new QueryEngineException("invalid database name");
@@ -136,124 +139,175 @@ public class EnsemblQueryEngine implements QueryEngine {
 
   @Override
   public File load(String ids, String dbCode, boolean fullEntryFormat) {
-    String url, species="", key, value;
+    String url, species = "", key, value;
     StringTokenizer tokenizer, tokenizer2;
-    
+
     // get species from query
-    // see EnsemblQueryExpressionBuilder.compile() to see how the query is created
-    tokenizer = new StringTokenizer(_ensQuery.toString(),"|");
-    while(tokenizer.hasMoreTokens()){
-      tokenizer2 = new StringTokenizer(tokenizer.nextToken(),"=");
+    // see EnsemblQueryExpressionBuilder.compile() to see how the query is
+    // created
+    tokenizer = new StringTokenizer(_ensQuery.toString(), "|");
+    while (tokenizer.hasMoreTokens()) {
+      tokenizer2 = new StringTokenizer(tokenizer.nextToken(), "=");
       key = tokenizer2.nextToken();
       value = tokenizer2.nextToken();
-      if (key.equals(EnsemblQueryModel.SPECIES_KEY)){
-        species=value;
+      if (key.equals(EnsemblQueryModel.SPECIES_KEY)) {
+        species = value;
       }
     }
-    if (_dbName.getUserName().contains(HUMAN_KEY)){
-      species=HUMAN_KEY;
+    if (_dbName.getUserName().contains(HUMAN_KEY)) {
+      species = HUMAN_KEY;
     }
 
-    // get URL to use to query Ensembl and get the entry
+    // get URL to use to query Ensembl and get the variant data
     url = _serverConfig.getLoadVariantURL(species, ids);
-    
-    File answer;
-    //refine HTTP GET errors; e.g. on 404/Bad request, ENSEMBL
-    //server provides more information that is retrieved in the
-    //answer file
+
+    File varFile;
+    // refine HTTP GET errors; e.g. on 404/Bad request, ENSEMBL
+    // server provides more information that is retrieved in the
+    // answer file
     try {
-      answer = HTTPBasicEngine.doGet(url, _header_attrs);
+      varFile = HTTPBasicEngine.doGet(url, _header_attrs);
     } catch (HTTPEngineException e) {
-      if (e.getAnswerFile()==null){
+      if (e.getAnswerFile() == null) {
         throw e;
       }
-      answer = e.getAnswerFile();
+      varFile = e.getAnswerFile();
     }
-    
-    return answer;
+
+    // get URL to use to query Ensembl and get the VEP data
+    url = _serverConfig.getLoadVepURL(species, ids);
+    File vepFile;
+    // refine HTTP GET errors; e.g. on 404/Bad request, ENSEMBL
+    // server provides more information that is retrieved in the
+    // answer file
+    try {
+      vepFile = HTTPBasicEngine.doGet(url, _header_attrs);
+    } catch (HTTPEngineException e) {
+      if (e.getAnswerFile() == null) {
+        throw e;
+      }
+      vepFile = e.getAnswerFile();
+    }
+
+    // merge two data files into a single one
+    File mergedFile;
+    try {
+      mergedFile = mergeData(varFile, vepFile);
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    }
+
+    return mergedFile;
   }
 
-  private String getServiceURLfromQuery(){
-    String species="", gene_name="", region_span="", variant_set="", url, key, value;
+  @Override
+  public int getPageSize(){
+    return _defPageSize;
+  }
+  
+  @Override
+  public boolean enablePagination(){
+    return true;
+  }
+  
+  private File mergeData(File varFile, File vepFile) throws Exception{
+    //Merge XML documents library:
+    //https://github.com/atteo/xml-combiner
+    XmlCombiner combiner = new XmlCombiner();
+
+    // combine files
+    combiner.combine(varFile.toPath());
+    combiner.combine(vepFile.toPath());
+    
+    // store the result
+    File mergedFile = File.createTempFile("var_vep", ".xml");
+    mergedFile.deleteOnExit();
+    EZLogger.debug("var_vep merged file: " + mergedFile.getAbsolutePath());
+    combiner.buildDocument(mergedFile.toPath());
+
+    return mergedFile;
+  }
+
+  private String getServiceURLfromQuery() {
+    String species = "", gene_name = "", region_span = "", variant_set = "", url, key, value;
     StringTokenizer tokenizer, tokenizer2;
     Search res;
-    
+
     // Step 1: get gene name and species from query
-    // see EnsemblQueryExpressionBuilder.compile() to see how the query is created
-    tokenizer = new StringTokenizer(_ensQuery.toString(),"|");
-    while(tokenizer.hasMoreTokens()){
-      tokenizer2 = new StringTokenizer(tokenizer.nextToken(),"=");
+    // see EnsemblQueryExpressionBuilder.compile() to see how the query is
+    // created
+    tokenizer = new StringTokenizer(_ensQuery.toString(), "|");
+    while (tokenizer.hasMoreTokens()) {
+      tokenizer2 = new StringTokenizer(tokenizer.nextToken(), "=");
       key = tokenizer2.nextToken();
       value = tokenizer2.nextToken();
-      if (key.equals(EnsemblQueryModel.GENE_NAME_KEY)){
-        gene_name=value;
-      }
-      else if (key.equals(EnsemblQueryModel.SPECIES_KEY)){
-        species=value;
-      }
-      else if (key.equals(EnsemblQueryModel.REGION_KEY)){
-        region_span=value;
-      }
-      else if (key.equals(EnsemblQueryModel.VARIANT_SET_KEY)){
-        variant_set=value;
+      if (key.equals(EnsemblQueryModel.GENE_NAME_KEY)) {
+        gene_name = value;
+      } else if (key.equals(EnsemblQueryModel.SPECIES_KEY)) {
+        species = value;
+      } else if (key.equals(EnsemblQueryModel.REGION_KEY)) {
+        region_span = value;
+      } else if (key.equals(EnsemblQueryModel.VARIANT_SET_KEY)) {
+        variant_set = value;
       }
     }
-    
-    if (_dbName.getUserName().contains(HUMAN_KEY)){
-      species=HUMAN_KEY;
+
+    if (_dbName.getUserName().contains(HUMAN_KEY)) {
+      species = HUMAN_KEY;
     }
-    if (gene_name.isEmpty() && region_span.isEmpty()){
+    if (gene_name.isEmpty() && region_span.isEmpty()) {
       throw new QueryEngineException("provide Gene Name or Region");
     }
 
-    if (!gene_name.isEmpty() && !region_span.isEmpty()){
+    if (!gene_name.isEmpty() && !region_span.isEmpty()) {
       throw new QueryEngineException("cannot set Gene Name and Region simultaneously");
     }
 
-    if (species.isEmpty()){
+    if (species.isEmpty()) {
       throw new QueryEngineException("species is missing");
     }
-    
-    EZLogger.debug("species: "+species);
-    if (!gene_name.isEmpty()){
-      EZLogger.debug("gene name: "+gene_name);
+
+    EZLogger.debug("species: " + species);
+    if (!gene_name.isEmpty()) {
+      EZLogger.debug("gene name: " + gene_name);
       // using gene name and species, query Ensembl to get Ensembl IDs
-      res = _dbName.getSearch(HTTPBasicEngine.doGet(_serverConfig.getGene2EnsgIdUrl(species, gene_name), _header_attrs));
+      res = _dbName
+          .getSearch(HTTPBasicEngine.doGet(_serverConfig.getGene2EnsgIdUrl(species, gene_name), _header_attrs));
       if (res.getError() != null) {
         throw new QueryEngineException(res.getError());
       }
-      if (res.getIds().isEmpty()){
-        throw new QueryEngineException("unable to retrieve Ensembl ID for gene name:"+gene_name);
+      if (res.getIds().isEmpty()) {
+        throw new QueryEngineException("unable to retrieve Ensembl ID for gene name:" + gene_name);
       }
       // we need an official ENSG ID...
-      for(String id : res.getIds()){
-        if (id.startsWith("ENSG")){
+      for (String id : res.getIds()) {
+        if (id.startsWith("ENSG")) {
           url = _serverConfig.getFetchVariationUrl(id, variant_set);
           return url;
         }
       }
-      throw new QueryEngineException("unable to find Ensembl ID for gene name:"+gene_name);
+      throw new QueryEngineException("unable to find Ensembl ID for gene name:" + gene_name);
     }
-    if (!region_span.isEmpty()){
-      EZLogger.debug("region span: "+region_span);
+    if (!region_span.isEmpty()) {
+      EZLogger.debug("region span: " + region_span);
       url = _serverConfig.getFetchVariationUrl(species, region_span, variant_set);
       return url;
     }
-    //should not happen
+    // should not happen
     throw new QueryEngineException("unknown query (neither Gene Name nor Region provided)");
   }
-  
-  private void prepareSearchData(){
-    if (_searchData==null){
+
+  private void prepareSearchData() {
+    if (_searchData == null) {
       String url = getServiceURLfromQuery();
       File answer;
-      //refine HTTP GET errors; e.g. on 404/Bad request, ENSEMBL
-      //server provides more information that is retrieved in the
-      //answer file
+      // refine HTTP GET errors; e.g. on 404/Bad request, ENSEMBL
+      // server provides more information that is retrieved in the
+      // answer file
       try {
         answer = HTTPBasicEngine.doGet(url, _header_attrs);
       } catch (HTTPEngineException e) {
-        if (e.getAnswerFile()==null){
+        if (e.getAnswerFile() == null) {
           throw e;
         }
         answer = e.getAnswerFile();
@@ -263,20 +317,21 @@ public class EnsemblQueryEngine implements QueryEngine {
         throw new QueryEngineException(res.getError());
       }
       _searchData = res;
+      _defPageSize = _searchData.getTotal();
     }
   }
-  
-  private void prepareSummaryData(){
-    if (_summaryData==null){
+
+  private void prepareSummaryData() {
+    if (_summaryData == null) {
       String url = getServiceURLfromQuery();
       File answer;
-      //refine HTTP GET errors; e.g. on 404/Bad request, ENSEMBL
-      //server provides more information that is retrieved in the
-      //answer file
+      // refine HTTP GET errors; e.g. on 404/Bad request, ENSEMBL
+      // server provides more information that is retrieved in the
+      // answer file
       try {
         answer = HTTPBasicEngine.doGet(url, _header_attrs);
       } catch (HTTPEngineException e) {
-        if (e.getAnswerFile()==null){
+        if (e.getAnswerFile() == null) {
           throw e;
         }
         answer = e.getAnswerFile();
@@ -286,15 +341,16 @@ public class EnsemblQueryEngine implements QueryEngine {
         throw new QueryEngineException(res.getError());
       }
       _summaryData = res;
+      _defPageSize = _summaryData.getTotal();
     }
   }
-  
-  private Search getSearchPage(int from, int nb){
+
+  private Search getSearchPage(int from, int nb) {
     Search s = new Search();
     ArrayList<String> ids = new ArrayList<>();
-    
-    int total = Math.min(from+nb, _searchData.getTotal());
-    for(int i=from; i<total;i++){
+
+    int total = Math.min(from + nb, _searchData.getTotal());
+    for (int i = from; i < total; i++) {
       ids.add(_searchData.getId(i));
     }
     s.setIds(ids);
@@ -302,16 +358,16 @@ public class EnsemblQueryEngine implements QueryEngine {
     s.setTotal(_searchData.getTotal());
     return s;
   }
-  
-  private Summary getSummaryPage(int from, int nb){
+
+  private Summary getSummaryPage(int from, int nb) {
     Summary s;
     s = new Summary();
-    
-    int total = Math.min(from+nb, _summaryData.getTotal());
-    for(int i=from; i<total;i++){
+
+    int total = Math.min(from + nb, _summaryData.getTotal());
+    for (int i = from; i < total; i++) {
       s.addDoc(_summaryData.getDoc(i));
     }
-    
+
     s.setFrom(from);
     s.setTotal(_summaryData.getTotal());
     return s;

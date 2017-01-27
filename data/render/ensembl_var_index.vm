@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Variant: $item.getId()</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="./bootstrap-3.3.7-dist/css/bootstrap.min.css">
+  <script src="./jquery/jquery-3.1.1.min.js"></script>
+  <script src="./bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+<!-- 
+ Example:
+ http://www.ensembl.org/Homo_sapiens/Variation/Mappings?db=core;g=ENSG00000141510;r=17:7661779-7687550;v=rs587781858;vdb=variation;vf=110805787
+-->
+
+<div style="margin: auto; width: 98%;">
+
+<p>
+<span class="label label-success"><span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span> Variant</span> 
+<a href="$item.getSourceURL()">$item.getId()</a>
+</p>
+<p>
+<span class="label label-primary">Original source</span> <small>$item.getSource()</small>
+</p>
+
+<p>
+<span class="label label-primary">Most severe consequence</span> $item.getMost_severe_consequence()
+</p>
+
+<p>
+<span class="label label-primary">Alleles</span> $item.getAllele_string() | Ancestral: $item.getAmbiguity() | Ambiguity code: $item.getAncestral_allele()
+</p>
+
+<p>
+<span class="label label-primary">Evidence</span> 
+#foreach( $evidence in $item.getEvidence() )
+#set ($img=$item.getEvidenceImageName($evidence))
+<img src="./images/$img" data-toggle="tooltip" title="$evidence">
+#end
+</p>
+
+<p>
+<span class="label label-primary">Clinical significance</span>
+#if ($item.getClinical_significance().size()!=0)
+  #foreach( $clinical in $item.getClinical_significance() )
+  #set ($img=$item.getClinical_significanceImageName($clinical))
+  <img src="./images/$img" data-toggle="tooltip" title="$clinical">
+  #end
+#else
+  &nbsp;&nbsp;-
+#end
+</p>
+
+<!-- Synonyms -->
+#set( $synonyms = $item.getSynonyms() )
+#if ($synonyms.size()!=0)
+  <div class="panel-group">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h6 class="panel-title">
+          <a data-toggle="collapse" href="#HGVS"><span class="label label-primary">dbSNP HGVS</span> <span class="badge">$synonyms.size()</span></a>
+        </h6>
+      </div>
+      <div id="HGVS" class="panel-collapse collapse">
+        <div class="panel-body">
+        <table>
+        <tr><td style="vertical-align:top">
+          #foreach( $synonym in $synonyms )
+            #if($synonym.startsWith("NM_"))
+              $synonym<br/>
+            #end
+          #end
+          #foreach( $synonym in $item.getSynonyms() )
+            #if($synonym.startsWith("RCV")||$synonym.startsWith("SCV"))
+              $synonym<br/>
+            #end
+          #end
+        </td><td>&nbsp;&nbsp;</td><td style="vertical-align:top">
+          #foreach( $synonym in $item.getSynonyms() )
+            #if($synonym.startsWith("NP_"))
+              $synonym<br/>
+            #end
+          #end
+        </td></tr>
+        </table>
+        </div>
+      </div>
+    </div>
+  </div>
+#end
+
+<!-- Transcript consequences -->
+#set( $tcs = $item.getTranscriptConsequences() )
+#if ($tcs.size()!=0)
+  <div class="panel-group">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h6 class="panel-title">
+          <a data-toggle="collapse" href="#TC"><span class="label label-primary">Transcript consequences</span> <span class="badge">$tcs.size()</span></a>
+        </h6>
+      </div>
+      <div id="TC" class="panel-collapse collapse">
+        <div class="panel-body">
+        <div class="table-responsive">          
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Gene</th>
+              <th>Transcript</th>
+              <th>Consequence</th>
+              <th>Amino acid</th>
+              <th>Codons</th>
+              <th>SIFT</th>
+              <th>Polyphen</th>
+            </tr>
+          </thead>
+          <tbody>
+            #foreach( $tc in $tcs )
+              <tr>
+                <td style="vertical-align:top">
+                  $tc.getGeneID() <br/> <small>$tc.getGeneName()</small>
+                </td>
+                <td style="vertical-align:top">
+                  $tc.getTransriptID() <small>($tc.getStrand())</small>
+                </td>
+                <td style="vertical-align:top">
+                  $tc.getConsequence()
+                </td>
+                <td style="vertical-align:top">
+                  $tc.getAminoAcid()
+                </td>
+                <td style="vertical-align:top">
+                  $tc.getCodons()
+                </td>
+                <td style="vertical-align:top">
+                  #set ( $spred=$tc.getSIFTprediction() )
+                  #if ($spred.contains("tolerated"))
+                  <span class="label label-success" data-toggle="tooltip" title="$spred">
+                  #elseif ($spred.contains("-")==false)
+                  <span class="label label-danger" data-toggle="tooltip" title="$spred">
+                  #end
+                  $tc.getSIFTscoreStr()
+                  </span>
+                </td>
+                <td style="vertical-align:top">
+                  #set ( $ppred=$tc.getPolyphenPrediction() )
+                  #if ($ppred.contains("benign"))
+                  <span class="label label-success" data-toggle="tooltip" title="$ppred">
+                  #elseif ($ppred.contains("possibly"))
+                  <span class="label label-warning" data-toggle="tooltip" title="$ppred">
+                  #elseif ($ppred.contains("probably"))
+                  <span class="label label-danger" data-toggle="tooltip" title="$ppred">
+                  #end
+                  $tc.getPolyphenScoreStr()
+                  </span>
+                </td>
+              </tr>
+            #end
+          </tbody>
+        </table>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+#end
+
+</div>
+  
+</body>
+</html>
