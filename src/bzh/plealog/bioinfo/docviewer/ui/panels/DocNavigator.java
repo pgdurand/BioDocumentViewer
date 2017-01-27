@@ -32,6 +32,7 @@ import java.awt.event.MouseEvent;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.List;
 
 import javax.swing.Action;
 import javax.swing.BorderFactory;
@@ -44,9 +45,20 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.RowSorter;
+import javax.swing.SortOrder;
 import javax.swing.SwingUtilities;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.TableColumnModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
+
+import com.jgoodies.forms.builder.DefaultFormBuilder;
+import com.jgoodies.forms.layout.FormLayout;
+import com.plealog.genericapp.api.EZEnvironment;
+import com.plealog.genericapp.api.log.EZLogger;
+import com.plealog.genericapp.ui.common.ContextMenuElement;
+import com.plealog.genericapp.ui.common.ContextMenuManager;
 
 import bzh.plealog.bioinfo.docviewer.api.QueryEngine;
 import bzh.plealog.bioinfo.docviewer.api.QueryEngineException;
@@ -56,20 +68,13 @@ import bzh.plealog.bioinfo.docviewer.ui.resources.Messages;
 import bzh.plealog.bioinfo.ui.util.BasicSelectTableAction;
 import bzh.plealog.bioinfo.ui.util.TableColumnManager;
 
-import com.jgoodies.forms.builder.DefaultFormBuilder;
-import com.jgoodies.forms.layout.FormLayout;
-import com.plealog.genericapp.api.EZEnvironment;
-import com.plealog.genericapp.api.log.EZLogger;
-import com.plealog.genericapp.ui.common.ContextMenuElement;
-import com.plealog.genericapp.ui.common.ContextMenuManager;
-
 /**
- * This class can be used to display results contained in Summary
- * objects. In addition, the class is capable of handling queries to a remote
- * server to complete the results of a particular query. Indeed, each
- * query to a server may return a huge number of results, but a single
- * Summary object only contains a page of n results. Please, have a look at the
- * method setData(Summary).
+ * This class can be used to display results contained in Summary objects. In
+ * addition, the class is capable of handling queries to a remote server to
+ * complete the results of a particular query. Indeed, each query to a server
+ * may return a huge number of results, but a single Summary object only
+ * contains a page of n results. Please, have a look at the method
+ * setData(Summary).
  * 
  * @author Patrick G. Durand
  * @since 2009
@@ -83,14 +88,14 @@ public class DocNavigator extends JPanel {
   private JLabel _totDocs;
   private JButton _prevBtn;
   private JButton _nextBtn;
-  // This component aims at displaying results from querying Entrez system. Such
-  // a result may be composed from several pages. This is the page currently
-  // displayed.
+  // This component aims at displaying results from querying a remote databank
+  // system (NCBI, EBI, ...). Such a result may be composed from several pages. 
+  // This is the page currently displayed.
   private int _curPage;
   // And this is the page size used to query the remote server.
   private int _pageSize;
   // To avoid a query the remote server each time the user ask for a new page of
-  // result, this table is used to store previously retrieved pages. Each page 
+  // result, this table is used to store previously retrieved pages. Each page
   // is actually a Summary object. Key is a page number.
   private Hashtable<String, Summary> _docPages;
   private Action _doubleClickAct;
@@ -116,13 +121,14 @@ public class DocNavigator extends JPanel {
     JTabbedPane jtp;
 
     _engine = engine;
-    
+
     _docPages = new Hashtable<String, Summary>();
 
     tModel = new DocSummaryTableModel(engine.getBankType().getPresentationModel());
     _table = new DocSummaryTable(tModel);
     _table.addMouseListener(new TableMouseListener());
-
+    _table.setAutoCreateRowSorter(true);
+    
     _scroller = new JScrollPane(_table);
     _scroller.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
     tcm = new TableColumnManager(_table, tModel.getReferenceColHeaders());
@@ -257,6 +263,35 @@ public class DocNavigator extends JPanel {
     }
   }
 
+  private void setSummaryResultData(Summary res) {
+    ((DocSummaryTableModel) _table.getModel()).setData(res);
+    sortData();
+    _scroller.getVerticalScrollBar().setValue(0);
+
+    _totDocs.setText(DecimalFormat.getInstance().format((res.getTotal())));
+  }
+
+  private void sortData(){
+    int column = 0;
+    SortOrder order = SortOrder.ASCENDING;
+    RowSorter<?> st;
+    
+    // we check if we already have sorted data using particular column/order
+    st = _table.getRowSorter();
+    if (st!=null && st.getSortKeys().isEmpty()==false){
+      column = _table.getRowSorter().getSortKeys().get(0).getColumn();
+      order = _table.getRowSorter().getSortKeys().get(0).getSortOrder();
+    }
+    
+    // do sort!
+    TableRowSorter<TableModel> sorter = new TableRowSorter<>(_table.getModel());
+    _table.setRowSorter(sorter);
+    List<RowSorter.SortKey> sortKeys = new ArrayList<>();
+    sortKeys.add(new RowSorter.SortKey(column, order));
+    sorter.setSortKeys(sortKeys);
+    sorter.sort();
+  }
+
   /**
    * Adds a listener to follow the selection made on the document table.
    */
@@ -269,13 +304,6 @@ public class DocNavigator extends JPanel {
    */
   public void removeDocSelectionListener(ListSelectionListener listener) {
     _table.getSelectionModel().removeListSelectionListener(listener);
-  }
-
-  private void setSummaryResultData(Summary res) {
-    ((DocSummaryTableModel) _table.getModel()).setData(res);
-    _scroller.getVerticalScrollBar().setValue(0);
-
-    _totDocs.setText(DecimalFormat.getInstance().format((res.getTotal())));
   }
 
   /**
@@ -389,23 +417,21 @@ public class DocNavigator extends JPanel {
         setData(res);
         _curPage = newPage;
         _curPageField.setText(String.valueOf(_curPage));
-      }
-      catch(QueryEngineException qee){
+      } catch (QueryEngineException qee) {
         EZEnvironment.setDefaultCursor();
-        EZLogger.warn(String.format("Query is: %s. Bank is: %s", _engine.getQuery().toString(), _engine.getBankType().getCode()));
+        EZLogger.warn(
+            String.format("Query is: %s. Bank is: %s", _engine.getQuery().toString(), _engine.getBankType().getCode()));
         EZLogger.warn(qee.getMessage());
         JOptionPane.showMessageDialog(EZEnvironment.getParentFrame(), qee.getMessage(),
-            Messages.getString("DatabaseOpener.err2"),
-            JOptionPane.ERROR_MESSAGE | JOptionPane.OK_CANCEL_OPTION);
-      }
-      catch(HTTPEngineException hbe){
+            Messages.getString("DatabaseOpener.err2"), JOptionPane.ERROR_MESSAGE | JOptionPane.OK_CANCEL_OPTION);
+      } catch (HTTPEngineException hbe) {
         EZEnvironment.setDefaultCursor();
-        EZLogger.warn(String.format("Query is: %s. Bank is: %s", _engine.getQuery().toString(), _engine.getBankType().getCode()));
+        EZLogger.warn(
+            String.format("Query is: %s. Bank is: %s", _engine.getQuery().toString(), _engine.getBankType().getCode()));
         EZLogger.warn(hbe.getUrl());
         EZLogger.warn(String.format("[%d] %s", hbe.getHttpCode(), hbe.getMessage()));
         JOptionPane.showMessageDialog(EZEnvironment.getParentFrame(), hbe.getMessage(),
-            Messages.getString("DatabaseOpener.err2"),
-            JOptionPane.ERROR_MESSAGE | JOptionPane.OK_CANCEL_OPTION);
+            Messages.getString("DatabaseOpener.err2"), JOptionPane.ERROR_MESSAGE | JOptionPane.OK_CANCEL_OPTION);
       }
     }
 

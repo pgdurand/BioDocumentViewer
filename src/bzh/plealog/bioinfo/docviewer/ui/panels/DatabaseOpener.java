@@ -34,9 +34,17 @@ import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 import javax.swing.event.InternalFrameEvent;
 import javax.swing.event.InternalFrameListener;
+
+import com.jgoodies.forms.builder.DefaultFormBuilder;
+import com.jgoodies.forms.layout.FormLayout;
+import com.plealog.genericapp.api.EZEnvironment;
+import com.plealog.genericapp.api.log.EZLogger;
+import com.plealog.genericapp.ui.desktop.GDesktopPane;
+import com.plealog.genericapp.ui.desktop.GInternalFrame;
 
 import bzh.plealog.bioinfo.api.filter.BFilter;
 import bzh.plealog.bioinfo.api.filter.BFilterException;
@@ -47,14 +55,8 @@ import bzh.plealog.bioinfo.docviewer.api.Summary;
 import bzh.plealog.bioinfo.docviewer.http.HTTPEngineException;
 import bzh.plealog.bioinfo.docviewer.ui.DocViewerConfig;
 import bzh.plealog.bioinfo.docviewer.ui.resources.Messages;
+import bzh.plealog.bioinfo.docviewer.ui.web.SwingFXWebViewer;
 import bzh.plealog.bioinfo.ui.filter.BFilterEditorDialog;
-
-import com.jgoodies.forms.builder.DefaultFormBuilder;
-import com.jgoodies.forms.layout.FormLayout;
-import com.plealog.genericapp.api.EZEnvironment;
-import com.plealog.genericapp.api.log.EZLogger;
-import com.plealog.genericapp.ui.desktop.GDesktopPane;
-import com.plealog.genericapp.ui.desktop.GInternalFrame;
 
 /**
  * This panel is the entry point of the database explorer component. It allows a
@@ -91,24 +93,24 @@ public class DatabaseOpener extends JPanel {
     _helperField.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 0));
     _helperField.setOpaque(true);
     _helperField.setFocusable(false);
-    
+
     _serviceField = new JLabel();
     _serviceField.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 0));
     _serviceField.setOpaque(true);
     _serviceField.setFocusable(false);
-    
+
     NOT_RUNNING_TASK_COLOR = _helperField.getBackground();
 
     mainPanel.add(createPanelID(banks), BorderLayout.CENTER);
 
     this.setLayout(new BorderLayout());
     this.add(mainPanel, BorderLayout.NORTH);
-    
-    //the following is used to check whether or not remote server is available
-    //and provide that information on the UI
+
+    // the following is used to check whether or not remote server is available
+    // and provide that information on the UI
     Timer timer = new Timer(2000, new ServiceTimer(banks.get(0)));
     timer.setRepeats(false);
-    timer.start(); 
+    timer.start();
   }
 
   private Component createPanelID(List<BankType> banks) {
@@ -132,7 +134,7 @@ public class DatabaseOpener extends JPanel {
     builder.append(_dbList, _startEditor);
     builder.appendSeparator();
     builder.append(_serviceField);
-    
+
     JPanel panel = new JPanel(new BorderLayout());
     panel.add(builder.getContainer(), BorderLayout.CENTER);
     panel.setBorder(BorderFactory.createEmptyBorder(0, 15, 5, 0));
@@ -172,6 +174,16 @@ public class DatabaseOpener extends JPanel {
     displayInternalFrame(viewer, title, icon, null);
   }
 
+  public static void displayWebDocument(String htmlFile, String title, ImageIcon icon) {
+    SwingFXWebViewer webViewer = new SwingFXWebViewer(null, true);
+    DatabaseOpener.displayInternalFrame(webViewer, title, icon);
+    SwingUtilities.invokeLater(new Runnable() {
+      public void run() {
+        webViewer.load("file://" + htmlFile);
+      }
+    });
+  }
+
   /**
    * Returns true if a sequence fetching process is already running in the
    * system.
@@ -204,7 +216,8 @@ public class DatabaseOpener extends JPanel {
     _helperField.setIcon(null);
     _helperField.setBackground(NOT_RUNNING_TASK_COLOR);
   }
-  private void showEditor(BankType db, BFilter query){
+
+  private void showEditor(BankType db, BFilter query) {
     BFilterEditorDialog filterDialog;
     BFilter filt;
 
@@ -246,11 +259,15 @@ public class DatabaseOpener extends JPanel {
         setHelperMessage(Messages.getString("DatabaseOpener.lbl7"));
         EZEnvironment.setWaitCursor();
         QueryEngine engine = _db.prepareQueryEngine(_query);
-        Summary res = engine.getSummary(0, DocViewerConfig.PAGE_SIZE);
-        if (res.nbDocs()==0) {
-          EZEnvironment.displayInfoMessage(EZEnvironment.getParentFrame(), Messages.getString("DatabaseOpener.lbl8"));
+        Summary res;
+        if (engine.enablePagination()) {
+          res = engine.getSummary(0, engine.getPageSize());
+        } else {
+          res = engine.getSummary();
         }
-        else{
+        if (res.nbDocs() == 0) {
+          EZEnvironment.displayInfoMessage(EZEnvironment.getParentFrame(), Messages.getString("DatabaseOpener.lbl8"));
+        } else {
           XplorDocNavigator navigator = new XplorDocNavigator(engine);
           navigator.setData(res);
           // displayFrame(_db.getUserName(), navigator);
@@ -258,36 +275,30 @@ public class DatabaseOpener extends JPanel {
               DocViewerConfig.DBXPLR_ICON, navigator);
           bError = false;
         }
-      }
-      catch(QueryEngineException qee){
+      } catch (QueryEngineException qee) {
         EZEnvironment.setDefaultCursor();
         EZLogger.warn(String.format("Query is: %s. Bank is: %s", _query.toString(), _db.getCode()));
         EZLogger.warn(qee.getMessage());
         JOptionPane.showMessageDialog(EZEnvironment.getParentFrame(), qee.getMessage(),
-            Messages.getString("DatabaseOpener.err2"),
-            JOptionPane.ERROR_MESSAGE | JOptionPane.OK_CANCEL_OPTION);
-      }
-      catch(HTTPEngineException hbe){
+            Messages.getString("DatabaseOpener.err2"), JOptionPane.ERROR_MESSAGE | JOptionPane.OK_CANCEL_OPTION);
+      } catch (HTTPEngineException hbe) {
         EZEnvironment.setDefaultCursor();
         EZLogger.warn(String.format("Query is: %s. Bank is: %s", _query.toString(), _db.getCode()));
         EZLogger.warn(hbe.getUrl());
         EZLogger.warn(String.format("[%d] %s", hbe.getHttpCode(), hbe.getMessage()));
         JOptionPane.showMessageDialog(EZEnvironment.getParentFrame(), hbe.getMessage(),
-            Messages.getString("DatabaseOpener.err2"),
-            JOptionPane.ERROR_MESSAGE | JOptionPane.OK_CANCEL_OPTION);
-      }
-      catch (BFilterException bfe) {
+            Messages.getString("DatabaseOpener.err2"), JOptionPane.ERROR_MESSAGE | JOptionPane.OK_CANCEL_OPTION);
+      } catch (BFilterException bfe) {
         EZEnvironment.setDefaultCursor();
         EZLogger.warn(bfe.getMessage());
         JOptionPane.showMessageDialog(EZEnvironment.getParentFrame(), bfe.getMessage(),
-            Messages.getString("DatabaseOpener.err1"),
-            JOptionPane.ERROR_MESSAGE | JOptionPane.OK_CANCEL_OPTION);
+            Messages.getString("DatabaseOpener.err1"), JOptionPane.ERROR_MESSAGE | JOptionPane.OK_CANCEL_OPTION);
       } finally {
         EZEnvironment.setDefaultCursor();
         cleanHelperMessage();
       }
-      //if error, display back the editor with the query
-      if(bError){
+      // if error, display back the editor with the query
+      if (bError) {
         showEditor(_db, _query);
       }
     }
@@ -328,34 +339,36 @@ public class DatabaseOpener extends JPanel {
     public void internalFrameDeactivated(InternalFrameEvent e) {
     }
   }
-  
-  private class ServiceTimer implements ActionListener{
+
+  private class ServiceTimer implements ActionListener {
     private BankType bt;
-    
-    private ServiceTimer(BankType bt){
+
+    private ServiceTimer(BankType bt) {
       this.bt = bt;
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
-      if (bt.getServerConfiguration().isServerAvailable()){
+      if (bt.getServerConfiguration().isServerAvailable()) {
         String str = String.format("<html><span style='color:green;'>%s is online</span></html>", bt.getProviderName());
         _serviceField.setText(str);
-      }
-      else{
+      } else {
         String str = String.format("<html><span style='color:red;'>%s is offline</span></html>", bt.getProviderName());
         _serviceField.setText(str);
       }
     }
   }
-  
-  private class DBListener implements ActionListener{
+
+  private class DBListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-      //BankType bt = (BankType) ((JComboBox<?>)e.getSource()).getSelectedItem();
-      
-      //EZLogger.info("Filter path: "+DocViewerConfig.getFilterStoragePath(bt));
+      // BankType bt = (BankType)
+      // ((JComboBox<?>)e.getSource()).getSelectedItem();
+
+      // EZLogger.info("Filter path:
+      // "+DocViewerConfig.getFilterStoragePath(bt));
     }
-    
+
   }
 }

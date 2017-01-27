@@ -65,7 +65,7 @@ public class XplorDocNavigator extends JPanel {
   private JButton _cancelBtn;
   private SaveTableToCSVFileAction _saveCSVAction;
   private SaveTableToCSVFileAction _saveCSVActionMnu;
-  
+
   public XplorDocNavigator(QueryEngine engine) {
     _engine = engine;
     _docNavigator = new DocNavigator(engine);
@@ -183,11 +183,18 @@ public class XplorDocNavigator extends JPanel {
   private class DocTableSelectionListener implements ListSelectionListener {
     private List<SummaryDoc> getDocs(ListSelectionModel selModel) {
       ArrayList<SummaryDoc> docs;
+      SummaryDoc doc;
 
       docs = new ArrayList<SummaryDoc>();
       for (int i = selModel.getMinSelectionIndex(); i <= selModel.getMaxSelectionIndex(); i++) {
         if (selModel.isSelectedIndex(i)) {
-          docs.add(_curResult.getDoc(i));
+          // since table can be sorted, we use the View to get the appropriate
+          // document
+          // note: first column is ALWAYS a number: document index
+          // and SUMMARY_DOC_IDX for column enables to get the document (see
+          // implementation of DocNavigatorTableModel)
+          doc = (SummaryDoc) _docNavigator.getDataTable().getValueAt(i, DocSummaryTableModel.SUMMARY_DOC_IDX);
+          docs.add(doc);
         }
       }
       return docs;
@@ -206,8 +213,15 @@ public class XplorDocNavigator extends JPanel {
       _sequenceFetcher.setEnabled(_engine.getBankType().enableSequenceRetrieval() && !_monitor.isJobRunning());
       _sequenceFetcher.selectionIsEmpty(false);
       _sequenceFetcher.setTotDocs(_curResult.getTotal());
-      //for the document viewer, we can only handle a single doc. 
-      _docViewerAction.setDocument(_curResult.getDoc(e.getFirstIndex()));
+      // for the document viewer, we can only handle a single doc.
+      // since table can be sorted, we use the View to get the appropriate
+      // document
+      // note: first column is ALWAYS a number: document index
+      // and SUMMARY_DOC_IDX for column enables to get the document (see
+      // implementation of DocNavigatorTableModel)
+      SummaryDoc doc = (SummaryDoc) _docNavigator.getDataTable().getValueAt(selModel.getMinSelectionIndex(),
+          DocSummaryTableModel.SUMMARY_DOC_IDX);
+      _docViewerAction.setDocument(doc);
       _docViewerAction.setQueryEngine(_engine);
       _docViewerAction.setEnabled(selModel.getMinSelectionIndex() == selModel.getMaxSelectionIndex());
       _saveCSVActionMnu.setEnabled(true);

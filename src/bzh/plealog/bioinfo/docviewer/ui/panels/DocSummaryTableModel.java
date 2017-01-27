@@ -38,6 +38,8 @@ public class DocSummaryTableModel extends AbstractTableModel {
   private TableHeaderColumnItem[] _refColumnIds;
   private Summary _data;
 
+  public static final int SUMMARY_DOC_IDX = -1;
+      
   private DocSummaryTableModel() {
     super();
   }
@@ -113,7 +115,13 @@ public class DocSummaryTableModel extends AbstractTableModel {
   public int getRowCount() {
     return _data != null ? _data.nbDocs() : 0;
   }
-
+  
+  public Class<?> getColumnClass(int columnIndex) {
+    if (_data==null || _data.getDocs().isEmpty()) {
+      return Object.class;
+    }
+    return getValueAt(0, columnIndex).getClass();
+  }
   public Object getValueAt(int rowIndex, int columnIndex) {
     SummaryDoc item;
     Object val = null;

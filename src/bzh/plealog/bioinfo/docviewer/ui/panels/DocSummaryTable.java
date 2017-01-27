@@ -52,6 +52,7 @@ public class DocSummaryTable extends JKTable {
     // force display of grid (to solve a MacOS X problem)
     this.setGridColor(Color.LIGHT_GRAY);
     this.getTableHeader().setReorderingAllowed(false);
+    this.setAutoCreateRowSorter(true);
   }
 
   public TableCellRenderer getCellRenderer(int row, int column) {
