@@ -38,6 +38,10 @@ public class HTTPEngineException extends RuntimeException {
    */
   public static final int HTTPEX_TIMEOUT = 1003;
 
+  /** 1004: unknown host.
+   */
+  public static final int HTTPEX_UNKNOWN_HOST = 1004;
+
   @SuppressWarnings("unused")
   private HTTPEngineException() {  }
 

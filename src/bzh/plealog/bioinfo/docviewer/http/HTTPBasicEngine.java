@@ -24,6 +24,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.SocketTimeoutException;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -140,6 +141,8 @@ public class HTTPBasicEngine {
       throw hee;
     } catch (SocketTimeoutException ste) {
       throw new HTTPEngineException("Server does not answer (time out)", url, HTTPEngineException.HTTPEX_TIMEOUT);
+    } catch (UnknownHostException uhe){
+      throw new HTTPEngineException("Unable to connect to server", url, HTTPEngineException.HTTPEX_UNKNOWN_HOST);
     } catch (Exception e) {
       // we Log the HTTP or IO error since message is usually out of concern
       // for the end user. However, a log trace is always useful.
