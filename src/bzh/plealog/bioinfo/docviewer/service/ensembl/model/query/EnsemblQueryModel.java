@@ -117,8 +117,7 @@ public class EnsemblQueryModel implements QueryModel {
     entry.setAllowCaseSensitive(false);
     entry.setHelpMsg(
         // this code is closely associated to EnsemblServerConfiguration.formatVariant()
-        "Variant type to retrieve. Reserved keys: all, clinvar, cosmic. Otherwise, use one of: "+
-        "http://www.ensembl.org/info/genome/variation/data_description.html#variation_sets"
+        "Variant type to retrieve. Use one of: all, clinvar, cosmic, phencode."
     );
     accessors_.put(entry.getAccessorVisibleName(), entry);
     

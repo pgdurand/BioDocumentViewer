@@ -233,9 +233,10 @@ public class EnsemblQueryEngine implements QueryEngine {
   }
 
   private String getServiceURLfromQuery() {
-    String species = "", gene_name = "", region_span = "", variant_set = "", url, key, value;
+    String species = "", gene_name = "", region_span = "", url, key, value;
     StringTokenizer tokenizer, tokenizer2;
     Search res;
+    EnsemblVariantType type = EnsemblVariantType.ALL;
 
     // Step 1: get gene name and species from query
     // see EnsemblQueryExpressionBuilder.compile() to see how the query is
@@ -252,7 +253,10 @@ public class EnsemblQueryEngine implements QueryEngine {
       } else if (key.equals(EnsemblQueryModel.REGION_KEY)) {
         region_span = value;
       } else if (key.equals(EnsemblQueryModel.VARIANT_SET_KEY)) {
-        variant_set = value;
+        type = EnsemblVariantType.byName(value);
+        if (type==null){
+          throw new QueryEngineException("unknown Variant type: "+value);
+        }
       }
     }
 
@@ -286,7 +290,7 @@ public class EnsemblQueryEngine implements QueryEngine {
       // we need an official ENSG ID...
       for (String id : res.getIds()) {
         if (id.startsWith("ENSG")) {
-          url = _serverConfig.getFetchVariationUrl(id, variant_set);
+          url = _serverConfig.getFetchVariationUrl(id, type);
           return url;
         }
       }
@@ -294,7 +298,7 @@ public class EnsemblQueryEngine implements QueryEngine {
     }
     if (!region_span.isEmpty()) {
       EZLogger.debug("region span: " + region_span);
-      url = _serverConfig.getFetchVariationUrl(species, region_span, variant_set);
+      url = _serverConfig.getFetchVariationUrl(species, region_span, type);
       return url;
     }
     // should not happen

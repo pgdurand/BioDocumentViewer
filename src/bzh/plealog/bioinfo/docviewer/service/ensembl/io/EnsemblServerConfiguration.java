@@ -91,24 +91,24 @@ public class EnsemblServerConfiguration implements ServerConfiguration {
     return str;
   }
   
-  public String getFetchVariationUrl(String ensg_id, String variant_set_name){
+  public String getFetchVariationUrl(String ensg_id, EnsemblVariantType type){
     String str;
     
     str = EZFileUtils.terminateURL(_defaultServer)+FETCH_VAR_SERVICE_BY_ENSID;
     
     str = str.replaceAll("@ENSG_ID@", ensg_id);
-    str = formatVariant(str, variant_set_name);
+    str = formatVariant(str, type);
     return str;
   }
 
-  public String getFetchVariationUrl(String species, String region, String variant_set_name){
+  public String getFetchVariationUrl(String species, String region, EnsemblVariantType type){
     String str;
     
     str = EZFileUtils.terminateURL(_defaultServer)+FETCH_VAR_SERVICE_BY_REGION;
     
     str = str.replaceAll("@SPECIES@", species);
     str = str.replaceAll("@REGION@", region);
-    str = formatVariant(str, variant_set_name);
+    str = formatVariant(str, type);
     return str;
   }
 
@@ -133,34 +133,17 @@ public class EnsemblServerConfiguration implements ServerConfiguration {
   }
 
   /**
-   * Format a URL to retrieve variants given a variant set name.
+   * Format a URL to retrieve variants given a variant set type.
    * 
-   * @param url the url to update
-   * @param variant_set_name name of the variant set. This is an internal keyword as defined
-   * in XXX.
+   * @param url the url to update. 
+   * @param type type of the variant set.
    */
-  private String formatVariant(String url, String variant_set_name){
+  private String formatVariant(String url, EnsemblVariantType type){
     // Documentation to understand this code:
     //  http://rest.ensembl.org/documentation/info/overlap_id
     //  http://www.ensembl.org/info/genome/variation/data_description.html#variation_sets
     //  https://www.biostars.org/p/230261/
     
-    // handle specific variation types first
-    if ("clinvar".equalsIgnoreCase(variant_set_name)){
-      return url.replaceAll("@VARIANT_TYPE@", "variation;variant_set=ClinVar");
-    }
-    else if ("phencode".equalsIgnoreCase(variant_set_name)){
-      return url.replaceAll("@VARIANT_TYPE@", "variation;variant_set=phencode");
-    }
-    else if ("cosmic".equalsIgnoreCase(variant_set_name)){
-      return url.replaceAll("@VARIANT_TYPE@", "somatic_variation");
-    }
-    else if ("all".equalsIgnoreCase(variant_set_name)){
-      return url.replaceAll("@VARIANT_TYPE@", "variation");
-    }
-    else {
-      //default is: a variant_set on variant type 
-      return url.replaceAll("@VARIANT_TYPE@", "variation;variant_set="+variant_set_name);
-    }
+    return url.replaceAll("@VARIANT_TYPE@", type.getFormatString());
   }
 }
