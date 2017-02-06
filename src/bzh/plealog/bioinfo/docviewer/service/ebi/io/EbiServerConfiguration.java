@@ -34,6 +34,17 @@ import bzh.plealog.bioinfo.docviewer.config.DocViewerDirectoryType;
 import bzh.plealog.bioinfo.docviewer.http.HTTPBasicEngine;
 import bzh.plealog.bioinfo.docviewer.ui.DocViewerConfig;
 
+/**
+ * Setup the configuration to query EBI RESTful API. This class loads its
+ * configuration from a file called <i>ebiQuery.cfg</i>. By default that file
+ * is loaded either from directory
+ * <i>${userHome}/.${EZApplicationBranding.getAppName()}/conf</i> if it exists,
+ * of from the file located next to this class, otherwise. Configuration file
+ * lookup is done following this order: <i>conf</i> directory first, Java
+ * package, otherwise.
+ * 
+ * @author Patrick G. Durand
+ */
 public class EbiServerConfiguration implements ServerConfiguration{
   //adding new fields imply updating copy constructor
   private Hashtable<String, String> _summaryUrls;
@@ -70,6 +81,9 @@ public class EbiServerConfiguration implements ServerConfiguration{
     for (String key : srcConfig._summaryUrls.keySet()){
       _summaryUrls.put(key, srcConfig._summaryUrls.get(key));
     }
+    _seqPerRun = srcConfig._seqPerRun;
+    _sleepTimePerRun = srcConfig._sleepTimePerRun;
+    _maxLetterPerRun = srcConfig._maxLetterPerRun;
   }
 
   private void prepareConfiguration(String resName) throws QueryEngineException {

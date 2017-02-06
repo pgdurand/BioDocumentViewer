@@ -38,10 +38,14 @@ import bzh.plealog.bioinfo.docviewer.ui.resources.Messages;
 import bzh.plealog.bioinfo.util.CoreUtil;
 
 /**
- * This class stores the Sequence server configuration to be used by a client of
- * a Sequence server. This one is dedicated to use the NCBI server
- * (configuration is stored in file &apos;ncbiSequenceServer.config&apos;.
- *
+ * Setup the configuration to query NCBI URL API. This class loads its
+ * configuration from a file called <i>ncbiQuery.cfg</i>. By default that file
+ * is loaded either from directory
+ * <i>${userHome}/.${EZApplicationBranding.getAppName()}/conf</i> if it exists,
+ * of from the file located next to this class, otherwise. Configuration file
+ * lookup is done following this order: <i>conf</i> directory first, Java
+ * package, otherwise.
+ * 
  * @author Patrick G. Durand
  */
 public class EntrezServerConfiguration implements ServerConfiguration{
