@@ -16,38 +16,59 @@
  */
 package bzh.plealog.bioinfo.docviewer.service.ensembl.io;
 
-import com.plealog.genericapp.api.file.EZFileUtils;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.util.Enumeration;
+import java.util.Hashtable;
+import java.util.Properties;
 
+import com.plealog.genericapp.api.configuration.DirectoryManager;
+import com.plealog.genericapp.api.file.EZFileUtils;
+import com.plealog.genericapp.api.log.EZLogger;
+
+import bzh.plealog.bioinfo.docviewer.api.QueryEngineException;
 import bzh.plealog.bioinfo.docviewer.api.ServerConfiguration;
+import bzh.plealog.bioinfo.docviewer.config.DocViewerDirectoryType;
 import bzh.plealog.bioinfo.docviewer.http.HTTPBasicEngine;
 
 /**
- * Setup the configuration to query Ensembl RESTful API.
+ * Setup the configuration to query Ensembl RESTful API. This class loads its
+ * configuration from a file called <i>ensemblQuery.cfg</i>. By default that file
+ * is loaded either from directory
+ * <i>${userHome}/.${EZApplicationBranding.getAppName()}/conf</i> if it exists,
+ * of from the file located next to this class, otherwise. Configuration file
+ * lookup is done following this order: <i>conf</i> directory first, Java
+ * package, otherwise.
  * 
  * @author Patrick G. Durand
  */
 public class EnsemblServerConfiguration implements ServerConfiguration {
-
+  //adding new fields imply updating copy constructor
+  private Hashtable<String, String> _summaryUrls;
+  private int _sleepTimePerRun = 1000; // use milliseconds internally
+  private boolean _useH37assembly;
+  
+  //  ==== Resource containing URL templates
+  private static final String CONF_RESOURCE = "ensemblQuery.cfg";
+  
   //  ==== Server address
   // Standard Ensembl RESTful server. Can be used for all species.
-  private static final String SERVER_URL = "http://rest.ensembl.org";
+  private static final String SERVER_URL = "ensembl.server.address";
   // Ensembl RESTful server to only target GRCh37 release of the human genome.
-  private static final String H37_SERVER_URL = "http://grch37.rest.ensembl.org";
+  private static final String H37_SERVER_URL = "h37.ensembl.server.address";
   
-  //  ==== Service URLs
+  //  ==== Service
   // get an Ensembl ID by gene name
-  private static final String GENE_TO_ENSG_SERVICE = "xrefs/symbol/@SPECIES@/@GENE_NAME@?object_type=gene";
-
-  // note: in the following URLs, variant_type is not added here. It is done by
-  // this.formatVariant() method
+  private static final String GENE_TO_ENSG_SERVICE = "gene2ensg.service";
   // get Variants by Ensembl ID
-  private static final String FETCH_VAR_SERVICE_BY_ENSID = "overlap/id/@ENSG_ID@?feature=@VARIANT_TYPE@";
+  private static final String FETCH_VAR_SERVICE_BY_ENSID = "fetch.var.ensid.service";
   // get Variants by chromosomic region
-  private static final String FETCH_VAR_SERVICE_BY_REGION = "overlap/region/@SPECIES@/@REGION@?feature=@VARIANT_TYPE@";
+  private static final String FETCH_VAR_SERVICE_BY_REGION = "fetch.var.region.service";
   // get Variant full entry
-  private static final String LOAD_VAR_SERVICE = "variation/@SPECIES@/@VAR_ID@";
+  private static final String LOAD_VAR_SERVICE = "load.var.service";
   // get VEP data
-  private static final String LOAD_VEP_SERVICE = "vep/@SPECIES@/id/@VAR_ID@";
+  private static final String LOAD_VEP_SERVICE = "loag.vep.service";
 
   // ==== For internal use
   /* These are keys located in above URLs. They are replaced at runtime with
@@ -59,13 +80,17 @@ public class EnsemblServerConfiguration implements ServerConfiguration {
   private static final String VAR_ID_KEY = "@VAR_ID@";
   private static final String VARIANT_TYPE_KEY = "@VARIANT_TYPE@";
   
-  private String _defaultServer;
+  private static final String SEQ_SLEEP_KEY = "sleep.per.run"; // use seconds in
   
+  private static final String LOAD_ERR = "Load Ensembl configuration from: %s";
+  private static final String CONF_ERR = "Ensembl configuration resource not found: %s";
+
   /**
    * Constructor.
    */
   public EnsemblServerConfiguration(){
-    _defaultServer = SERVER_URL;
+    this(false);
+    //_defaultServer = SERVER_URL;
   }
   
   /**
@@ -77,20 +102,111 @@ public class EnsemblServerConfiguration implements ServerConfiguration {
    *          data.
    */
   public EnsemblServerConfiguration(boolean useGRCh37){
-    if (useGRCh37){
-      _defaultServer = H37_SERVER_URL;
-    }
-    else{
-      _defaultServer = SERVER_URL;
-    }
+    _useH37assembly = useGRCh37;
+    prepareConfiguration(CONF_RESOURCE);
   }
+  
   /**
    * Copy constructor.
    */
   public EnsemblServerConfiguration(EnsemblServerConfiguration srcConfig){
-    _defaultServer = srcConfig._defaultServer;
+    _summaryUrls = new Hashtable<String, String>();
+    for (String key : srcConfig._summaryUrls.keySet()){
+      _summaryUrls.put(key, srcConfig._summaryUrls.get(key));
+    }
+    _sleepTimePerRun = srcConfig._sleepTimePerRun;
+    _useH37assembly = srcConfig._useH37assembly;
   }
 
+  private void prepareConfiguration(String resName) throws QueryEngineException {
+    InputStream         in = null;
+    Properties          props;
+    String              key,  str;
+    Enumeration<Object> keys;
+    File                f;
+    
+    try {
+      // first, try to locate the file in the user conf dir
+      str = DirectoryManager.getPath(DocViewerDirectoryType.CONF);
+      if (str!=null){
+        str += CONF_RESOURCE;
+        f = new File(str);
+        if (f.exists()){
+          EZLogger.debug(String.format(LOAD_ERR, f.getAbsolutePath()));
+          in = new FileInputStream(f);
+        }
+      }
+      //try from software resource
+      if (in==null){
+        EZLogger.debug(String.format(LOAD_ERR, EnsemblQueryEngine.class.getResource(resName).toString()));
+        in = EnsemblQueryEngine.class.getResourceAsStream(resName);
+      }
+      //not good
+      if (in == null)
+        throw new Exception(String.format(CONF_ERR,CONF_RESOURCE));
+      
+      //ok, load the configuration
+      props = new Properties();
+      props.load(in);
+      _summaryUrls = new Hashtable<>();
+      
+      String serverAddr;
+      
+      if (_useH37assembly){
+        serverAddr = props.getProperty(H37_SERVER_URL);
+      }
+      else{
+        serverAddr = props.getProperty(SERVER_URL);
+      }
+      _summaryUrls.put(SERVER_URL, serverAddr);
+      serverAddr = EZFileUtils.terminateURL(serverAddr);
+      keys = props.keys();
+      while(keys.hasMoreElements()){
+        key = keys.nextElement().toString();
+        if (key.equals(GENE_TO_ENSG_SERVICE)){
+          manageServiceUrl(props, key, serverAddr);
+        }
+        else if (key.equals(FETCH_VAR_SERVICE_BY_ENSID)){
+          manageServiceUrl(props, key, serverAddr);
+        }
+        else if (key.equals(FETCH_VAR_SERVICE_BY_REGION)){
+          manageServiceUrl(props, key, serverAddr);
+        }
+        else if (key.equals(LOAD_VAR_SERVICE)){
+          manageServiceUrl(props, key, serverAddr);
+        }
+        else if (key.equals(LOAD_VEP_SERVICE)){
+          manageServiceUrl(props, key, serverAddr);
+        }
+        else if (key.equals(SEQ_SLEEP_KEY)){
+          str = props.getProperty(key);
+          EZLogger.debug(String.format("%s = %s", key, str));
+          _sleepTimePerRun = Integer.valueOf(str);
+        }
+      }
+      if (_summaryUrls.isEmpty())
+        throw new Exception("summary URLs not found");
+    } catch (Exception ex) {
+      throw new QueryEngineException("unable to init Ensembl Query System: " + resName + ": " + ex);
+    } finally {
+      if (in != null) {
+        try {
+          in.close();
+        } catch (Exception ex) {
+        }
+      }
+    }
+  }
+
+  private void manageServiceUrl(Properties props, String key, String serverAddr){
+    String str = props.getProperty(key).trim();
+    if (str.charAt(0)=='/'){
+      str = str.substring(1);
+    }
+    EZLogger.debug(String.format("%s = %s", key, str));
+    _summaryUrls.put(key, serverAddr+str);
+  }
+  
   @Override
   public int getSequencesPerRun() {
     return 0;
@@ -108,7 +224,7 @@ public class EnsemblServerConfiguration implements ServerConfiguration {
 
   @Override
   public boolean isServerAvailable() {
-    return HTTPBasicEngine.isServerAvailable(_defaultServer);
+    return HTTPBasicEngine.isServerAvailable(_summaryUrls.get(SERVER_URL));
   }
 
   /**
@@ -123,7 +239,7 @@ public class EnsemblServerConfiguration implements ServerConfiguration {
   public String getGene2EnsgIdUrl(String species, String gene_name){
     String str;
     
-    str = EZFileUtils.terminateURL(_defaultServer)+GENE_TO_ENSG_SERVICE;
+    str = _summaryUrls.get(GENE_TO_ENSG_SERVICE);
     
     str = str.replaceAll(SPECIES_KEY, species);
     str = str.replaceAll(GENE_NAME_KEY, gene_name);
@@ -143,7 +259,7 @@ public class EnsemblServerConfiguration implements ServerConfiguration {
   public String getFetchVariationUrl(String ensg_id, EnsemblVariantType type){
     String str;
     
-    str = EZFileUtils.terminateURL(_defaultServer)+FETCH_VAR_SERVICE_BY_ENSID;
+    str = _summaryUrls.get(FETCH_VAR_SERVICE_BY_ENSID);
     
     str = str.replaceAll(ENSG_ID_KEY, ensg_id);
     str = formatVariant(str, type);
@@ -167,7 +283,7 @@ public class EnsemblServerConfiguration implements ServerConfiguration {
   public String getFetchVariationUrl(String species, String region, EnsemblVariantType type){
     String str;
     
-    str = EZFileUtils.terminateURL(_defaultServer)+FETCH_VAR_SERVICE_BY_REGION;
+    str = _summaryUrls.get(FETCH_VAR_SERVICE_BY_REGION);
     
     str = str.replaceAll(SPECIES_KEY, species);
     str = str.replaceAll(REGION_KEY, region);
@@ -186,7 +302,7 @@ public class EnsemblServerConfiguration implements ServerConfiguration {
   public String getLoadVariantURL(String species, String id){
     String str;
     
-    str = EZFileUtils.terminateURL(_defaultServer)+LOAD_VAR_SERVICE;
+    str = _summaryUrls.get(LOAD_VAR_SERVICE);
     
     str = str.replaceAll(SPECIES_KEY, species);
     str = str.replaceAll(VAR_ID_KEY, id);
@@ -204,7 +320,7 @@ public class EnsemblServerConfiguration implements ServerConfiguration {
   public String getLoadVepURL(String species, String id){
     String str;
     
-    str = EZFileUtils.terminateURL(_defaultServer)+LOAD_VEP_SERVICE;
+    str = _summaryUrls.get(LOAD_VEP_SERVICE);
     
     str = str.replaceAll(SPECIES_KEY, species);
     str = str.replaceAll(VAR_ID_KEY, id);
