@@ -46,7 +46,7 @@ import com.plealog.genericapp.api.EZEnvironment;
 
 /**
  * Describe the banks from NCBI Entrez that are available for querying with this software.
- * Right now, provide access to nucleotide, protein, 3D structure, Clinvar and taxonomy databanks. 
+ * Right now, provide access to nucleotide, protein, 3D structure and taxonomy databanks. 
  * More can be added if needed: adapt this code accordingly.
  * 
  * @author Patrick G. Durand
@@ -62,6 +62,39 @@ public enum EntrezBank implements BankType {
   STRUCTURE ("S", "3D Structures",            "structure",  false, ReaderType.PDB), 
   TAXONOMY  ("T", "Taxonomy",                 "taxonomy",   false, ReaderType.UNKNOWN);
 
+  /*
+   * Future feature: dbSNP
+   * 
+   * NCBI dbSNP:
+   *  Query by chromosomal region on the human genome:   
+   *     https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=snp&term=108093559:108239829[Base%20Position]%20AND%20%2211%22[CHR]%20AND%20txid9606
+   *  Sample answer is:
+   *
+        <Id>879255505</Id>
+        <Id>878853514</Id>
+        <Id>878853503</Id>
+        <Id>878853501</Id>
+        <Id>878853499</Id>
+        <Id>878853497</Id>
+        <Id>878853493</Id>
+        <Id>878853490</Id>
+        <Id>876660725</Id>
+        <Id>876660661</Id>
+        <Id>876659996</Id>
+        <Id>876659324</Id>
+        <Id>876659304</Id>
+        <Id>876659116</Id>
+        <Id>876659088</Id>
+        <Id>876658520</Id>
+        <Id>876658500</Id>
+        <Id>876658324</Id>
+        <Id>876658224</Id>
+        <Id>876659923</Id>
+   
+   * Get Summary by ID: 
+   *   https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=snp&id=879255505&report=XML
+   * */
+  
   private final String type;
   private final ReaderType rType;
   private final String userName;

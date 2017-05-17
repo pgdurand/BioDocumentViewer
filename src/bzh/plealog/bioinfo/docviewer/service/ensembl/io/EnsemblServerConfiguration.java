@@ -58,7 +58,7 @@ public class EnsemblServerConfiguration implements ServerConfiguration {
   // Ensembl RESTful server to only target GRCh37 release of the human genome.
   private static final String H37_SERVER_URL = "h37.ensembl.server.address";
   
-  //  ==== Service
+  //  ==== Service for Variants
   // get an Ensembl ID by gene name
   private static final String GENE_TO_ENSG_SERVICE = "gene2ensg.service";
   // get Variants by Ensembl ID
@@ -70,6 +70,13 @@ public class EnsemblServerConfiguration implements ServerConfiguration {
   // get VEP data
   private static final String LOAD_VEP_SERVICE = "loag.vep.service";
 
+  
+  //  ==== Service for Transcripts
+  // get Variants by chromosomic region
+  private static final String FETCH_RNA_SERVICE_BY_ENSID = "fetch.rna.ensid.service";
+  private static final String FETCH_RNA_SERVICE_BY_REGION = "fetch.rna.region.service";
+
+  
   // ==== For internal use
   /* These are keys located in above URLs. They are replaced at runtime with
    * appropriate values. */
@@ -176,6 +183,12 @@ public class EnsemblServerConfiguration implements ServerConfiguration {
           manageServiceUrl(props, key, serverAddr);
         }
         else if (key.equals(LOAD_VEP_SERVICE)){
+          manageServiceUrl(props, key, serverAddr);
+        }
+        else if (key.equals(FETCH_RNA_SERVICE_BY_ENSID)){
+          manageServiceUrl(props, key, serverAddr);
+        }
+        else if (key.equals(FETCH_RNA_SERVICE_BY_REGION)){
           manageServiceUrl(props, key, serverAddr);
         }
         else if (key.equals(SEQ_SLEEP_KEY)){
@@ -324,6 +337,45 @@ public class EnsemblServerConfiguration implements ServerConfiguration {
     
     str = str.replaceAll(SPECIES_KEY, species);
     str = str.replaceAll(VAR_ID_KEY, id);
+    return str;
+  }
+
+  /**
+   * Return a URL to retrieve known Transcripts given an Ensembl Gene ID.
+   * 
+   * @param ensg_id
+   *          official Ensembl Gene ID
+   * 
+   * @return a URL properly formatted to query Ensembl DB.
+   */
+  public String getFetchTranscriptUrl(String ensg_id){
+    String str;
+    
+    str = _summaryUrls.get(FETCH_RNA_SERVICE_BY_ENSID);
+    
+    str = str.replaceAll(ENSG_ID_KEY, ensg_id);
+    return str;
+  }
+
+  /**
+   * Return a URL to retrieve known Transcripts within a particular region.
+   * 
+   * @param species
+   *          the species name
+   * @param region
+   *          the region for which to retrieve known variants. Expected format is
+   *          A:B-C with A, B and C being chromosome number, start location and
+   *          stop location, respectively.
+   * 
+   * @return a URL properly formatted to query Ensembl DB.
+   */
+  public String getFetchTranscriptUrl(String species, String region){
+    String str;
+    
+    str = _summaryUrls.get(FETCH_VAR_SERVICE_BY_REGION);
+    
+    str = str.replaceAll(SPECIES_KEY, species);
+    str = str.replaceAll(REGION_KEY, region);
     return str;
   }
 
