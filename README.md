@@ -1,6 +1,6 @@
 # BioDocumentViewer
 
-[![License AGPL](https://img.shields.io/badge/license-Affero%20GPL%203.0-blue.svg)](https://www.gnu.org/licenses/agpl-3.0.txt) [![Build Status](https://travis-ci.org/pgdurand/BioDocumentViewer.svg?branch=master)](https://travis-ci.org/pgdurand/BioDocumentViewer) [![](https://tokei.rs/b1/github/pgdurand/BioDocumentViewer?category=code)](https://github.com/pgdurand/BioDocumentViewer) [![](https://img.shields.io/badge/platform-Java--1.7+-yellow.svg)](http://www.oracle.com/technetwork/java/javase/downloads/index.html) [![](https://img.shields.io/badge/run_on-Linux--Mac_OSX--Windows-yellowgreen.svg)]()
+[![License AGPL](https://img.shields.io/badge/license-Affero%20GPL%203.0-blue.svg)](https://www.gnu.org/licenses/agpl-3.0.txt) [![Build Status](https://travis-ci.org/pgdurand/BioDocumentViewer.svg?branch=master)](https://travis-ci.org/pgdurand/BioDocumentViewer) [![](https://tokei.rs/b1/github/pgdurand/BioDocumentViewer?category=code)](https://github.com/pgdurand/BioDocumentViewer) [![](https://img.shields.io/badge/platform-Java--1.8+-yellow.svg)](http://www.oracle.com/technetwork/java/javase/downloads/index.html) [![](https://img.shields.io/badge/run_on-Linux--Mac_OSX--Windows-yellowgreen.svg)]()
 
 ## Introduction
 
@@ -21,7 +21,7 @@ The following screenshot illustrates BioDocumentViewer main features:
 
 ## Requirements
 
-Use a [Java Virtual Machine](http://www.oracle.com/technetwork/java/javase/downloads/index.html) 1.7 (or above) from Oracle. 
+Use a [Java Virtual Machine](http://www.oracle.com/technetwork/java/javase/downloads/index.html) 1.8 (or above) from Oracle. 
 
 As a result of using Java, BioDocumentViewer is available for Linux, Mac OSX and Windows systems.
 
