@@ -34,7 +34,7 @@ import bzh.plealog.bioinfo.docviewer.api.SummaryDoc;
 import bzh.plealog.bioinfo.docviewer.conf.DirManager;
 import bzh.plealog.bioinfo.docviewer.conf.DocViewerConfig;
 import bzh.plealog.bioinfo.docviewer.http.HTTPBasicEngine;
-import bzh.plealog.bioinfo.docviewer.ui.panels.DatabaseOpener;
+import bzh.plealog.bioinfo.docviewer.ui.panels.StatusBarHelperPanel;
 import bzh.plealog.bioinfo.docviewer.ui.resources.Messages;
 import bzh.plealog.bioinfo.docviewer.ui.structure.ThreeDStructureViewer;
 import bzh.plealog.bioinfo.seqvertor.BiojavaUtils;
@@ -112,7 +112,7 @@ public class DisplayEntryAction extends AbstractAction {
 
     // Load entry
     seqId = _curDoc.getValue(_qEngine.getBankType().getPresentationModel().getAccessionFieldKey());
-    DatabaseOpener.setHelperMessage(MF.format(new Object[]{seqId}));
+    StatusBarHelperPanel.setHelperMessage(MF.format(new Object[]{seqId}));
 
     try{
       tmpFile = _qEngine.load(seqId, _qEngine.getBankType().getCode(), true);
@@ -177,7 +177,7 @@ public class DisplayEntryAction extends AbstractAction {
     viewer.setData(descriptor);
 
     //open a new internal frame on the desktop
-    DatabaseOpener.displayInternalFrame(viewer, seqId, isProteic?DocViewerConfig.PROTEIN_ICON:DocViewerConfig.DNA_ICON);
+    StatusBarHelperPanel.displayInternalFrame(viewer, seqId, isProteic?DocViewerConfig.PROTEIN_ICON:DocViewerConfig.DNA_ICON);
   }
 
   /**
@@ -190,7 +190,7 @@ public class DisplayEntryAction extends AbstractAction {
     // Get the PDB id
     String pdbCode = _curDoc.getValue(_qEngine.getBankType().getPresentationModel().getAccessionFieldKey());
 
-    DatabaseOpener.setHelperMessage("Downloading "+pdbCode);
+    StatusBarHelperPanel.setHelperMessage("Downloading "+pdbCode);
     // Format URL and download PDB entry from remote server
     String url = linker.getURL("PDBgz", pdbCode);
 
@@ -228,7 +228,7 @@ public class DisplayEntryAction extends AbstractAction {
     try {Thread.sleep(2000);} catch (InterruptedException e) {}
     
     //open a new internal frame on the desktop
-    DatabaseOpener.displayInternalFrame(viewer, pdbCode, DocViewerConfig.STRUCT_ICON);
+    StatusBarHelperPanel.displayInternalFrame(viewer, pdbCode, DocViewerConfig.STRUCT_ICON);
   }
 
   /**
@@ -266,7 +266,7 @@ public class DisplayEntryAction extends AbstractAction {
       }
       DisplayEntryAction.this.setEnabled(true);
       EZEnvironment.setDefaultCursor();
-      DatabaseOpener.cleanHelperMessage();
+      StatusBarHelperPanel.cleanHelperMessage();
       _loadInProgress = false;
     }
   }

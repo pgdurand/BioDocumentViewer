@@ -32,7 +32,7 @@ import com.plealog.genericapp.api.log.EZLogger;
 import bzh.plealog.bioinfo.api.data.sequence.BankSequenceDescriptor;
 import bzh.plealog.bioinfo.docviewer.conf.DirManager;
 import bzh.plealog.bioinfo.docviewer.conf.DocViewerConfig;
-import bzh.plealog.bioinfo.docviewer.ui.panels.DatabaseOpener;
+import bzh.plealog.bioinfo.docviewer.ui.panels.StatusBarHelperPanel;
 import bzh.plealog.bioinfo.docviewer.ui.resources.Messages;
 import bzh.plealog.bioinfo.seqvertor.BiojavaUtils;
 import bzh.plealog.bioinfo.seqvertor.SequenceDataBag;
@@ -86,7 +86,7 @@ public class OpenSampleFileAction extends AbstractAction {
       }
       
       EZEnvironment.setWaitCursor();
-      DatabaseOpener.setHelperMessage(Messages
+      StatusBarHelperPanel.setHelperMessage(Messages
               .getString("OpenFileAction.msg1"));
       
       File f = new File(sampleSeqFile);
@@ -124,7 +124,7 @@ public class OpenSampleFileAction extends AbstractAction {
       viewer.setData(descriptor);
 
       //open a new internal frame on the desktop
-      DatabaseOpener.displayInternalFrame(viewer, sdb.getSeqInfo().getId(), 
+      StatusBarHelperPanel.displayInternalFrame(viewer, sdb.getSeqInfo().getId(), 
           isProteic?DocViewerConfig.PROTEIN_ICON:DocViewerConfig.DNA_ICON);
       return true;
     }
@@ -138,7 +138,7 @@ public class OpenSampleFileAction extends AbstractAction {
             t.toString());
       } finally {
         EZEnvironment.setDefaultCursor();
-        DatabaseOpener.cleanHelperMessage();
+        StatusBarHelperPanel.cleanHelperMessage();
       }
     }
   }

@@ -56,6 +56,7 @@ import bzh.plealog.bioinfo.docviewer.conf.DocViewerConfig;
 import bzh.plealog.bioinfo.docviewer.ui.actions.OpenFileAction;
 import bzh.plealog.bioinfo.docviewer.ui.actions.OpenSampleFileAction;
 import bzh.plealog.bioinfo.docviewer.ui.panels.DatabaseOpener;
+import bzh.plealog.bioinfo.docviewer.ui.panels.StatusBarHelperPanel;
 import bzh.plealog.bioinfo.docviewer.ui.resources.Messages;
 import bzh.plealog.bioinfo.ui.blast.config.ConfigManager;
 import bzh.plealog.bioinfo.ui.config.UISystemConfigurator;
@@ -221,11 +222,13 @@ public class DocumentViewer {
 
       JPanel statusBar = new JPanel(new BorderLayout());
       JPanel hlpPnl = new JPanel(new BorderLayout());
-      hlpPnl.add(DatabaseOpener.getHelperField(), BorderLayout.WEST);
+      hlpPnl.add(StatusBarHelperPanel.getHelperField(), BorderLayout.WEST);
       statusBar.add(new MemoryMeter(), BorderLayout.WEST);
       statusBar.add(hlpPnl, BorderLayout.CENTER);
       
       dpanel.add(statusBar, BorderLayout.SOUTH);
+      
+      StatusBarHelperPanel.setDesktop(_desktop);
       
       return dpanel;
     }
@@ -265,7 +268,6 @@ public class DocumentViewer {
         List<BankType> bts = bp.getBanks();
         // prepare the query system
         DatabaseOpener dop = new DatabaseOpener(bp.getBanks());
-        dop.setDesktop(_desktop);
 
         GInternalFrame iFrame = new GInternalFrame(dop, bts.get(0)
             .getProviderName(), true, false, false, false);

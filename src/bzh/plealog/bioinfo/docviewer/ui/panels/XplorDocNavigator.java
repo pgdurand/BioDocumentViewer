@@ -30,6 +30,10 @@ import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import com.plealog.genericapp.api.EZEnvironment;
+import com.plealog.genericapp.api.log.EZLogger;
+import com.plealog.genericapp.ui.common.ContextMenuElement;
+
 import bzh.plealog.bioinfo.docviewer.api.QueryEngine;
 import bzh.plealog.bioinfo.docviewer.api.Summary;
 import bzh.plealog.bioinfo.docviewer.api.SummaryDoc;
@@ -38,10 +42,6 @@ import bzh.plealog.bioinfo.docviewer.ui.actions.DisplayEntryAction;
 import bzh.plealog.bioinfo.docviewer.ui.actions.FetchSequenceAction;
 import bzh.plealog.bioinfo.docviewer.ui.resources.Messages;
 import bzh.plealog.bioinfo.ui.util.SaveTableToCSVFileAction;
-
-import com.plealog.genericapp.api.EZEnvironment;
-import com.plealog.genericapp.api.log.EZLogger;
-import com.plealog.genericapp.ui.common.ContextMenuElement;
 
 /**
  * This is the component that aims at displaying database search result in the
@@ -223,7 +223,7 @@ public class XplorDocNavigator extends JPanel {
 
     public void jobDone() {
       super.jobDone();
-      DatabaseOpener.setFetchingProcessRunning(false);
+      StatusBarHelperPanel.setFetchingProcessRunning(false);
       this.setVisible(false);
       EZLogger.info(Messages.getString("DDXplorDocNavigator.lbl2"));
       if (this.getErrMsg() != null) {
@@ -236,7 +236,7 @@ public class XplorDocNavigator extends JPanel {
       _cancelBtn.setIcon(EZEnvironment.getImageIcon("stopScheduler.png"));
       _cancelBtn.setToolTipText(Messages.getString("SeqRetrieverMonitor.cancel.toolTip"));
       EZLogger.info(Messages.getString("DDXplorDocNavigator.lbl3"));
-      DatabaseOpener.setFetchingProcessRunning(true);
+      StatusBarHelperPanel.setFetchingProcessRunning(true);
       this.setMessage(Messages.getString("DatabaseOpener.lbl7"));
       _cancelBtn.setEnabled(true);
       this.setVisible(true);

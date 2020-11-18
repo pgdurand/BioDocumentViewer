@@ -40,7 +40,7 @@ import bzh.plealog.bioinfo.docviewer.fetcher.DBAutoFetcher;
 import bzh.plealog.bioinfo.docviewer.fetcher.DBSimpleFetcher;
 import bzh.plealog.bioinfo.docviewer.fetcher.DocFetcherUtils;
 import bzh.plealog.bioinfo.docviewer.fetcher.SeqRetrieverMonitor;
-import bzh.plealog.bioinfo.docviewer.ui.panels.DatabaseOpener;
+import bzh.plealog.bioinfo.docviewer.ui.panels.StatusBarHelperPanel;
 import bzh.plealog.bioinfo.docviewer.ui.resources.Messages;
 
 /**
@@ -70,7 +70,7 @@ public class FetchSequenceAction extends AbstractAction {
   }
 
   public void actionPerformed(ActionEvent event) {
-    if (_monitor.isJobRunning() || DatabaseOpener.isFetchingProcessRunning()) {
+    if (_monitor.isJobRunning() || StatusBarHelperPanel.isFetchingProcessRunning()) {
       EZEnvironment.displayInfoMessage(EZEnvironment.getParentFrame(), Messages.getString("FetchFastaAction.lbl1"));
       return;
     }

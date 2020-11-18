@@ -17,26 +17,24 @@
 package bzh.plealog.bioinfo.docviewer.ui.panels;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.MessageFormat;
 import java.util.List;
 
 import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JComponent;
-import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
-import javax.swing.event.InternalFrameEvent;
-import javax.swing.event.InternalFrameListener;
+
+import com.jgoodies.forms.builder.DefaultFormBuilder;
+import com.jgoodies.forms.layout.FormLayout;
+import com.plealog.genericapp.api.EZEnvironment;
+import com.plealog.genericapp.api.log.EZLogger;
 
 import bzh.plealog.bioinfo.api.filter.BFilter;
 import bzh.plealog.bioinfo.api.filter.BFilterException;
@@ -49,13 +47,6 @@ import bzh.plealog.bioinfo.docviewer.http.HTTPEngineException;
 import bzh.plealog.bioinfo.docviewer.ui.resources.Messages;
 import bzh.plealog.bioinfo.ui.filter.BFilterEditorDialog;
 
-import com.jgoodies.forms.builder.DefaultFormBuilder;
-import com.jgoodies.forms.layout.FormLayout;
-import com.plealog.genericapp.api.EZEnvironment;
-import com.plealog.genericapp.api.log.EZLogger;
-import com.plealog.genericapp.ui.desktop.GDesktopPane;
-import com.plealog.genericapp.ui.desktop.GInternalFrame;
-
 /**
  * This panel is the entry point of the database explorer component. It allows a
  * user to choose a data provider, a database and start a search.
@@ -65,18 +56,10 @@ import com.plealog.genericapp.ui.desktop.GInternalFrame;
  */
 public class DatabaseOpener extends JPanel {
   private static final long serialVersionUID = 4699430095111364352L;
-  private static GDesktopPane _desktop;
-  private static JLabel _helperField;
-  private static JLabel _serviceField;
+  
+  private JLabel _serviceField;
   private JComboBox<BankType> _dbList;
   private JButton _startEditor;
-
-  private static Color RUNNING_TASK_COLOR = Color.GREEN.darker();
-  private static Color NOT_RUNNING_TASK_COLOR;
-
-  // use to be sure that at any time only one fetching process is authorized
-  // using such a static variable is not so good, so for the future: enhance!
-  protected static boolean _fetchInProgress;
 
   private static final MessageFormat RES_HEADER = new MessageFormat(Messages.getString("DatabaseOpener.lbl5"));
   private static final MessageFormat RES_HEADER2 = new MessageFormat(Messages.getString("DatabaseOpener.lbl6"));
@@ -132,81 +115,6 @@ public class DatabaseOpener extends JPanel {
     return panel;
   }
 
-  public void setDesktop(GDesktopPane desktop) {
-    _desktop = desktop;
-  }
-
-  /**
-   * Return the help field.
-   */
-  public static JComponent getHelperField() {
-    if (_helperField == null) {
-      _helperField = new JLabel();
-      _helperField.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-      _helperField.setOpaque(true);
-      _helperField.setFocusable(false);
-      NOT_RUNNING_TASK_COLOR = _helperField.getBackground();
-    }
-    return _helperField;
-  }
-
-  public static void displayInternalFrame(JComponent viewer, String title, ImageIcon icon,
-      final XplorDocNavigator navigator) {
-    int delta = 20;
-
-    GInternalFrame iFrame = new GInternalFrame(viewer, // the viewer
-        title, // iFrame title will be the entry ID
-        true, true, true, // resizable, closable, maximizable: allowed
-        false);// does not allow iconifiable: not working with JRE1.7+ on OSX !
-               // Known bug.
-    if (icon != null)
-      iFrame.setFrameIcon(icon);
-    Dimension dim = _desktop.getSize();
-    iFrame.setVisible(false);
-    _desktop.addGInternalFrame(iFrame);
-    iFrame.setSize(dim);
-    iFrame.setBounds(delta, delta, dim.width - 2 * delta, dim.height - 2 * delta);
-    iFrame.setDefaultCloseOperation(JInternalFrame.DO_NOTHING_ON_CLOSE);
-    iFrame.addInternalFrameListener(new IFrameListener(navigator));
-    iFrame.setVisible(true);
-  }
-
-  public static void displayInternalFrame(JComponent viewer, String title, ImageIcon icon) {
-    displayInternalFrame(viewer, title, icon, null);
-  }
-
-  /**
-   * Returns true if a sequence fetching process is already running in the
-   * system.
-   */
-  public static synchronized boolean isFetchingProcessRunning() {
-    return _fetchInProgress;
-  }
-
-  /**
-   * Sets the running status of the sequence fetching system.
-   */
-  public static synchronized void setFetchingProcessRunning(boolean running) {
-    _fetchInProgress = running;
-  }
-
-  /**
-   * Set a message during some operation.
-   */
-  public static void setHelperMessage(String msg) {
-    if (msg == null) {
-      cleanHelperMessage();
-    }
-    _helperField.setText(msg);
-    _helperField.setIcon(DocViewerConfig.WORKING_ICON);
-    _helperField.setBackground(RUNNING_TASK_COLOR);
-  }
-
-  public static void cleanHelperMessage() {
-    _helperField.setText("");
-    _helperField.setIcon(null);
-    _helperField.setBackground(NOT_RUNNING_TASK_COLOR);
-  }
   private void showEditor(BankType db, BFilter query){
     BFilterEditorDialog filterDialog;
     BFilter filt;
@@ -246,7 +154,7 @@ public class DatabaseOpener extends JPanel {
       try {
         _query.compile();
 
-        setHelperMessage(Messages.getString("DatabaseOpener.lbl7"));
+        StatusBarHelperPanel.setHelperMessage(Messages.getString("DatabaseOpener.lbl7"));
         EZEnvironment.setWaitCursor();
         QueryEngine engine = _db.prepareQueryEngine(_query);
         Summary res = engine.getSummary(0, DocViewerConfig.PAGE_SIZE);
@@ -257,7 +165,7 @@ public class DatabaseOpener extends JPanel {
           XplorDocNavigator navigator = new XplorDocNavigator(engine);
           navigator.setData(res);
           // displayFrame(_db.getUserName(), navigator);
-          displayInternalFrame(navigator, RES_HEADER.format(new Object[] { _db.getUserName() }),
+          StatusBarHelperPanel.displayInternalFrame(navigator, RES_HEADER.format(new Object[] { _db.getUserName() }),
               DocViewerConfig.DBXPLR_ICON, navigator);
           bError = false;
         }
@@ -287,7 +195,7 @@ public class DatabaseOpener extends JPanel {
             JOptionPane.ERROR_MESSAGE | JOptionPane.OK_CANCEL_OPTION);
       } finally {
         EZEnvironment.setDefaultCursor();
-        cleanHelperMessage();
+        StatusBarHelperPanel.cleanHelperMessage();
       }
       //if error, display back the editor with the query
       if(bError){
@@ -296,41 +204,7 @@ public class DatabaseOpener extends JPanel {
     }
   }
 
-  private static class IFrameListener implements InternalFrameListener {
-    XplorDocNavigator navigator;
-
-    public IFrameListener(XplorDocNavigator navigator) {
-      this.navigator = navigator;
-    }
-
-    public void internalFrameOpened(InternalFrameEvent e) {
-    }
-
-    public void internalFrameClosing(InternalFrameEvent e) {
-      if (EZEnvironment.confirmMessage(EZEnvironment.getParentFrame(), Messages.getString("DatabaseOpener.msg1"))) {
-        if (navigator != null)
-          navigator.cancelJob();
-        e.getInternalFrame().dispose();
-      }
-    }
-
-    public void internalFrameClosed(InternalFrameEvent e) {
-      if (navigator != null)
-        navigator.cancelJob();
-    }
-
-    public void internalFrameIconified(InternalFrameEvent e) {
-    }
-
-    public void internalFrameDeiconified(InternalFrameEvent e) {
-    }
-
-    public void internalFrameActivated(InternalFrameEvent e) {
-    }
-
-    public void internalFrameDeactivated(InternalFrameEvent e) {
-    }
-  }
+  
   
   private class ServiceTimer implements ActionListener{
     private BankType bt;
