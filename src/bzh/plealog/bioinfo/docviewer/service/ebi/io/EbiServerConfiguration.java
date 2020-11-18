@@ -29,8 +29,8 @@ import com.plealog.genericapp.api.log.EZLogger;
 
 import bzh.plealog.bioinfo.docviewer.api.QueryEngineException;
 import bzh.plealog.bioinfo.docviewer.api.ServerConfiguration;
+import bzh.plealog.bioinfo.docviewer.conf.DocViewerConfig;
 import bzh.plealog.bioinfo.docviewer.http.HTTPBasicEngine;
-import bzh.plealog.bioinfo.docviewer.ui.DocViewerConfig;
 
 public class EbiServerConfiguration implements ServerConfiguration{
   //adding new fields imply updating copy constructor

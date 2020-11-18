@@ -14,7 +14,7 @@
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU Affero General Public License for more details.
  */
-package bzh.plealog.bioinfo.docviewer.ui;
+package bzh.plealog.bioinfo.docviewer.conf;
 
 import java.io.File;
 import java.io.InputStream;

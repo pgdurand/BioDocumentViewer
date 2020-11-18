@@ -45,7 +45,7 @@ import com.plealog.genericapp.api.file.EZFileManager;
 import com.plealog.genericapp.api.log.EZLogger;
 
 import bzh.plealog.bioinfo.api.data.feature.FeatureTable;
-import bzh.plealog.bioinfo.docviewer.ui.DocViewerConfig;
+import bzh.plealog.bioinfo.docviewer.conf.DocViewerConfig;
 import bzh.plealog.bioinfo.docviewer.ui.resources.Messages;
 import bzh.plealog.bioinfo.docviewer.ui.structure.model.PdbModelListener;
 import bzh.plealog.bioinfo.ui.feature.FeatureWebLinker;

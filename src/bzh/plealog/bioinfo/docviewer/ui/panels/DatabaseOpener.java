@@ -44,8 +44,8 @@ import bzh.plealog.bioinfo.docviewer.api.BankType;
 import bzh.plealog.bioinfo.docviewer.api.QueryEngine;
 import bzh.plealog.bioinfo.docviewer.api.QueryEngineException;
 import bzh.plealog.bioinfo.docviewer.api.Summary;
+import bzh.plealog.bioinfo.docviewer.conf.DocViewerConfig;
 import bzh.plealog.bioinfo.docviewer.http.HTTPEngineException;
-import bzh.plealog.bioinfo.docviewer.ui.DocViewerConfig;
 import bzh.plealog.bioinfo.docviewer.ui.resources.Messages;
 import bzh.plealog.bioinfo.ui.filter.BFilterEditorDialog;
 

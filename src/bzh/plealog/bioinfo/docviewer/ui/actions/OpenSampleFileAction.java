@@ -31,7 +31,7 @@ import com.plealog.genericapp.api.log.EZLogger;
 
 import bzh.plealog.bioinfo.api.data.sequence.BankSequenceDescriptor;
 import bzh.plealog.bioinfo.docviewer.conf.DirManager;
-import bzh.plealog.bioinfo.docviewer.ui.DocViewerConfig;
+import bzh.plealog.bioinfo.docviewer.conf.DocViewerConfig;
 import bzh.plealog.bioinfo.docviewer.ui.panels.DatabaseOpener;
 import bzh.plealog.bioinfo.docviewer.ui.resources.Messages;
 import bzh.plealog.bioinfo.seqvertor.BiojavaUtils;

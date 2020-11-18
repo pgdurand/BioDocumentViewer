@@ -35,11 +35,11 @@ import com.plealog.genericapp.implem.file.EZFileExtDescriptor;
 import bzh.plealog.bioinfo.docviewer.api.QueryEngine;
 import bzh.plealog.bioinfo.docviewer.api.ServerConfiguration;
 import bzh.plealog.bioinfo.docviewer.api.SummaryDoc;
+import bzh.plealog.bioinfo.docviewer.conf.DocViewerConfig;
 import bzh.plealog.bioinfo.docviewer.fetcher.DBAutoFetcher;
 import bzh.plealog.bioinfo.docviewer.fetcher.DBSimpleFetcher;
 import bzh.plealog.bioinfo.docviewer.fetcher.DocFetcherUtils;
 import bzh.plealog.bioinfo.docviewer.fetcher.SeqRetrieverMonitor;
-import bzh.plealog.bioinfo.docviewer.ui.DocViewerConfig;
 import bzh.plealog.bioinfo.docviewer.ui.panels.DatabaseOpener;
 import bzh.plealog.bioinfo.docviewer.ui.resources.Messages;
 

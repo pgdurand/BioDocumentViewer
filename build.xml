@@ -3,7 +3,7 @@
 <!-- ============================================================= -->
 <project name="Document Viewer Tool" default="help" basedir=".">
 
-<property file="${basedir}/src/bzh/plealog/bioinfo/docviewer/ui/version.properties"/>
+<property file="${basedir}/src/bzh/plealog/bioinfo/docviewer/conf/version.properties"/>
 
 <property name="pbc.libName"    value="${prg.name}" />
 <property name="pbc.LibVersion" value="${prg.version}" />

@@ -29,7 +29,7 @@ import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
 import bzh.plealog.bioinfo.docviewer.api.DataListener;
-import bzh.plealog.bioinfo.docviewer.ui.DocViewerConfig;
+import bzh.plealog.bioinfo.docviewer.conf.DocViewerConfig;
 import bzh.plealog.bioinfo.docviewer.ui.resources.Messages;
 
 import com.jgoodies.forms.builder.DefaultFormBuilder;

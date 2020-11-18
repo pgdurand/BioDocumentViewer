@@ -27,10 +27,10 @@ import bzh.plealog.bioinfo.docviewer.api.QueryEngineException;
 import bzh.plealog.bioinfo.docviewer.api.Search;
 import bzh.plealog.bioinfo.docviewer.api.ServerConfiguration;
 import bzh.plealog.bioinfo.docviewer.api.Summary;
+import bzh.plealog.bioinfo.docviewer.conf.DocViewerConfig;
 import bzh.plealog.bioinfo.docviewer.http.HTTPBasicEngine;
 import bzh.plealog.bioinfo.docviewer.service.ebi.model.query.EbiQueryExpressionBuilder;
 import bzh.plealog.bioinfo.docviewer.service.ncbi.model.query.SimpleStringExpressionBuilder;
-import bzh.plealog.bioinfo.docviewer.ui.DocViewerConfig;
 
 /**
  * This is the engine capable of querying the EBI-Eye server to fetch some

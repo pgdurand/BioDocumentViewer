@@ -52,7 +52,7 @@ import bzh.plealog.bioinfo.api.core.config.CoreSystemConfigurator;
 import bzh.plealog.bioinfo.docviewer.api.BankProvider;
 import bzh.plealog.bioinfo.docviewer.api.BankType;
 import bzh.plealog.bioinfo.docviewer.conf.DirManager;
-import bzh.plealog.bioinfo.docviewer.ui.DocViewerConfig;
+import bzh.plealog.bioinfo.docviewer.conf.DocViewerConfig;
 import bzh.plealog.bioinfo.docviewer.ui.actions.OpenFileAction;
 import bzh.plealog.bioinfo.docviewer.ui.actions.OpenSampleFileAction;
 import bzh.plealog.bioinfo.docviewer.ui.panels.DatabaseOpener;

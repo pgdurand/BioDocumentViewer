@@ -26,8 +26,8 @@ import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 
 import bzh.plealog.bioinfo.docviewer.api.ServerConfiguration;
+import bzh.plealog.bioinfo.docviewer.conf.DocViewerConfig;
 import bzh.plealog.bioinfo.docviewer.http.HTTPBasicEngine;
-import bzh.plealog.bioinfo.docviewer.ui.DocViewerConfig;
 import bzh.plealog.bioinfo.docviewer.ui.resources.Messages;
 import bzh.plealog.bioinfo.util.CoreUtil;
 

@@ -28,11 +28,11 @@ import bzh.plealog.bioinfo.docviewer.api.QueryEngineException;
 import bzh.plealog.bioinfo.docviewer.api.Search;
 import bzh.plealog.bioinfo.docviewer.api.ServerConfiguration;
 import bzh.plealog.bioinfo.docviewer.api.Summary;
+import bzh.plealog.bioinfo.docviewer.conf.DocViewerConfig;
 import bzh.plealog.bioinfo.docviewer.http.HTTPBasicEngine;
 import bzh.plealog.bioinfo.docviewer.service.ensembl.model.query.EnsemblQueryExpressionBuilder;
 import bzh.plealog.bioinfo.docviewer.service.ensembl.model.query.EnsemblQueryModel;
 import bzh.plealog.bioinfo.docviewer.service.ncbi.model.query.SimpleStringExpressionBuilder;
-import bzh.plealog.bioinfo.docviewer.ui.DocViewerConfig;
 
 import com.plealog.genericapp.api.log.EZLogger;
 
