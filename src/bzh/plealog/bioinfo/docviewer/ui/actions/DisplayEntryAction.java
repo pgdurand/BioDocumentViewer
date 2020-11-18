@@ -150,6 +150,12 @@ public class DisplayEntryAction extends AbstractAction {
 
     tmpFile.delete();
 
+    if (sdb.getSequence().length()==0) {
+      MessageFormat mf = new MessageFormat(Messages.getString("DisplayEntryAction.msg3"));
+      EZEnvironment.displayWarnMessage(EZEnvironment.getParentFrame(), mf.format(new Object[] { seqId }));
+      return;
+    }
+    
     // Display entry
     CombinedAnnotatedSequenceViewer viewer = new CombinedAnnotatedSequenceViewer();
     BankSequenceDescriptor descriptor = new BankSequenceDescriptor(sdb.getFeatTable(), sdb.getSeqInfo(),
