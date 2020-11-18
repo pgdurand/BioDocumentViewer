@@ -1,4 +1,4 @@
-/* Copyright (C) 2006-2016 Patrick G. Durand
+/* Copyright (C) 2006-2020 Patrick G. Durand
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU Affero General Public License as published by
@@ -48,20 +48,21 @@ import javax.swing.SwingUtilities;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.TableColumnModel;
 
-import bzh.plealog.bioinfo.docviewer.api.QueryEngine;
-import bzh.plealog.bioinfo.docviewer.api.QueryEngineException;
-import bzh.plealog.bioinfo.docviewer.api.Summary;
-import bzh.plealog.bioinfo.docviewer.http.HTTPEngineException;
-import bzh.plealog.bioinfo.docviewer.ui.resources.Messages;
-import bzh.plealog.bioinfo.ui.util.BasicSelectTableAction;
-import bzh.plealog.bioinfo.ui.util.TableColumnManager;
-
 import com.jgoodies.forms.builder.DefaultFormBuilder;
 import com.jgoodies.forms.layout.FormLayout;
 import com.plealog.genericapp.api.EZEnvironment;
 import com.plealog.genericapp.api.log.EZLogger;
 import com.plealog.genericapp.ui.common.ContextMenuElement;
 import com.plealog.genericapp.ui.common.ContextMenuManager;
+
+import bzh.plealog.bioinfo.docviewer.api.QueryEngine;
+import bzh.plealog.bioinfo.docviewer.api.QueryEngineException;
+import bzh.plealog.bioinfo.docviewer.api.Summary;
+import bzh.plealog.bioinfo.docviewer.http.HTTPEngineException;
+import bzh.plealog.bioinfo.docviewer.ui.resources.Messages;
+import bzh.plealog.bioinfo.ui.util.BasicSelectTableAction;
+import bzh.plealog.bioinfo.ui.util.Selection.SelectType;
+import bzh.plealog.bioinfo.ui.util.TableColumnManager;
 
 /**
  * This class can be used to display results contained in Summary
@@ -434,13 +435,13 @@ public class DocNavigator extends JPanel {
 
       ArrayList<ContextMenuElement> actions;
       actions = new ArrayList<ContextMenuElement>();
-      act = new BasicSelectTableAction("Select all", BasicSelectTableAction.SelectType.ALL);
+      act = new BasicSelectTableAction("Select all", SelectType.ALL);
       act.setTable(_table);
       actions.add(new ContextMenuElement(act));
-      act = new BasicSelectTableAction("Clear selection", BasicSelectTableAction.SelectType.CLEAR);
+      act = new BasicSelectTableAction("Clear selection", SelectType.CLEAR);
       act.setTable(_table);
       actions.add(new ContextMenuElement(act));
-      act = new BasicSelectTableAction("Invert selection", BasicSelectTableAction.SelectType.INVERT);
+      act = new BasicSelectTableAction("Invert selection", SelectType.INVERT);
       act.setTable(_table);
       actions.add(new ContextMenuElement(act));
       _contextMnu = new ContextMenuManager(_table, actions);

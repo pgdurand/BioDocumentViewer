@@ -87,18 +87,11 @@ public class DatabaseOpener extends JPanel {
   public DatabaseOpener(List<BankType> banks) {
     JPanel mainPanel = new JPanel(new BorderLayout());
 
-    _helperField = new JLabel();
-    _helperField.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 0));
-    _helperField.setOpaque(true);
-    _helperField.setFocusable(false);
-    
     _serviceField = new JLabel();
     _serviceField.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 0));
     _serviceField.setOpaque(true);
     _serviceField.setFocusable(false);
     
-    NOT_RUNNING_TASK_COLOR = _helperField.getBackground();
-
     mainPanel.add(createPanelID(banks), BorderLayout.CENTER);
 
     this.setLayout(new BorderLayout());
@@ -143,7 +136,17 @@ public class DatabaseOpener extends JPanel {
     _desktop = desktop;
   }
 
-  public JComponent getHelperField() {
+  /**
+   * Return the help field.
+   */
+  public static JComponent getHelperField() {
+    if (_helperField == null) {
+      _helperField = new JLabel();
+      _helperField.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+      _helperField.setOpaque(true);
+      _helperField.setFocusable(false);
+      NOT_RUNNING_TASK_COLOR = _helperField.getBackground();
+    }
     return _helperField;
   }
 

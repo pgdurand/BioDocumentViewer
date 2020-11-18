@@ -1,4 +1,4 @@
-/* Copyright (C) 2006-2016 Patrick G. Durand
+/* Copyright (C) 2006-2020 Patrick G. Durand
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU Affero General Public License as published by
@@ -33,13 +33,13 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import com.plealog.genericapp.api.file.EZFileUtils;
+import com.plealog.genericapp.ui.common.JHeadPanel;
 import com.plealog.prefs4j.implem.ui.components.PatternSearchFacility;
 
 import bzh.plealog.bioinfo.docviewer.ui.structure.jmol.JMolCommander;
 import bzh.plealog.bioinfo.docviewer.ui.structure.jmol.JMolPanel;
 import bzh.plealog.bioinfo.docviewer.ui.structure.panels.PdbSeqViewer;
 import bzh.plealog.bioinfo.ui.sequence.event.DSelectionListenerSupport;
-import bzh.plealog.bioinfo.ui.util.JHeadPanel;
 
 /**
  * This the master 3D Viewer. It combines DDPdbSeqViewer, DDMolPanel and DDMolCommander

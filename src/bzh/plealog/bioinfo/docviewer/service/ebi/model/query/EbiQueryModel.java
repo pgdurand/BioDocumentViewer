@@ -1,4 +1,4 @@
-/* Copyright (C) 2006-2016 Patrick G. Durand
+/* Copyright (C) 2006-2020 Patrick G. Durand
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU Affero General Public License as published by
@@ -317,5 +317,10 @@ public class EbiQueryModel implements QueryModel {
 
   public BRuleFactory getRuleFactory() {
     return new BRuleFactoryImplem();
+  }
+
+  @Override
+  public void addAccessorEntry(BAccessorEntry arg0) {
+    
   }
 }

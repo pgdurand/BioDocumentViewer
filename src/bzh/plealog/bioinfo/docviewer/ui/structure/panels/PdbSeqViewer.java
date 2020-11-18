@@ -1,4 +1,4 @@
-/* Copyright (C) 2006-2016 Patrick G. Durand
+/* Copyright (C) 2006-2020 Patrick G. Durand
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU Affero General Public License as published by
@@ -38,6 +38,10 @@ import javax.swing.JTabbedPane;
 import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
 
+import com.plealog.genericapp.api.EZEnvironment;
+import com.plealog.genericapp.ui.common.ContextMenuElement;
+import com.plealog.genericapp.ui.common.ImageManagerAction;
+
 import bzh.plealog.bioinfo.api.data.feature.Feature;
 import bzh.plealog.bioinfo.api.data.feature.FeatureTable;
 import bzh.plealog.bioinfo.api.data.feature.utils.FeatureSelectionEvent;
@@ -60,10 +64,7 @@ import bzh.plealog.bioinfo.ui.sequence.basic.DSequenceViewer;
 import bzh.plealog.bioinfo.ui.sequence.basic.DViewerScroller;
 import bzh.plealog.bioinfo.ui.sequence.event.DSelectionListenerSupport;
 import bzh.plealog.bioinfo.ui.sequence.event.SelectSequenceAction;
-
-import com.plealog.genericapp.api.EZEnvironment;
-import com.plealog.genericapp.ui.common.ContextMenuElement;
-import com.plealog.genericapp.ui.common.ImageManagerAction;
+import bzh.plealog.bioinfo.ui.util.Selection.SelectType;
 
 /**
  * Setup sequence viewer.
@@ -168,9 +169,9 @@ public class PdbSeqViewer extends JPanel implements PdbModelListener {
 		_qViewer.registerSelectionListenerSupport(lSupport);
 		ArrayList<ContextMenuElement> actions;
 
-		_selectAllMnu = new SelectSequenceAction("Select all", SelectSequenceAction.SelectType.ALL);
+		_selectAllMnu = new SelectSequenceAction("Select all", SelectType.ALL);
 		_selectAllMnu.setListenerSupport(lSupport);
-		_selectNoneMnu = new SelectSequenceAction("Clear selection", SelectSequenceAction.SelectType.CLEAR);
+		_selectNoneMnu = new SelectSequenceAction("Clear selection", SelectType.CLEAR);
 		_selectNoneMnu.setListenerSupport(lSupport);
 		actions = new ArrayList<ContextMenuElement>();
 		actions.add(new ContextMenuElement(_selectAllMnu));
