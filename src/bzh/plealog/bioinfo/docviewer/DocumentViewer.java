@@ -1,4 +1,4 @@
-/* Copyright (C) 2006-2016 Patrick G. Durand
+/* Copyright (C) 2006-2020 Patrick G. Durand
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU Affero General Public License as published by
@@ -25,23 +25,17 @@ import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.Properties;
 
-import javax.swing.BorderFactory;
+import javax.swing.Action;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
+import javax.swing.JToolBar;
+import javax.swing.SwingConstants;
 
 import org.apache.log4j.BasicConfigurator;
-
-import bzh.plealog.bioinfo.api.core.config.CoreSystemConfigurator;
-import bzh.plealog.bioinfo.docviewer.api.BankProvider;
-import bzh.plealog.bioinfo.docviewer.api.BankType;
-import bzh.plealog.bioinfo.docviewer.ui.DocViewerConfig;
-import bzh.plealog.bioinfo.docviewer.ui.panels.DatabaseOpener;
-import bzh.plealog.bioinfo.docviewer.ui.resources.Messages;
-import bzh.plealog.bioinfo.ui.config.UISystemConfigurator;
-import bzh.plealog.bioinfo.ui.filter.resources.FilterMessages;
 
 import com.plealog.genericapp.api.EZApplicationBranding;
 import com.plealog.genericapp.api.EZEnvironment;
@@ -53,6 +47,20 @@ import com.plealog.genericapp.ui.desktop.CascadingWindowPositioner;
 import com.plealog.genericapp.ui.desktop.GDesktopPane;
 import com.plealog.genericapp.ui.desktop.GInternalFrame;
 import com.plealog.genericapp.ui.desktop.JWindowsMenu;
+
+import bzh.plealog.bioinfo.api.core.config.CoreSystemConfigurator;
+import bzh.plealog.bioinfo.docviewer.api.BankProvider;
+import bzh.plealog.bioinfo.docviewer.api.BankType;
+import bzh.plealog.bioinfo.docviewer.conf.DirManager;
+import bzh.plealog.bioinfo.docviewer.ui.DocViewerConfig;
+import bzh.plealog.bioinfo.docviewer.ui.actions.OpenFileAction;
+import bzh.plealog.bioinfo.docviewer.ui.actions.OpenSampleFileAction;
+import bzh.plealog.bioinfo.docviewer.ui.panels.DatabaseOpener;
+import bzh.plealog.bioinfo.docviewer.ui.resources.Messages;
+import bzh.plealog.bioinfo.ui.blast.config.ConfigManager;
+import bzh.plealog.bioinfo.ui.config.UISystemConfigurator;
+import bzh.plealog.bioinfo.ui.filter.resources.FilterMessages;
+import bzh.plealog.bioinfo.ui.util.MemoryMeter;
 
 /**
  * Starter class of the DocumentViewer.
@@ -105,6 +113,9 @@ public class DocumentViewer {
     // default graphics)
     UISystemConfigurator.initializeSystem();
 
+    // we setup the Directory Manager
+    ConfigManager.addConfig(new DirManager());
+    
     /*
      * notice: FilterSystemConfigurator provides BFilter factories. However,
      * since this DocumentViewer software provides several different filtering
@@ -132,6 +143,55 @@ public class DocumentViewer {
     private Component    _mainCompo = null;
     private JPanel       _btnPanel;
 
+    private JToolBar getToolbar() {
+      JToolBar tBar;
+      ImageIcon icon;
+      Action act;
+      JButton btn;
+
+      tBar = new JToolBar();
+      tBar.setFloatable(false);
+
+      icon = EZEnvironment.getImageIcon("openTest.png");
+      if (icon != null) {
+        act = new OpenSampleFileAction("", icon);
+      } else {
+        act = new OpenSampleFileAction(Messages.getString("OpenBlastList.test.name"));
+      }
+      act.setEnabled(true);
+      btn = tBar.add(act);
+      btn.setToolTipText(Messages.getString("OpenBlastList.test.tip"));
+      btn.setText(Messages.getString("OpenBlastList.test.name"));
+      btn.setHorizontalTextPosition(SwingConstants.RIGHT);
+      
+      tBar.addSeparator();
+      
+      icon = EZEnvironment.getImageIcon("open.png");
+      if (icon != null) {
+        act = new OpenFileAction("", icon);
+      } else {
+        act = new OpenFileAction(Messages.getString("OpenFileList.open.name"));
+      }
+      act.setEnabled(true);
+      btn = tBar.add(act);
+      btn.setToolTipText(Messages.getString("OpenFileList.open.tip"));
+      btn.setText(Messages.getString("OpenFileList.open.name"));
+      btn.setHorizontalTextPosition(SwingConstants.RIGHT);
+      /*
+      icon = EZEnvironment.getImageIcon("download.png");
+      if (icon != null) {
+        act = new FetchFromNcbiAction("", icon);
+      } else {
+        act = new FetchFromNcbiAction(
+            BVMessages.getString("OpenBlastList.openrid.name"));
+      }
+      act.setEnabled(true);
+      btn = tBar.add(act);
+      btn.setToolTipText(BVMessages.getString("OpenBlastList.openrid.tip"));
+      btn.setText(BVMessages.getString("OpenBlastList.openrid.name"));
+      */
+      return tBar;
+    }
     private Component prepareDesktop() {
       JPanel dpanel, mnuPnl;
       JButton logBtn;
@@ -149,15 +209,24 @@ public class DocumentViewer {
       menuBar.add(windowsMenu);
 
       logBtn = new JButton(EZEnvironment.getImageIcon("logger.png"));
-      logBtn.setBorder(BorderFactory.createEmptyBorder(0, 15, 0, 0));
+      //logBtn.setBorder(BorderFactory.createEmptyBorder(0, 15, 0, 0));
       logBtn.addActionListener(new ShowLoggerFrame());
 
       mnuPnl.add(menuBar, BorderLayout.WEST);
       mnuPnl.add(logBtn, BorderLayout.EAST);
       _btnPanel.add(mnuPnl, BorderLayout.EAST);
+      _btnPanel.add(getToolbar(), BorderLayout.WEST);
       dpanel.add(_btnPanel, BorderLayout.NORTH);
       dpanel.add(_desktop, BorderLayout.CENTER);
 
+      JPanel statusBar = new JPanel(new BorderLayout());
+      JPanel hlpPnl = new JPanel(new BorderLayout());
+      hlpPnl.add(DatabaseOpener.getHelperField(), BorderLayout.WEST);
+      statusBar.add(new MemoryMeter(), BorderLayout.WEST);
+      statusBar.add(hlpPnl, BorderLayout.CENTER);
+      
+      dpanel.add(statusBar, BorderLayout.SOUTH);
+      
       return dpanel;
     }
 
@@ -198,9 +267,6 @@ public class DocumentViewer {
         DatabaseOpener dop = new DatabaseOpener(bp.getBanks());
         dop.setDesktop(_desktop);
 
-        // package the UI
-        _btnPanel.add(dop.getHelperField(), BorderLayout.WEST);
-
         GInternalFrame iFrame = new GInternalFrame(dop, bts.get(0)
             .getProviderName(), true, false, false, false);
         iFrame.setFrameIcon(DocViewerConfig.DBXPLR_ICON);
@@ -230,6 +296,12 @@ public class DocumentViewer {
     public void preStart() {
       // This method is called by the framework at the very beginning of
       // application startup.
+    }
+
+    @Override
+    public void frameDisplayed() {
+      
+      
     }
   }
 
