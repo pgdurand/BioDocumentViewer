@@ -18,6 +18,7 @@ package bzh.plealog.bioinfo.docviewer.ui.actions;
 
 import java.awt.event.ActionEvent;
 import java.io.File;
+import java.io.IOException;
 import java.text.MessageFormat;
 
 import javax.swing.AbstractAction;
@@ -30,6 +31,7 @@ import com.plealog.genericapp.api.log.EZLogger;
 import bzh.plealog.bioinfo.api.data.sequence.BankSequenceDescriptor;
 import bzh.plealog.bioinfo.docviewer.api.QueryEngine;
 import bzh.plealog.bioinfo.docviewer.api.SummaryDoc;
+import bzh.plealog.bioinfo.docviewer.conf.DirManager;
 import bzh.plealog.bioinfo.docviewer.http.HTTPBasicEngine;
 import bzh.plealog.bioinfo.docviewer.ui.DocViewerConfig;
 import bzh.plealog.bioinfo.docviewer.ui.panels.DatabaseOpener;
@@ -37,6 +39,7 @@ import bzh.plealog.bioinfo.docviewer.ui.resources.Messages;
 import bzh.plealog.bioinfo.docviewer.ui.structure.ThreeDStructureViewer;
 import bzh.plealog.bioinfo.seqvertor.BiojavaUtils;
 import bzh.plealog.bioinfo.seqvertor.SequenceDataBag;
+import bzh.plealog.bioinfo.ui.blast.config.ConfigManager;
 import bzh.plealog.bioinfo.ui.feature.FeatureWebLinker;
 import bzh.plealog.bioinfo.ui.sequence.extended.CombinedAnnotatedSequenceViewer;
 
@@ -146,6 +149,13 @@ public class DisplayEntryAction extends AbstractAction {
       MessageFormat mf = new MessageFormat(Messages.getString("DisplayEntryAction.msg2"));
       EZEnvironment.displayWarnMessage(EZEnvironment.getParentFrame(), mf.format(new Object[] { seqId }));
       return;
+    }
+
+    DirManager dmgr = (DirManager) ConfigManager.getConfig(DirManager.NAME);
+    try {
+      EZFileUtils.copyFile(tmpFile, new File(dmgr.getDocumentDataPath()+seqId+"."+_qEngine.getBankType().getReaderType()));
+    } catch (IOException e) {
+      //not bad: we won't have a local copy of the file
     }
 
     tmpFile.delete();
