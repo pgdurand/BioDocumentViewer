@@ -46,27 +46,51 @@
     <mkdir  dir="${Ddoc.api}"/>
 </target>
 
+<target name="is-java-eight">
+  <condition property="java.eight">
+      <equals arg1="${ant.java.version}" arg2="1.8"/>
+  </condition>
+</target>
+
+<target name="javac8" depends="is-java-eight" if="java.eight">
+  <javac srcdir="${Dsrc}"
+         destdir="${Dlib}"
+         classpathref="class.path"
+         debug="${compile.debug}"
+         optimize="${compile.optimize}"
+         >
+  </javac>
+</target>
+
+  <!-- added for TravisCI -->
+<target name="javac9" depends="is-java-eight" unless="java.eight">
+  <javac srcdir="${Dsrc}"
+         destdir="${Dlib}"
+         classpathref="class.path"
+         debug="${compile.debug}"
+         optimize="${compile.optimize}"
+         >
+    <compilerarg line="--add-modules java.se.ee"/>
+  </javac>
+</target>
+
 <!-- ============================================================= -->
 <target name="compile" depends="prepare">
-   <copy todir="${Dsrc}">
-      <fileset dir="${src}">
-         <include name="bzh/plealog/bioinfo/**"/>
-      </fileset>
-    </copy>
-   <javac srcdir="${Dsrc}"
-          destdir="${Dlib}"
-	        classpathref="class.path"
-          debug="${compile.debug}"
-          optimize="${compile.optimize}"
-          >
-   </javac>
-  <copy todir="${Dlib}/bzh/plealog/bioinfo/">
+  <copy todir="${Dsrc}">
+    <fileset dir="${src}">
+       <include name="bzh/plealog/bioinfo/**"/>
+    </fileset>
+  </copy>
+	<antcall target="javac8"/>
+	<antcall target="javac9"/>
+	<copy todir="${Dlib}/bzh/plealog/bioinfo/">
     <fileset dir="${Dsrc}/bzh/plealog/bioinfo/">
       <include name="**/*properties"/>
       <include name="**/*messages"/>
       <include name="**/*cfg"/>
       <include name="**/*gif"/>
       <include name="**/*png"/>
+      <include name="**/*gp"/>
     </fileset>
   </copy>
 </target>
