@@ -211,17 +211,25 @@ public class DatabaseOpener extends JPanel {
     
     private ServiceTimer(BankType bt){
       this.bt = bt;
+      String str = String.format("<html><span style='color:orange;'>Contacting %s server...</span></html>", bt.getProviderName());
+      _serviceField.setText(str);
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-      if (bt.getServerConfiguration().isServerAvailable()){
-        String str = String.format("<html><span style='color:green;'>%s is online</span></html>", bt.getProviderName());
-        _serviceField.setText(str);
-      }
-      else{
-        String str = String.format("<html><span style='color:red;'>%s is offline</span></html>", bt.getProviderName());
-        _serviceField.setText(str);
-      }
+     Thread t = new Thread() {
+       @Override
+       public void run() {
+         if (bt.getServerConfiguration().isServerAvailable()){
+           String str = String.format("<html><span style='color:green;'>%s is online</span></html>", bt.getProviderName());
+           _serviceField.setText(str);
+         }
+         else{
+           String str = String.format("<html><span style='color:red;'>%s is offline</span></html>", bt.getProviderName());
+           _serviceField.setText(str);
+         }
+       }
+     };
+     t.start();
     }
   }
   

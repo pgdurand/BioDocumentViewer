@@ -53,7 +53,8 @@
 </target>
 
 <target name="javac8" depends="is-java-eight" if="java.eight">
-  <javac srcdir="${Dsrc}"
+	<echo>Use java 8 compiler</echo>
+	<javac srcdir="${Dsrc}"
          destdir="${Dlib}"
          classpathref="class.path"
          debug="${compile.debug}"
@@ -64,6 +65,7 @@
 
   <!-- added for TravisCI -->
 <target name="javac9" depends="is-java-eight" unless="java.eight">
+  <echo>Use java 9 compiler</echo>
   <javac srcdir="${Dsrc}"
          destdir="${Dlib}"
          classpathref="class.path"
