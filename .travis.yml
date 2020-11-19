@@ -4,4 +4,4 @@ os:
 jdk:
   - oraclejdk9
 script:
-  ant makejar
+  ant travisci

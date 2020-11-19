@@ -116,6 +116,34 @@
 </target>
 
 	<!-- ============================================================= -->
+	<target name="travisci" depends="prepare">
+	  <copy todir="${Dsrc}">
+	    <fileset dir="${src}">
+	       <include name="bzh/plealog/bioinfo/**"/>
+	    </fileset>
+	  </copy>
+		<echo>Use java 9 compiler</echo>
+		  <javac srcdir="${Dsrc}"
+		         destdir="${Dlib}"
+		         classpathref="class.path"
+		         debug="${compile.debug}"
+		         optimize="${compile.optimize}"
+		         >
+		    <compilerarg line="--add-modules java.se.ee"/>
+		  </javac>
+	  <copy todir="${Dlib}/bzh/plealog/bioinfo/">
+	    <fileset dir="${Dsrc}/bzh/plealog/bioinfo/">
+	      <include name="**/*properties"/>
+	      <include name="**/*messages"/>
+	      <include name="**/*cfg"/>
+	      <include name="**/*gif"/>
+	      <include name="**/*png"/>
+	      <include name="**/*gp"/>
+	    </fileset>
+	  </copy>
+	</target>
+
+	<!-- ============================================================= -->
 	<target name="makedistrib" depends="compile" >
 	    <jar destfile="${pbc.libJar}">
 	      <fileset dir="${Dlib}">
